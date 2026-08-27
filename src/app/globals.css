@@ -1,26 +1,363 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ==========================================================================
+   Aqua design system — Section 4, Brand-to-Digital Design System
+   Ratio target: ~70% warm white/sand, ~20% charcoal/burnt brown, ~10% gold.
+   ========================================================================== */
+
+@theme {
+  /* 4.1 Digital colour tokens */
+  --color-gold: #c79a23;
+  --color-gold-soft: #e0bd5c;
+  --color-gold-deep: #a67d13;
+  --color-brown: #8b4a33;
+  --color-brown-deep: #6d3826;
+  --color-charcoal: #2c2723;
+  --color-charcoal-soft: #3c3630;
+  --color-sand: #e9d8be;
+  --color-sand-soft: #f0e5d4;
+  --color-warm: #f7f4ee;
+  --color-warm-deep: #efeae1;
+  --color-ink: #2c2723;
+  --color-muted: #6b6259;
+  --color-line: rgba(44, 39, 35, 0.12);
+  --color-line-strong: rgba(44, 39, 35, 0.2);
+  --color-line-dark: rgba(247, 244, 238, 0.14);
+
+  /* 4.2 Typography */
+  --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+
+  /* 4.3 Layout */
+  --spacing-section: 7rem;
+  --radius-card: 1.5rem;
+  --radius-card-lg: 1.75rem;
+
+  /* 8.2 Animation timing */
+  --ease-out-brand: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-brand: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+
+* {
+  border-color: var(--color-line);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-warm);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: #fff;
+}
+
+/* 14.2 — visible focus states with brand-safe contrast */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.dark-section :focus-visible {
+  outline-color: var(--color-gold-soft);
+}
+
+/* --------------------------------------------------------------------------
+   Typography scale — 4.2
+   -------------------------------------------------------------------------- */
+
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+.h-display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.6rem, 7.2vw, 5.75rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+
+.h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.25rem, 5.4vw, 4.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+.h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2rem, 4.2vw, 3.5rem);
+  line-height: 1.06;
+  letter-spacing: -0.018em;
+}
+
+.h3 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: clamp(1.25rem, 1.9vw, 1.75rem);
+  line-height: 1.22;
+  letter-spacing: -0.01em;
+}
+
+.kicker {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.6875rem;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+@media (min-width: 768px) {
+  .kicker {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+  }
+}
+
+.lede {
+  font-size: clamp(1.0625rem, 1.35vw, 1.1875rem);
+  line-height: 1.62;
+  color: var(--color-muted);
+}
+
+.dark-section .lede {
+  color: rgba(247, 244, 238, 0.72);
+}
+
+/* --------------------------------------------------------------------------
+   Surface treatments
+   -------------------------------------------------------------------------- */
+
+.dark-section {
+  background-color: var(--color-charcoal);
+  color: var(--color-warm);
+}
+
+.dark-section * {
+  border-color: var(--color-line-dark);
+}
+
+/* Paper grain — keeps large warm-white fields from reading as flat screen white */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+}
+
+.hairline {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-line-strong) 18%,
+    var(--color-line-strong) 82%,
+    transparent
+  );
+}
+
+.gold-rule {
+  height: 2px;
+  width: 3rem;
+  background: var(--color-gold);
+  border-radius: 2px;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(
+    100deg,
+    var(--color-brown) 0%,
+    var(--color-gold-deep) 42%,
+    var(--color-gold) 62%,
+    var(--color-brown) 100%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: sheen 9s var(--ease-in-out-brand) infinite;
+}
+
+.dark-section .text-gradient-gold {
+  background: linear-gradient(
+    100deg,
+    var(--color-sand) 0%,
+    var(--color-gold-soft) 45%,
+    var(--color-gold) 65%,
+    var(--color-sand) 100%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes sheen {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Reveal-on-scroll — 8.2 timing, 14.2 reduced-motion behaviour
+   -------------------------------------------------------------------------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 620ms var(--ease-out-brand),
+    transform 620ms var(--ease-out-brand);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* --------------------------------------------------------------------------
+   Scrollbars for the horizontal industry rail
+   -------------------------------------------------------------------------- */
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.drag-rail {
+  cursor: grab;
+}
+
+.drag-rail.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+}
+
+.drag-rail.is-dragging * {
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Marquee — trust strip. Pauses on hover and under reduced motion (8.2, 14.2)
+   -------------------------------------------------------------------------- */
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 42s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* --------------------------------------------------------------------------
+   Prose — 6.35 article template, 700–900px measure
+   -------------------------------------------------------------------------- */
+
+.prose-aqua {
+  max-width: 46rem;
+  font-size: 1.0625rem;
+  line-height: 1.72;
+  color: #443c34;
+}
+
+.prose-aqua p {
+  margin-bottom: 1.35em;
+}
+
+.prose-aqua h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  color: var(--color-brown);
+  margin-top: 2.4em;
+  margin-bottom: 0.7em;
+}
+
+.prose-aqua h3 {
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--color-charcoal);
+  margin-top: 1.9em;
+  margin-bottom: 0.5em;
+}
+
+.prose-aqua strong {
+  font-weight: 600;
+  color: var(--color-charcoal);
+}
+
+/* --------------------------------------------------------------------------
+   14.2 / 8.1 — reduced motion disables pinning, parallax and looping motion
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .sticky-narrative {
+    position: static !important;
+    height: auto !important;
+  }
 }

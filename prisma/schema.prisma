@@ -1,0 +1,309 @@
+// Aqua Facility Services — CMS data model
+// Mirrors Section 10 (CMS & Content Models) of the Development Specification v1.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+/// Section 10 governance: contact details + credentials live in ONE record.
+model SiteSettings {
+  id              Int      @id @default(1)
+  companyName     String
+  legalName       String
+  tagline         String
+  positioning     String   @db.Text
+  brandPromise    String
+  philosophy      String
+  foundingYear    Int      @default(1996)
+  addressLine1    String
+  addressLine2    String?
+  city            String
+  state           String
+  postalCode      String
+  country         String   @default("India")
+  phone           String
+  altPhone        String?
+  email           String
+  careersEmail    String?
+  linkedin        String?
+  facebook        String?
+  instagram       String?
+  youtube         String?
+  footerCopy      String   @db.Text
+  primaryCtaLabel String   @default("Request a Proposal")
+  updatedAt       DateTime @updatedAt
+}
+
+model Service {
+  id             Int     @id @default(autoincrement())
+  slug           String  @unique
+  order          Int     @default(0)
+  title          String
+  navTitle       String
+  heroTitle      String
+  heroKicker     String
+  intro          String  @db.Text
+  outcomeLine    String  @db.Text
+  /// string[] — capability chips shown on cards
+  chips          Json
+  /// string[] — full core-capability list
+  capabilities   Json
+  /// {title, body}[] — "What We Solve"
+  problems       Json
+  /// {title, body}[] — People / Process / Equipment / Supervision
+  delivery       Json
+  techLayer      String  @db.Text
+  safetyNote     String  @db.Text
+  closingLine    String
+  ctaLabel       String  @default("Discuss Your Requirement")
+  seoTitle       String
+  seoDescription String  @db.Text
+  published      Boolean @default(true)
+
+  industries  IndustryOnService[]
+  caseStudies CaseStudy[]
+  insights    Insight[]
+}
+
+model Industry {
+  id             Int     @id @default(autoincrement())
+  slug           String  @unique
+  order          Int     @default(0)
+  title          String
+  heroTitle      String
+  intro          String  @db.Text
+  /// string[] — relevant capability tags
+  capabilities   Json
+  /// {title, body}[] — industry operating challenges
+  challenges     Json
+  ctaLabel       String  @default("Discuss Your Site Requirement")
+  seoTitle       String
+  seoDescription String  @db.Text
+  published      Boolean @default(true)
+
+  services    IndustryOnService[]
+  caseStudies CaseStudy[]
+}
+
+model IndustryOnService {
+  industryId Int
+  serviceId  Int
+  industry   Industry @relation(fields: [industryId], references: [id], onDelete: Cascade)
+  service    Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@id([industryId, serviceId])
+  @@index([serviceId])
+}
+
+model GroupCompany {
+  id          Int     @id @default(autoincrement())
+  slug        String  @unique
+  order       Int     @default(0)
+  displayName String
+  legalName   String
+  /// Section 18: exact legal name must be documented before go-live.
+  legalNameVerified Boolean @default(false)
+  positioning      String
+  scope            String  @db.Text
+  intro            String  @db.Text
+  roleInGroup      String  @db.Text
+  /// string[]
+  offerings        Json
+  /// string[]
+  beneficiaries    Json
+  operatingModel   String  @db.Text
+  proofNote        String  @db.Text
+  verificationNote String? @db.Text
+  seoTitle         String
+  seoDescription   String  @db.Text
+  published        Boolean @default(true)
+}
+
+/// Publishing rule (6.32): nothing publishes without approval; no invented numbers.
+model CaseStudy {
+  id                Int     @id @default(autoincrement())
+  slug              String  @unique
+  order             Int     @default(0)
+  clientName        String
+  clientApproved    Boolean @default(false)
+  anonymisedAs      String?
+  title             String
+  location          String
+  serviceScope      String  @db.Text
+  duration          String
+  workforceScale    String?
+  workforceVerified Boolean @default(false)
+  equipment         String? @db.Text
+  challenge         String  @db.Text
+  solution          String  @db.Text
+  process           String  @db.Text
+  outcome           String  @db.Text
+  /// {label, value, verified}[] — never publish unverified metrics
+  outcomeMetrics    Json
+  clientQuote       String? @db.Text
+  quoteAttribution  String?
+  quoteApproved     Boolean @default(false)
+  published         Boolean @default(false)
+
+  serviceId  Int?
+  service    Service?  @relation(fields: [serviceId], references: [id])
+  industryId Int?
+  industry   Industry? @relation(fields: [industryId], references: [id])
+
+  @@index([serviceId])
+  @@index([industryId])
+}
+
+model TechCapability {
+  id          Int     @id @default(autoincrement())
+  slug        String  @unique
+  order       Int     @default(0)
+  module      String
+  category    String
+  description String  @db.Text
+  /// live | in-rollout | planned — never show planned modules as live (6.17)
+  status      String  @default("planned")
+  metricLabel String?
+  metricHint  String?
+  published   Boolean @default(true)
+}
+
+model Certification {
+  id          Int       @id @default(autoincrement())
+  name        String
+  standard    String?
+  number      String?
+  issuer      String?
+  validUntil  DateTime?
+  documentUrl String?
+  /// Expired or unverified certifications must not render publicly.
+  displayPermission Boolean @default(false)
+  verified          Boolean @default(false)
+}
+
+model Equipment {
+  id        Int     @id @default(autoincrement())
+  name      String
+  category  String
+  useCase   String  @db.Text
+  imageUrl  String?
+  specs     String? @db.Text
+  published Boolean @default(true)
+}
+
+model Leadership {
+  id       Int     @id @default(autoincrement())
+  order    Int     @default(0)
+  name     String
+  role     String
+  bio      String  @db.Text
+  photoUrl String?
+  linkedin String?
+  approved Boolean @default(false)
+}
+
+model Job {
+  id             Int       @id @default(autoincrement())
+  slug           String    @unique
+  title          String
+  category       String
+  company        String
+  location       String
+  employmentType String
+  experience     String
+  skill          String
+  description    String    @db.Text
+  /// string[]
+  requirements   Json
+  postedAt       DateTime  @default(now())
+  expiresAt      DateTime?
+  published      Boolean   @default(true)
+
+  applications JobApplication[]
+}
+
+model Insight {
+  id             Int      @id @default(autoincrement())
+  slug           String   @unique
+  title          String
+  category       String
+  excerpt        String   @db.Text
+  body           String   @db.LongText
+  author         String   @default("Aqua Editorial Team")
+  readMinutes    Int      @default(4)
+  publishedAt    DateTime @default(now())
+  heroImage      String?
+  seoTitle       String
+  seoDescription String   @db.Text
+  published      Boolean  @default(true)
+
+  serviceId Int?
+  service   Service? @relation(fields: [serviceId], references: [id])
+
+  @@index([serviceId])
+}
+
+/// Section 13 — lead capture, routing and traceability.
+model Lead {
+  id             Int      @id @default(autoincrement())
+  reference      String   @unique
+  type           String   @default("proposal")
+  fullName       String
+  company        String
+  designation    String?
+  email          String
+  phone          String
+  cityState      String?
+  /// string[] — multi-select service requirement
+  servicesNeeded Json
+  industry       String?
+  siteLocation   String?
+  workforceNeed  String?
+  summary        String   @db.Text
+  consent        Boolean  @default(false)
+  /// Derived from the 13.1 routing table
+  routedTo       String
+  sourcePage     String?
+  utmSource      String?
+  utmMedium      String?
+  utmCampaign    String?
+  status         String   @default("new")
+  createdAt      DateTime @default(now())
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model JobApplication {
+  id         Int      @id @default(autoincrement())
+  reference  String   @unique
+  jobId      Int?
+  job        Job?     @relation(fields: [jobId], references: [id])
+  fullName   String
+  email      String
+  phone      String
+  location   String?
+  skill      String?
+  experience String?
+  message    String?  @db.Text
+  cvUrl      String?
+  consent    Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  @@index([jobId])
+}
+
+/// Appendix A — redirect inventory managed as data, not hard-coded guesswork.
+model Redirect {
+  id          Int     @id @default(autoincrement())
+  source      String  @unique
+  destination String
+  statusCode  Int     @default(301)
+  note        String?
+  active      Boolean @default(true)
+}
