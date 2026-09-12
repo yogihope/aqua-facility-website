@@ -15,7 +15,7 @@ export default function NotFound() {
 
       <Container className="relative">
         <div className="max-w-2xl py-16">
-          <span className="block h-12 w-12 opacity-70">
+          <span className="block h-12 w-auto opacity-70">
             <LogoMark />
           </span>
 

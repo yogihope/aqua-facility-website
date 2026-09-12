@@ -1,55 +1,40 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 /**
- * Aqua mark, rebuilt as inline SVG so it stays crisp, themeable and free of a
- * network request in the header.
+ * Aqua brand mark.
  *
- * Section 18 requires the brand team to supply primary / reverse / single-colour
- * SVG masters before go-live. When those arrive, swap the paths here — the
- * component API stays the same.
+ * The assets in `public/brand/` are derived from the 2048px master supplied by
+ * the brand team (`aqua-logo.png`), un-matted off its white background so the
+ * edges stay clean on the warm-white and charcoal surfaces alike:
+ *
+ *   aqua-symbol.png          the A alone — what this component renders
+ *   aqua-symbol-reverse.png  maroon swapped for warm white, for dark sections
+ *   aqua-lockup.png          the A with the "Aqua" wordmark and trademark
+ *   aqua-lockup-reverse.png  the same lockup for dark sections
+ *
+ * The lockup files are the brand's own compact logo, kept here for share
+ * images and print. On screen the header and footer pair the symbol with live
+ * "Aqua" type instead: at 40–44px the wordmark baked into the lockup renders
+ * around 9px tall and turns to mush, while live type stays crisp, selectable
+ * and recolourable per tone.
  */
 export function LogoMark({
   className,
   tone = "brand",
 }: {
   className?: string;
-  tone?: "brand" | "reverse" | "mono";
+  tone?: "brand" | "reverse";
 }) {
-  const gold =
-    tone === "reverse" ? "#E0BD5C" : tone === "mono" ? "currentColor" : "#C79A23";
-  const brown =
-    tone === "reverse" ? "#F7F4EE" : tone === "mono" ? "currentColor" : "#8B4A33";
-
   return (
-    <svg
-      viewBox="0 0 100 100"
-      className={cn("h-full w-auto", className)}
-      role="img"
-      aria-label="Aqua"
-    >
-      {/* Apex strokes forming the A */}
-      <path
-        d="M17 90 L50 12 L83 90"
-        fill="none"
-        stroke={gold}
-        strokeWidth="13.5"
-        strokeLinecap="butt"
-        strokeLinejoin="miter"
-      />
-      {/* Inner chevron */}
-      <path d="M50 24 L61.5 51 L50 41.5 L38.5 51 Z" fill={brown} />
-      {/* Sweeping crossbar */}
-      <path
-        d="M20 57 Q50 88 80 57"
-        fill="none"
-        stroke={gold}
-        strokeWidth="11.5"
-        strokeLinecap="round"
-      />
-      {/* Terminal dots */}
-      <circle cx="14.5" cy="50.5" r="6.2" fill={brown} />
-      <circle cx="85.5" cy="50.5" r="6.2" fill={brown} />
-    </svg>
+    <Image
+      src={tone === "reverse" ? "/brand/aqua-symbol-reverse.png" : "/brand/aqua-symbol.png"}
+      alt=""
+      width={512}
+      height={433}
+      loading="eager"
+      className={cn("h-full w-auto object-contain", className)}
+    />
   );
 }
 
@@ -64,7 +49,7 @@ export function Logo({
 }) {
   return (
     <span className={cn("flex items-center gap-3", className)}>
-      <span className="h-10 w-10 shrink-0 sm:h-11 sm:w-11">
+      <span className="h-10 w-auto shrink-0 sm:h-11">
         <LogoMark tone={tone} />
       </span>
       <span className="flex flex-col leading-none">

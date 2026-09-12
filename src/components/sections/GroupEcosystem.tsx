@@ -48,7 +48,7 @@ export function GroupEcosystem({
             <div className="absolute inset-[26%] rounded-full border border-dashed border-gold/25" />
 
             <div className="absolute left-1/2 top-1/2 flex h-24 w-24 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-gold/30 bg-white shadow-[0_18px_40px_-24px_rgba(44,39,35,0.5)]">
-              <span className="h-7 w-7">
+              <span className="h-7 w-auto">
                 <LogoMark />
               </span>
               <span className="mt-1.5 text-[0.5625rem] font-semibold uppercase tracking-[0.14em] text-muted">
