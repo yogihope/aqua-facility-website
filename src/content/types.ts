@@ -110,6 +110,10 @@ export type JobContent = {
   skill: string;
   description: string;
   requirements: string[];
+  /** Overrides the site-wide careers inbox where a role is recruited directly. */
+  applyEmail?: string;
+  /** Surfaces the role above the board as the current headline vacancy. */
+  featured?: boolean;
 };
 
 export type InsightContent = {
@@ -131,4 +135,52 @@ export type RedirectContent = {
   destination: string;
   statusCode: number;
   note?: string;
+};
+
+export type AwardImage = {
+  src: string;
+  alt: string;
+  caption: string;
+  width: number;
+  height: number;
+};
+
+/**
+ * Recognition records. Same governance rule as certifications: an award only
+ * renders once `verified` is true and the citation details (title, issuer,
+ * date, venue) are taken from the certificate itself rather than summarised.
+ */
+export type AwardContent = {
+  slug: string;
+  order: number;
+  title: string;
+  edition: string;
+  presentedTo: string;
+  awardedOn: string;
+  venue: string;
+  city: string;
+  presentedBy: string;
+  endorsedBy: string;
+  certifiedBy: string;
+  summary: string;
+  criteria: string[];
+  images: AwardImage[];
+  verified: boolean;
+};
+
+/**
+ * Section 6.2 leadership module. `photoUrl` is optional by design — the card
+ * falls back to a monogram so the section can publish on verified names and
+ * roles without waiting on photography (Section 18).
+ */
+export type LeaderContent = {
+  slug: string;
+  order: number;
+  name: string;
+  role: string;
+  initials: string;
+  summary: string;
+  photoUrl?: string;
+  linkedin?: string;
+  approved: boolean;
 };

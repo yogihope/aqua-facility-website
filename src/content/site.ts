@@ -24,17 +24,21 @@ export const site = {
   foundingYear: FOUNDING_YEAR,
   domain: "https://aquafacility.com",
 
-  // [VERIFY] — replace with the confirmed corporate office record.
+  // City and state are management-confirmed. Street line and PIN are still
+  // [VERIFY] — an empty postalCode is rendered as absent rather than guessed,
+  // so no invented address component reaches the footer or Organization schema.
   addressLine1: "Corporate Office",
-  addressLine2: "Address to be confirmed by management",
-  city: "Pune",
-  state: "Maharashtra",
-  postalCode: "411001",
+  addressLine2: "Street address to be confirmed by management",
+  city: "Ahmedabad",
+  state: "Gujarat",
+  postalCode: "",
   country: "India",
   phone: "+91 00000 00000",
   altPhone: null as string | null,
   email: "info@aquafacility.com",
   careersEmail: "careers@aquafacility.com",
+  /** Direct recruiting inbox published on individual vacancies. */
+  operationsEmail: "operations@aquafacility.com",
 
   linkedin: "https://www.linkedin.com/company/aqua-facility-services",
   facebook: "https://www.facebook.com/aquafacilityservices",
@@ -45,6 +49,15 @@ export const site = {
     "Aqua is an integrated operational-services organisation managing the people, processes, facilities and support systems organisations depend on every day.",
   primaryCtaLabel: "Request a Proposal",
 } as const;
+
+/**
+ * "City, State PIN" for display, with the PIN omitted while it is unverified.
+ * One helper so an empty component never renders as a stray space or a guess.
+ */
+export function cityLine(): string {
+  const base = `${site.city}, ${site.state}`;
+  return site.postalCode ? `${base} ${site.postalCode}` : base;
+}
 
 /** Section 3 — maximum 9 visible primary navigation items. */
 export const primaryNav = [

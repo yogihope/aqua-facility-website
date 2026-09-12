@@ -17,6 +17,7 @@ export const home = {
   /** Section 2 — Trust strip. ISO claim carries a VERIFY flag until documented. */
   trustStrip: [
     { label: "30+ Years of Expertise", verified: true },
+    { label: "Gujarat State Best Employer Brand 2026", verified: true },
     { label: "PAN-India Capability", verified: true },
     { label: "Multi-Sector Expertise", verified: true },
     { label: "ISO-Certified", verified: false, note: "Standard to be confirmed" },
@@ -114,6 +115,57 @@ export const home = {
     primary: { label: "Request a Proposal", href: "/request-proposal" },
     secondary: { label: "Discuss Your Requirement", href: "/contact" },
   },
+};
+
+/**
+ * "About Aqua" summary block — runs on the home page and again above the About
+ * page narrative.
+ *
+ * Appendix B: age statements are never hand-maintained. The heading and the
+ * experience pillar take their number from `yearsOfExpertise()` at render time,
+ * which is why the "30" does not appear as a literal anywhere below.
+ */
+export const aboutAqua = {
+  kicker: "About Aqua",
+  headingLead: "Years of Building",
+  headingEmphasis: "Better Workplaces.",
+  body: "Aqua has grown from a single facility-services operation into an integrated group that manages the people, processes and support systems organisations depend on every day — across corporate campuses, manufacturing plants, industrial sites and public infrastructure.",
+  pillars: [
+    {
+      label: "Founded in 1996",
+      body: "Three decades of continuous operation, under the same ownership.",
+    },
+    {
+      label: "years of experience",
+      body: "Operating knowledge built on site, across changing standards and technologies.",
+      /** Rendered as "{years} years of experience" — see Appendix B. */
+      prefixYears: true,
+    },
+    {
+      label: "Pan-India operations",
+      body: "Deployment capability that follows clients beyond a single city or state.",
+    },
+    {
+      label: "Experienced workforce",
+      body: "Trained housekeeping teams, ITI and non-ITI technicians, production staff and supervisors.",
+    },
+    {
+      label: "Multiple industries",
+      body: "Manufacturing, corporate, healthcare, education, infrastructure and public environments.",
+    },
+    {
+      label: "Integrated facility solutions",
+      body: "One organisation accountable across facilities, workforce, plant assets and infrastructure.",
+    },
+    {
+      label: "Strong compliance systems",
+      body: "Statutory and client-specific compliance maintained through the deployment process.",
+    },
+    {
+      label: "Technology-enabled operations",
+      body: "Digital attendance, geo-tagged verification, ticketing and MIS across multi-site work.",
+    },
+  ],
 };
 
 /** Section 6.2 — About page content. */

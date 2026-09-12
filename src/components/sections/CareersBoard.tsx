@@ -155,7 +155,7 @@ export function CareersBoard({ jobs }: { jobs: JobContent[] }) {
                   </ul>
                 </div>
 
-                <div className="shrink-0">
+                <div className="flex shrink-0 flex-col gap-3 sm:items-end">
                   <CtaLink
                     href={`/careers/apply?job=${job.slug}`}
                     data-analytics="career_apply_click"
@@ -164,6 +164,18 @@ export function CareersBoard({ jobs }: { jobs: JobContent[] }) {
                   >
                     Apply
                   </CtaLink>
+                  {/* Directly recruited roles publish their own inbox. */}
+                  {job.applyEmail ? (
+                    <a
+                      href={`mailto:${job.applyEmail}?subject=${encodeURIComponent(
+                        `Application — ${job.title} (${job.location})`
+                      )}`}
+                      data-analytics="email_click"
+                      className="break-all text-[0.75rem] font-semibold text-muted transition-colors hover:text-brown sm:text-right"
+                    >
+                      {job.applyEmail}
+                    </a>
+                  ) : null}
                 </div>
               </div>
             </article>

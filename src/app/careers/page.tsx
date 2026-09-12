@@ -2,22 +2,27 @@ import { Container, Section } from "@/components/ui/Container";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { CareersBoard } from "@/components/sections/CareersBoard";
+import { FeaturedVacancy } from "@/components/sections/FeaturedVacancy";
+import { EmployeeDevelopment } from "@/components/sections/EmployeeDevelopment";
+import { AwardHighlight } from "@/components/sections/AwardHighlight";
 import { SectionHeading, JsonLd } from "@/components/ui/Bits";
-import { Reveal } from "@/components/ui/Reveal";
-import { getJobs } from "@/lib/data";
+import { getJobs, getAwards } from "@/lib/data";
+import { getFeaturedJob } from "@/content/careers";
+import { site } from "@/content/site";
 import { buildMetadata, breadcrumbSchema, jobPostingSchema } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Careers at Aqua | Build the Operations That Keep India Moving",
   description:
-    "Opportunities across facility management, administration, technical operations, production support, supervision and corporate functions.",
+    "Current vacancies across facility management, accounts, administration, technical operations, production support and supervision — at a Gujarat State Best Employer Brand Award 2026 organisation.",
   path: "/careers",
 });
 
 export const revalidate = 1800;
 
 export default async function CareersPage() {
-  const jobs = await getJobs();
+  const [jobs, awards] = await Promise.all([getJobs(), getAwards()]);
+  const featured = getFeaturedJob(jobs);
   const postedAt = new Date().toISOString().slice(0, 10);
 
   return (
@@ -45,67 +50,49 @@ export default async function CareersPage() {
       <PageHero
         kicker="Careers"
         title="Build the Operations That Keep India Moving."
-        intro="Aqua creates opportunities across facility management, administration, technical operations, production support, supervision and corporate functions."
+        intro="Aqua creates opportunities across facility management, accounts and administration, technical operations, production support, supervision and corporate functions."
         breadcrumbs={[{ name: "Home", href: "/" }, { name: "Careers" }]}
         meta={[
           { label: "Open roles", value: String(jobs.length) },
           { label: "Categories", value: "Corporate · Technical · Workforce" },
           { label: "Group companies", value: "Six" },
-          { label: "Locations", value: "Multiple sites" },
+          { label: "Recognition", value: "Best Employer Brand 2026" },
         ]}
       />
 
       <Section tone="warm" className="grain">
         <Container>
-          <CareersBoard jobs={jobs} />
-        </Container>
-      </Section>
+          {featured ? (
+            <div className="mb-14">
+              <FeaturedVacancy job={featured} />
+            </div>
+          ) : null}
 
-      <Section tone="sand">
-        <Container>
           <SectionHeading
-            kicker="Working at Aqua"
+            kicker="Current vacancies"
             title={
               <>
-                Operations work,{" "}
-                <span className="italic text-brown">done properly.</span>
+                Every role we are{" "}
+                <span className="italic text-brown">hiring for now.</span>
               </>
             }
+            body={`Filter by category, location, group company or skill. Applications reach HR at ${site.careersEmail}; roles recruited directly list their own inbox.`}
           />
-          <div className="mt-12 grid gap-4 md:grid-cols-3">
-            {[
-              {
-                title: "Induction before deployment",
-                body: "Safety orientation and role induction happen before the first shift, not during it.",
-              },
-              {
-                title: "Structured supervision",
-                body: "Every site has a supervision layer, an escalation route and a review cadence.",
-              },
-              {
-                title: "Documented employment",
-                body: "Onboarding, attendance, payroll and statutory documentation are part of the process.",
-              },
-            ].map((item, i) => (
-              <Reveal key={item.title} delay={i * 80}>
-                <article className="h-full rounded-[1.5rem] border border-line bg-white/70 p-7">
-                  <h3 className="h3 text-[1.0625rem] text-charcoal">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 text-[0.9375rem] leading-relaxed text-muted">
-                    {item.body}
-                  </p>
-                </article>
-              </Reveal>
-            ))}
+
+          <div className="mt-12">
+            <CareersBoard jobs={jobs} />
           </div>
         </Container>
       </Section>
 
+      <EmployeeDevelopment />
+
+      <AwardHighlight awards={awards} />
+
       <CtaBand
         kicker="Apply"
         title="Send your details and we will match you to a role."
-        body="Application handling, CV upload and the HR recipient workflow are configured before launch. Until then, share your requirement and our team will respond."
+        body={`Apply against a specific vacancy, or send an open application and we will keep it on file. You can also email your CV to ${site.careersEmail}.`}
         primary={{ label: "Apply now", href: "/careers/apply" }}
         secondary={{ label: "Contact HR", href: "/contact" }}
       />

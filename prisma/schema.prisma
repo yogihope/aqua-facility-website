@@ -196,12 +196,17 @@ model Equipment {
   published Boolean @default(true)
 }
 
+/// Section 6.2. Publishes on verified name + role; `photoUrl` stays optional so
+/// the module is not blocked on photography — the card renders a monogram until
+/// a headshot is supplied.
 model Leadership {
   id       Int     @id @default(autoincrement())
+  slug     String  @unique
   order    Int     @default(0)
   name     String
   role     String
-  bio      String  @db.Text
+  initials String
+  summary  String  @db.Text
   photoUrl String?
   linkedin String?
   approved Boolean @default(false)
@@ -220,11 +225,40 @@ model Job {
   description    String    @db.Text
   /// string[]
   requirements   Json
+  /// Overrides the site-wide careers inbox where a role is recruited directly.
+  applyEmail     String?
+  /// Pins the role above the board as the current headline vacancy.
+  featured       Boolean   @default(false)
   postedAt       DateTime  @default(now())
   expiresAt      DateTime?
   published      Boolean   @default(true)
 
   applications JobApplication[]
+}
+
+/// Recognition records. Same governance rule as Certification: nothing renders
+/// publicly until `verified` is true and the citation is transcribed from the
+/// certificate rather than summarised.
+model Award {
+  id          Int      @id @default(autoincrement())
+  slug        String   @unique
+  order       Int      @default(0)
+  title       String
+  edition     String
+  presentedTo String
+  awardedOn   DateTime
+  venue       String
+  city        String
+  presentedBy String
+  endorsedBy  String
+  certifiedBy String
+  summary     String   @db.Text
+  /// string[] — assessment parameters as published by the awarding body
+  criteria    Json
+  /// {src, alt, caption, width, height}[] — ceremony and certificate imagery
+  images      Json
+  verified    Boolean  @default(false)
+  published   Boolean  @default(true)
 }
 
 model Insight {

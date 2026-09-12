@@ -8,6 +8,8 @@ import { techCapabilities } from "../src/content/technology";
 import { jobs } from "../src/content/careers";
 import { insights } from "../src/content/insights";
 import { redirects } from "../src/content/redirects";
+import { awards } from "../src/content/awards";
+import { leaders } from "../src/content/leadership";
 
 /**
  * Seeds MySQL from the authored content in `src/content`.
@@ -238,6 +240,8 @@ async function main() {
       skill: job.skill,
       description: job.description,
       requirements: job.requirements,
+      applyEmail: job.applyEmail ?? null,
+      featured: job.featured ?? false,
       published: true,
     };
     await prisma.job.upsert({
@@ -247,6 +251,53 @@ async function main() {
     });
   }
   console.log(`  ${jobs.length} jobs`);
+
+  /* -- Leadership ---------------------------------------------------------- */
+  for (const leader of leaders) {
+    const data = {
+      order: leader.order,
+      name: leader.name,
+      role: leader.role,
+      initials: leader.initials,
+      summary: leader.summary,
+      photoUrl: leader.photoUrl ?? null,
+      linkedin: leader.linkedin ?? null,
+      approved: leader.approved,
+    };
+    await prisma.leadership.upsert({
+      where: { slug: leader.slug },
+      create: { slug: leader.slug, ...data },
+      update: data,
+    });
+  }
+  console.log(`  ${leaders.length} leadership profiles`);
+
+  /* -- Awards -------------------------------------------------------------- */
+  for (const award of awards) {
+    const data = {
+      order: award.order,
+      title: award.title,
+      edition: award.edition,
+      presentedTo: award.presentedTo,
+      awardedOn: new Date(award.awardedOn),
+      venue: award.venue,
+      city: award.city,
+      presentedBy: award.presentedBy,
+      endorsedBy: award.endorsedBy,
+      certifiedBy: award.certifiedBy,
+      summary: award.summary,
+      criteria: award.criteria,
+      images: award.images,
+      verified: award.verified,
+      published: true,
+    };
+    await prisma.award.upsert({
+      where: { slug: award.slug },
+      create: { slug: award.slug, ...data },
+      update: data,
+    });
+  }
+  console.log(`  ${awards.length} awards`);
 
   /* -- Insights ------------------------------------------------------------ */
   for (const insight of insights) {

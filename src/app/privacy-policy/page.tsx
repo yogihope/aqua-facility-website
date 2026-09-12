@@ -2,7 +2,7 @@ import { Container, Section } from "@/components/ui/Container";
 import { PageHero } from "@/components/sections/PageHero";
 import { VerifyNote } from "@/components/ui/Bits";
 import { buildMetadata } from "@/lib/seo";
-import { site } from "@/content/site";
+import { site, cityLine } from "@/content/site";
 
 export const metadata = buildMetadata({
   title: "Privacy Policy",
@@ -123,7 +123,7 @@ export default function PrivacyPolicyPage() {
                   </>
                 ) : null}
                 <br />
-                {site.city}, {site.state} {site.postalCode}
+                {cityLine()}
                 <br />
                 <a href={`mailto:${site.email}`}>{site.email}</a>
                 <br />

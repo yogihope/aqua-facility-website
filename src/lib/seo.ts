@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { site } from "@/content/site";
+import { publishedAwards } from "@/content/awards";
 
 /** Section 11.1 — canonical URLs, OG/Twitter metadata, unique titles. */
 export const SITE_URL =
@@ -80,9 +81,19 @@ export function organizationSchema() {
       streetAddress: site.addressLine1,
       addressLocality: site.city,
       addressRegion: site.state,
-      postalCode: site.postalCode,
+      // Omitted rather than guessed while the PIN is unverified.
+      ...(site.postalCode ? { postalCode: site.postalCode } : {}),
       addressCountry: "IN",
     },
+    // Only verified recognitions are published as structured data, and the
+    // field is dropped entirely rather than emitted as an empty array.
+    ...(publishedAwards().length
+      ? {
+          award: publishedAwards().map(
+            (a) => `${a.title} (${a.edition}) — ${a.presentedBy}`
+          ),
+        }
+      : {}),
     contactPoint: [
       {
         "@type": "ContactPoint",

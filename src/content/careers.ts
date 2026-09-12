@@ -13,6 +13,27 @@ export const JOB_CATEGORIES = [
 
 export const jobs: JobContent[] = [
   {
+    slug: "accounts-executive-ahmedabad",
+    title: "Accounts Executive",
+    category: "Corporate",
+    company: "Aqua Facility Services Pvt. Ltd.",
+    location: "Ahmedabad, Gujarat",
+    employmentType: "Full-time",
+    experience: "1+ year",
+    skill: "Accounts & Finance",
+    description:
+      "Run day-to-day accounting for the Ahmedabad office — books, reconciliations, statutory inputs and reporting — working independently against monthly closing deadlines.",
+    requirements: [
+      "Minimum 1 year of relevant experience",
+      "Strong knowledge of Advanced Excel",
+      "Hands-on experience with Tally",
+      "Good understanding of accounting principles",
+      "Ability to work independently and meet deadlines",
+    ],
+    applyEmail: "operations@aquafacility.com",
+    featured: true,
+  },
+  {
     slug: "site-facility-manager-pune",
     title: "Site Facility Manager",
     category: "Corporate",
@@ -152,3 +173,45 @@ export const jobs: JobContent[] = [
 ];
 
 export const getJob = (slug: string) => jobs.find((j) => j.slug === slug);
+
+/** The headline vacancy pinned above the board, if any role is flagged. */
+export const getFeaturedJob = (list: JobContent[] = jobs) =>
+  list.find((j) => j.featured);
+
+/**
+ * Employee development — the stages a person actually passes through at Aqua,
+ * described as process rather than as benefits copy. Nothing here asserts an
+ * outcome that is not part of the documented deployment process.
+ */
+export const employeeDevelopment = [
+  {
+    stage: "Induction",
+    title: "Trained before the first shift",
+    body: "Safety orientation, site induction and role briefing happen before deployment, so nobody learns the standard on the job.",
+  },
+  {
+    stage: "Skilling",
+    title: "Equipment and method training",
+    body: "Mechanised equipment, chemical handling and standard work methods are taught and re-certified rather than assumed from prior experience.",
+  },
+  {
+    stage: "Supervision",
+    title: "A named supervisor and a review cadence",
+    body: "Every site carries a supervision layer with an escalation route, so performance is discussed regularly instead of only at incident time.",
+  },
+  {
+    stage: "Progression",
+    title: "Associate to supervisor to site lead",
+    body: "Supervisory and site-management roles are filled from within wherever the skill and record support it, across all six group companies.",
+  },
+  {
+    stage: "Documentation",
+    title: "Employment on record",
+    body: "Onboarding, attendance, payroll and statutory documentation are maintained through the process, not assembled at audit time.",
+  },
+  {
+    stage: "Recognition",
+    title: "An employer brand that is assessed",
+    body: "Aqua's people practices were assessed externally for The Gujarat State Best Employer Brand Awards 2026.",
+  },
+];

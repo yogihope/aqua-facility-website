@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
 import { CtaLink } from "@/components/ui/Button";
 import { Kicker } from "@/components/ui/Bits";
-import { site, yearsOfExpertise } from "@/content/site";
+import { site, cityLine, yearsOfExpertise } from "@/content/site";
 import { getServices, getIndustries, getGroupCompanies } from "@/lib/data";
 
 /**
@@ -92,6 +92,7 @@ export async function Footer() {
                 { label: "About", href: "/about" },
                 { label: "Projects", href: "/projects" },
                 { label: "Technology", href: "/technology" },
+                { label: "Awards", href: "/awards" },
                 { label: "Impact", href: "/impact" },
                 { label: "Careers", href: "/careers" },
                 { label: "Insights", href: "/insights" },
@@ -103,7 +104,7 @@ export async function Footer() {
                 <span>{site.addressLine1}</span>
                 {site.addressLine2 ? <span>{site.addressLine2}</span> : null}
                 <span>
-                  {site.city}, {site.state} {site.postalCode}
+                  {cityLine()}
                 </span>
                 <a
                   href={`tel:${site.phone.replace(/\s/g, "")}`}

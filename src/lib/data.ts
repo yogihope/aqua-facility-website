@@ -8,12 +8,17 @@ import { caseStudies as staticCases, getCaseStudy } from "@/content/projects";
 import { jobs as staticJobs } from "@/content/careers";
 import { insights as staticInsights, getInsight } from "@/content/insights";
 import { techCapabilities as staticTech } from "@/content/technology";
+import { awards as staticAwards } from "@/content/awards";
+import { leaders as staticLeaders } from "@/content/leadership";
 import type {
+  AwardContent,
+  AwardImage,
   CaseStudyContent,
   GroupCompanyContent,
   IndustryContent,
   InsightContent,
   JobContent,
+  LeaderContent,
   ServiceContent,
   TechCapabilityContent,
 } from "@/content/types";
@@ -280,8 +285,68 @@ export async function getJobs(): Promise<JobContent[]> {
       skill: r.skill,
       description: r.description,
       requirements: asArray<string>(r.requirements),
+      applyEmail: r.applyEmail ?? undefined,
+      featured: r.featured,
     }));
   }, staticJobs);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Leadership                                                                  */
+/* -------------------------------------------------------------------------- */
+
+/** Section 6.2 — unapproved profiles never reach the DOM. */
+export async function getLeaders(): Promise<LeaderContent[]> {
+  const approved = staticLeaders.filter((l) => l.approved);
+  return withDb(async () => {
+    const rows = await prisma.leadership.findMany({
+      where: { approved: true },
+      orderBy: { order: "asc" },
+    });
+    return rows.map((r) => ({
+      slug: r.slug,
+      order: r.order,
+      name: r.name,
+      role: r.role,
+      initials: r.initials,
+      summary: r.summary,
+      photoUrl: r.photoUrl ?? undefined,
+      linkedin: r.linkedin ?? undefined,
+      approved: r.approved,
+    }));
+  }, approved);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Awards                                                                      */
+/* -------------------------------------------------------------------------- */
+
+/** Same rule as certifications: unverified recognitions do not render. */
+export async function getAwards(): Promise<AwardContent[]> {
+  const verified = staticAwards.filter((a) => a.verified);
+  return withDb(async () => {
+    const rows = await prisma.award.findMany({
+      where: { published: true, verified: true },
+      orderBy: { order: "asc" },
+    });
+    return rows.map((r) => ({
+      slug: r.slug,
+      order: r.order,
+      title: r.title,
+      edition: r.edition,
+      presentedTo: r.presentedTo,
+      awardedOn: r.awardedOn.toISOString().slice(0, 10),
+      venue: r.venue,
+      city: r.city,
+      presentedBy: r.presentedBy,
+      endorsedBy: r.endorsedBy,
+      certifiedBy: r.certifiedBy,
+      summary: r.summary,
+      criteria: asArray<string>(r.criteria),
+      images: asArray<AwardImage>(r.images),
+      verified: r.verified,
+    }));
+  }, verified);
 }
 
 /* -------------------------------------------------------------------------- */

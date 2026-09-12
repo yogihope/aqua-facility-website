@@ -5,7 +5,7 @@ import { JsonLd, VerifyNote } from "@/components/ui/Bits";
 import { Reveal } from "@/components/ui/Reveal";
 import { getServices, getIndustries } from "@/lib/data";
 import { buildMetadata, breadcrumbSchema } from "@/lib/seo";
-import { site } from "@/content/site";
+import { site, cityLine } from "@/content/site";
 
 export const metadata = buildMetadata({
   title: "Contact Aqua | Let's Talk About Your Operation",
@@ -43,7 +43,7 @@ export default async function ContactPage() {
                 <span>{site.addressLine1}</span>
                 {site.addressLine2 ? <span>{site.addressLine2}</span> : null}
                 <span>
-                  {site.city}, {site.state} {site.postalCode}
+                  {cityLine()}
                 </span>
                 <span>{site.country}</span>
               </address>

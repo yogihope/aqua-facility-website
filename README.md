@@ -96,6 +96,8 @@ use `npm run db:studio`.
 | Case studies | `projects.ts` | `CaseStudy` |
 | Technology modules | `technology.ts` | `TechCapability` |
 | Job openings | `careers.ts` | `Job` |
+| Leadership + chairman's message | `leadership.ts` | `Leadership` |
+| Awards & recognition | `awards.ts` | `Award` |
 | Articles | `insights.ts` | `Insight` |
 | Legacy URL map | `redirects.ts` | `Redirect` |
 
@@ -119,8 +121,17 @@ This is enforced in the UI, not just in review:
   marker until the certificate is supplied.
 - **Technology modules** carry `live` / `in-rollout` / `planned` status, and the
   UI labels anything that is not live (Section 6.17).
-- **Leadership, certifications and the PAN-India map** are built but held in an
+- **Leadership** publishes on management-confirmed names and roles. A leader
+  without a headshot renders a monogram plate at the same 4:5 ratio, so setting
+  `photoUrl` later swaps the photograph in without moving the layout.
+- **Awards** carry `verified`, and every citation field (title, edition, issuer,
+  endorsement, date, venue) is transcribed from the certificate rather than
+  summarised. `/awards` 404s rather than rendering an empty shell if nothing is
+  verified.
+- **Certifications and the PAN-India map** are built but held in an
   "awaiting assets" state.
+- **The corporate PIN code** is empty rather than guessed, and `cityLine()`
+  omits it everywhere until it is supplied.
 
 Flip the corresponding flag in the CMS once management supplies documentation
 and the content publishes itself.
@@ -129,8 +140,12 @@ and the content publishes itself.
 
 Tracked against Section 18 of the spec:
 
-- [ ] Replace placeholder contact details in `src/content/site.ts` (address,
-      phone). They live in one record and propagate site-wide.
+- [ ] Replace the remaining placeholder contact details in
+      `src/content/site.ts` (street address, PIN, phone). City and state are
+      confirmed as Ahmedabad, Gujarat. They live in one record and propagate
+      site-wide.
+- [ ] Supply leadership headshots. Drop them into `public/leadership/` and set
+      `photoUrl` in `src/content/leadership.ts`.
 - [ ] Drop the brand team's SVG masters into `src/components/ui/Logo.tsx`
       (the mark is currently rebuilt as inline SVG).
 - [ ] Confirm legal entity names and licence details for the five pending group

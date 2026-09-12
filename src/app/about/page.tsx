@@ -2,10 +2,14 @@ import { Container, Section } from "@/components/ui/Container";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { PptpStory } from "@/components/sections/PptpStory";
+import { AboutAqua } from "@/components/sections/AboutAqua";
+import { Leadership } from "@/components/sections/Leadership";
+import { AwardHighlight } from "@/components/sections/AwardHighlight";
 import { SectionHeading, JsonLd, VerifyNote, IndexBadge } from "@/components/ui/Bits";
 import { Reveal } from "@/components/ui/Reveal";
 import { about } from "@/content/home";
 import { site, yearsOfExpertise } from "@/content/site";
+import { getLeaders, getAwards } from "@/lib/data";
 import { buildMetadata, breadcrumbSchema } from "@/lib/seo";
 
 export const metadata = buildMetadata({
@@ -17,7 +21,9 @@ export const metadata = buildMetadata({
 
 export const revalidate = 3600;
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const [leaders, awards] = await Promise.all([getLeaders(), getAwards()]);
+
   return (
     <>
       <JsonLd
@@ -63,8 +69,11 @@ export default function AboutPage() {
         </Container>
       </Section>
 
+      {/* The organisation in eight facts */}
+      <AboutAqua tone="sand" showLink={false} />
+
       {/* Timeline — horizontal on desktop, vertical on mobile (Section 7) */}
-      <Section tone="sand">
+      <Section tone="warm" className="grain">
         <Container>
           <SectionHeading
             kicker="How Aqua evolved"
@@ -134,7 +143,7 @@ export default function AboutPage() {
       </Section>
 
       {/* Vision, mission, values */}
-      <Section tone="warm" className="grain">
+      <Section tone="sand">
         <Container>
           <div className="grid gap-4 lg:grid-cols-2">
             <Reveal>
@@ -187,36 +196,35 @@ export default function AboutPage() {
       {/* People. Process. Technology. Performance. */}
       <PptpStory />
 
-      {/* Leadership + certifications + PAN-India — all gated on verification */}
+      {/* Leadership — publishes on confirmed names and roles */}
+      <Leadership leaders={leaders} />
+
+      {/* Recognition */}
+      <AwardHighlight awards={awards} />
+
+      {/* Remaining credential modules — still gated on verification */}
       <Section tone="sand">
         <Container>
           <SectionHeading
             kicker="Credentials"
             title={
               <>
-                Leadership, certifications{" "}
+                Certifications{" "}
                 <span className="italic text-brown">and coverage.</span>
               </>
             }
-            body="These modules are built and ready. They publish when management supplies verified biographies, certificate documents and the confirmed operating-location list."
+            body="These modules are built and ready. They publish when compliance supplies the certificate documents and operations confirms the operating-location list."
           />
 
-          <div className="mt-12 grid gap-4 lg:grid-cols-3">
+          <div className="mt-12 grid gap-4 lg:grid-cols-2">
             <Reveal>
-              <PendingModule
-                title="Leadership"
-                body="Verified names, roles, biographies and photographs, with LinkedIn links where approved."
-                owner="Management"
-              />
-            </Reveal>
-            <Reveal delay={80}>
               <PendingModule
                 title="Certifications & compliance"
                 body="Standard, certificate number, issuer and validity, with downloadable documents. Expired certifications hide automatically."
                 owner="Compliance"
               />
             </Reveal>
-            <Reveal delay={160}>
+            <Reveal delay={80}>
               <PendingModule
                 title="PAN-India capability map"
                 body="Actual operating states and locations only — no aspirational coverage."

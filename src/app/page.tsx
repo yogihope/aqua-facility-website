@@ -1,5 +1,6 @@
 import { Hero } from "@/components/sections/Hero";
 import { TrustStrip } from "@/components/sections/TrustStrip";
+import { AboutAqua } from "@/components/sections/AboutAqua";
 import { Repositioning } from "@/components/sections/Repositioning";
 import { ServiceBento } from "@/components/sections/ServiceBento";
 import { IndustriesRail } from "@/components/sections/IndustriesRail";
@@ -8,6 +9,7 @@ import { TechnologySection } from "@/components/sections/TechnologySection";
 import { GroupEcosystem } from "@/components/sections/GroupEcosystem";
 import { CaseStudiesSection } from "@/components/sections/CaseStudiesSection";
 import { Assurance } from "@/components/sections/Assurance";
+import { AwardHighlight } from "@/components/sections/AwardHighlight";
 import { CtaBand } from "@/components/sections/CtaBand";
 
 import {
@@ -16,6 +18,7 @@ import {
   getGroupCompanies,
   getCaseStudies,
   getTechCapabilities,
+  getAwards,
 } from "@/lib/data";
 import { home } from "@/content/home";
 import { buildMetadata } from "@/lib/seo";
@@ -32,18 +35,21 @@ export const metadata = buildMetadata({
 export const revalidate = 3600;
 
 export default async function HomePage() {
-  const [services, industries, group, caseStudies, tech] = await Promise.all([
-    getServices(),
-    getIndustries(),
-    getGroupCompanies(),
-    getCaseStudies(),
-    getTechCapabilities(),
-  ]);
+  const [services, industries, group, caseStudies, tech, awards] =
+    await Promise.all([
+      getServices(),
+      getIndustries(),
+      getGroupCompanies(),
+      getCaseStudies(),
+      getTechCapabilities(),
+      getAwards(),
+    ]);
 
   return (
     <>
       {/* 1 */} <Hero />
       {/* 2 */} <TrustStrip />
+      {/* 2b */} <AboutAqua />
       {/* 3 + 5 */} <Repositioning />
       {/* 4 */} <ServiceBento services={services} />
       {/* 6 */} <IndustriesRail industries={industries} />
@@ -51,6 +57,7 @@ export default async function HomePage() {
       {/* 8 */} <TechnologySection capabilities={tech} />
       {/* 9 */} <GroupEcosystem companies={group} />
       {/* 10 */} <CaseStudiesSection caseStudies={caseStudies} />
+      {/* 10b */} <AwardHighlight awards={awards} />
       {/* 11 */} <Assurance />
       {/* 12 */}
       <CtaBand
