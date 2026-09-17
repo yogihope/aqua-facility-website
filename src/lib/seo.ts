@@ -44,7 +44,11 @@ export function buildMetadata({
     title,
     description,
     alternates: { canonical: url },
-    robots: noIndex ? { index: false, follow: false } : undefined,
+    // Only set when needed: an explicit `robots: undefined` here overrides the
+    // staging noindex the root layout declares.
+    ...(noIndex || process.env.NEXT_PUBLIC_ENV === "staging"
+      ? { robots: { index: false, follow: false } }
+      : {}),
     openGraph: {
       title,
       description,

@@ -55,6 +55,9 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
 
+  // Docker image ships only the self-contained server (see Dockerfile).
+  output: "standalone",
+
   /**
    * Section 3.1 lists every canonical URL with a trailing slash, and Appendix A
    * lists the legacy URLs the same way. Matching that form keeps the redirect
@@ -82,7 +85,15 @@ const nextConfig: NextConfig = {
   },
 
   async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
+    // 16.3 — staging stays out of the index on every response, including
+    // files and API routes that carry no <meta name="robots">.
+    const stagingHeaders =
+      process.env.NEXT_PUBLIC_ENV === "staging"
+        ? [{ key: "X-Robots-Tag", value: "noindex, nofollow" }]
+        : [];
+    return [
+      { source: "/:path*", headers: [...securityHeaders, ...stagingHeaders] },
+    ];
   },
 };
 

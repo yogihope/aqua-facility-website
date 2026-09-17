@@ -1,0 +1,13 @@
+# Server-side compose for the Aqua website. Lives at /opt/aqua-web on the VPS.
+# Deploy: docker compose pull app && docker compose up -d app
+services:
+  app:
+    image: ghcr.io/yogihope/aqua-facility-website:latest
+    container_name: aqua-web-app
+    restart: unless-stopped
+    # Loopback only — nginx terminates TLS and proxies to it.
+    ports:
+      - "127.0.0.1:3010:3000"
+    env_file:
+      - path: .env
+        required: false
