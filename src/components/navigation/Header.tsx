@@ -176,7 +176,7 @@ export function Header({ nav }: { nav: NavData }) {
           {/* Hidden on a wrapper: CtaLink's own inline-flex outranks `hidden`
               in the stylesheet, which left this button pushing the header
               wider than the screen on phones. */}
-          <div className="hidden lg:block">
+          <div className="hidden xl:block">
             <CtaLink
               href="/request-proposal"
               className="h-11 min-h-0 px-5 text-[0.8125rem]"
