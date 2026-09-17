@@ -78,183 +78,194 @@ export function Header({ nav }: { nav: NavData }) {
   const solid = scrolled || !overHero || openMega !== null;
 
   return (
-    <header
-      ref={headerRef}
-      onMouseLeave={scheduleClose}
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
-        solid
-          ? "bg-warm/92 shadow-[0_1px_0_0_rgba(44,39,35,0.08)] backdrop-blur-xl"
-          : "bg-transparent"
-      )}
-    >
-      <a
-        href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-brown focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-warm"
-      >
-        Skip to content
-      </a>
-
-      <div
+    <>
+      <header
+        ref={headerRef}
+        onMouseLeave={scheduleClose}
         className={cn(
-          "mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-5 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-8 lg:px-10",
-          scrolled ? "h-[68px]" : "h-[84px] lg:h-[92px]"
+          "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
+          solid
+            ? "bg-warm/92 shadow-[0_1px_0_0_rgba(44,39,35,0.08)] backdrop-blur-xl"
+            : "bg-transparent"
         )}
       >
-        <Link href="/" aria-label={`${site.legalName} — home`} className="shrink-0">
-          <Logo tone={solid ? "brand" : "brand"} />
-        </Link>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-brown focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-warm"
+        >
+          Skip to content
+        </a>
 
-        {/* Desktop navigation — max 9 primary items (Section 3) */}
-        <nav aria-label="Primary" className="hidden xl:block">
-          <ul className="flex items-center gap-0.5">
-            {primaryNav.map((item) => {
-              const isMega = "mega" in item && item.mega;
-              const active =
-                pathname === item.href || pathname.startsWith(`${item.href}/`);
-              return (
-                <li
-                  key={item.href}
-                  onMouseEnter={() => {
-                    cancelClose();
-                    setOpenMega(isMega ? (item.mega as string) : null);
-                  }}
-                >
-                  {isMega ? (
-                    <button
-                      type="button"
-                      aria-expanded={openMega === item.mega}
-                      aria-haspopup="true"
-                      onClick={() =>
-                        setOpenMega(
-                          openMega === item.mega ? null : (item.mega as string)
-                        )
-                      }
-                      onFocus={() => setOpenMega(item.mega as string)}
-                      className={cn(
-                        "flex items-center gap-1.5 rounded-lg px-3.5 py-2.5 text-[0.875rem] font-medium transition-colors duration-200",
-                        active || openMega === item.mega
-                          ? "text-brown"
-                          : "text-charcoal/80 hover:text-brown"
-                      )}
-                    >
-                      {item.label}
-                      <svg
-                        viewBox="0 0 12 12"
-                        aria-hidden="true"
+        <div
+          className={cn(
+            "mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-5 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-8 lg:px-10",
+            scrolled ? "h-[68px]" : "h-[84px] lg:h-[92px]"
+          )}
+        >
+          <Link href="/" aria-label={`${site.legalName} — home`} className="shrink-0">
+            <Logo tone={solid ? "brand" : "brand"} />
+          </Link>
+
+          {/* Desktop navigation — max 9 primary items (Section 3) */}
+          <nav aria-label="Primary" className="hidden xl:block">
+            <ul className="flex items-center gap-0.5">
+              {primaryNav.map((item) => {
+                const isMega = "mega" in item && item.mega;
+                const active =
+                  pathname === item.href || pathname.startsWith(`${item.href}/`);
+                return (
+                  <li
+                    key={item.href}
+                    onMouseEnter={() => {
+                      cancelClose();
+                      setOpenMega(isMega ? (item.mega as string) : null);
+                    }}
+                  >
+                    {isMega ? (
+                      <button
+                        type="button"
+                        aria-expanded={openMega === item.mega}
+                        aria-haspopup="true"
+                        onClick={() =>
+                          setOpenMega(
+                            openMega === item.mega ? null : (item.mega as string)
+                          )
+                        }
+                        onFocus={() => setOpenMega(item.mega as string)}
                         className={cn(
-                          "h-2.5 w-2.5 transition-transform duration-300",
-                          openMega === item.mega && "rotate-180"
+                          "flex items-center gap-1.5 rounded-lg px-3.5 py-2.5 text-[0.875rem] font-medium transition-colors duration-200",
+                          active || openMega === item.mega
+                            ? "text-brown"
+                            : "text-charcoal/80 hover:text-brown"
                         )}
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
                       >
-                        <path d="M2.5 4.5 6 8l3.5-3.5" />
-                      </svg>
-                    </button>
-                  ) : (
-                    <Link
-                      href={item.href}
-                      className={cn(
-                        "block rounded-lg px-3.5 py-2.5 text-[0.875rem] font-medium transition-colors duration-200",
-                        active ? "text-brown" : "text-charcoal/80 hover:text-brown"
-                      )}
-                    >
-                      {item.label}
-                    </Link>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
+                        {item.label}
+                        <svg
+                          viewBox="0 0 12 12"
+                          aria-hidden="true"
+                          className={cn(
+                            "h-2.5 w-2.5 transition-transform duration-300",
+                            openMega === item.mega && "rotate-180"
+                          )}
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M2.5 4.5 6 8l3.5-3.5" />
+                        </svg>
+                      </button>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        className={cn(
+                          "block rounded-lg px-3.5 py-2.5 text-[0.875rem] font-medium transition-colors duration-200",
+                          active ? "text-brown" : "text-charcoal/80 hover:text-brown"
+                        )}
+                      >
+                        {item.label}
+                      </Link>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
 
-        <div className="flex items-center gap-3">
-          {/* Hidden on a wrapper: CtaLink's own inline-flex outranks `hidden`
-              in the stylesheet, which left this button pushing the header
-              wider than the screen on phones. */}
-          <div className="hidden xl:block">
-            <CtaLink
-              href="/request-proposal"
-              className="h-11 min-h-0 px-5 text-[0.8125rem]"
-              arrow={false}
+          <div className="flex items-center gap-3">
+            {/* Hidden on a wrapper: CtaLink's own inline-flex outranks `hidden`
+                in the stylesheet, which left this button pushing the header
+                wider than the screen on phones. */}
+            <div className="hidden xl:block">
+              <CtaLink
+                href="/request-proposal"
+                className="h-11 min-h-0 px-5 text-[0.8125rem]"
+                arrow={false}
+              >
+                {site.primaryCtaLabel}
+              </CtaLink>
+            </div>
+
+            <button
+              type="button"
+              aria-label={drawerOpen ? "Close menu" : "Open menu"}
+              aria-expanded={drawerOpen}
+              onClick={() => setDrawerOpen((v) => !v)}
+              className="flex h-11 w-11 items-center justify-center rounded-xl border border-line-strong text-charcoal transition-colors hover:border-gold hover:text-brown xl:hidden"
             >
-              {site.primaryCtaLabel}
-            </CtaLink>
+              <span className="relative block h-3.5 w-5">
+                <span
+                  className={cn(
+                    "absolute left-0 block h-[1.5px] w-full bg-current transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                    drawerOpen ? "top-1.5 rotate-45" : "top-0"
+                  )}
+                />
+                <span
+                  className={cn(
+                    "absolute left-0 top-1.5 block h-[1.5px] w-full bg-current transition-opacity duration-200",
+                    drawerOpen && "opacity-0"
+                  )}
+                />
+                <span
+                  className={cn(
+                    "absolute left-0 block h-[1.5px] w-full bg-current transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                    drawerOpen ? "top-1.5 -rotate-45" : "top-3"
+                  )}
+                />
+              </span>
+            </button>
           </div>
-
-          <button
-            type="button"
-            aria-label={drawerOpen ? "Close menu" : "Open menu"}
-            aria-expanded={drawerOpen}
-            onClick={() => setDrawerOpen((v) => !v)}
-            className="flex h-11 w-11 items-center justify-center rounded-xl border border-line-strong text-charcoal transition-colors hover:border-gold hover:text-brown xl:hidden"
-          >
-            <span className="relative block h-3.5 w-5">
-              <span
-                className={cn(
-                  "absolute left-0 block h-[1.5px] w-full bg-current transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
-                  drawerOpen ? "top-1.5 rotate-45" : "top-0"
-                )}
-              />
-              <span
-                className={cn(
-                  "absolute left-0 top-1.5 block h-[1.5px] w-full bg-current transition-opacity duration-200",
-                  drawerOpen && "opacity-0"
-                )}
-              />
-              <span
-                className={cn(
-                  "absolute left-0 block h-[1.5px] w-full bg-current transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
-                  drawerOpen ? "top-1.5 -rotate-45" : "top-3"
-                )}
-              />
-            </span>
-          </button>
         </div>
-      </div>
 
-      {/* Mega menus */}
-      <div onMouseEnter={cancelClose}>
-        <MegaPanel
-          open={openMega === "services"}
-          eyebrow="Six capability pillars"
-          title="One Operational Partner. Multiple Capabilities."
-          items={nav.services}
-          basePath="/services"
-          hubLabel="View all services"
-          featured={{
-            kicker: "Featured capability",
-            title: "Technology for Seamless Operations",
-            body: "Digital attendance, geo-tagged verification, ticketing and MIS across multi-site operations.",
-            href: "/technology",
-            cta: "See how we monitor operations",
-          }}
-        />
-        <MegaPanel
-          open={openMega === "industries"}
-          eyebrow="Sector-led discovery"
-          title="Built for Complex Operating Environments."
-          items={nav.industries}
-          basePath="/industries"
-          hubLabel="View all industries"
-          columns={3}
-          featured={{
-            kicker: "Featured sector",
-            title: "Railways & Infrastructure",
-            body: "Mechanised cleaning, manpower, maintenance and project support for high-footfall environments.",
-            href: "/industries/railways-infrastructure",
-            cta: "Explore the sector",
-          }}
-        />
-      </div>
+        {/* Mega menus */}
+        <div onMouseEnter={cancelClose}>
+          <MegaPanel
+            open={openMega === "services"}
+            eyebrow="Six capability pillars"
+            title="One Operational Partner. Multiple Capabilities."
+            items={nav.services}
+            basePath="/services"
+            hubLabel="View all services"
+            featured={{
+              kicker: "Featured capability",
+              title: "Technology for Seamless Operations",
+              body: "Digital attendance, geo-tagged verification, ticketing and MIS across multi-site operations.",
+              href: "/technology",
+              cta: "See how we monitor operations",
+            }}
+          />
+          <MegaPanel
+            open={openMega === "industries"}
+            eyebrow="Sector-led discovery"
+            title="Built for Complex Operating Environments."
+            items={nav.industries}
+            basePath="/industries"
+            hubLabel="View all industries"
+            columns={3}
+            featured={{
+              kicker: "Featured sector",
+              title: "Railways & Infrastructure",
+              body: "Mechanised cleaning, manpower, maintenance and project support for high-footfall environments.",
+              href: "/industries/railways-infrastructure",
+              cta: "Explore the sector",
+            }}
+          />
+        </div>
 
-      {/* Mobile drawer — accordion, no hover dependency (3.2, 15) */}
-      <MobileDrawer open={drawerOpen} nav={nav} onClose={() => setDrawerOpen(false)} />
-    </header>
+        {/* Mobile drawer — accordion, no hover dependency (3.2, 15) */}
+      </header>
+
+      {/* Mobile drawer sits outside <header>: the header's backdrop-filter
+          (applied once it turns solid) makes it the containing block for fixed
+          children, which collapsed the drawer to the header's own height. */}
+      <MobileDrawer
+        open={drawerOpen}
+        nav={nav}
+        scrolled={scrolled}
+        onClose={() => setDrawerOpen(false)}
+      />
+    </>
   );
 }
 
@@ -368,10 +379,12 @@ function MegaPanel({
 function MobileDrawer({
   open,
   nav,
+  scrolled,
   onClose,
 }: {
   open: boolean;
   nav: NavData;
+  scrolled: boolean;
   onClose: () => void;
 }) {
   const [section, setSection] = useState<string | null>(null);
@@ -397,7 +410,9 @@ function MobileDrawer({
   return (
     <div
       className={cn(
-        "fixed inset-x-0 top-[68px] bottom-0 overflow-y-auto border-t border-line bg-warm transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] xl:hidden",
+        "fixed inset-x-0 bottom-0 z-40 overflow-y-auto border-t border-line bg-warm transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] xl:hidden",
+        // Matches the header height so the drawer starts right under it.
+        scrolled ? "top-[68px]" : "top-[84px] lg:top-[92px]",
         open
           ? "translate-y-0 opacity-100"
           : "pointer-events-none -translate-y-2 opacity-0"
