@@ -478,15 +478,8 @@ function MobileDrawer({
           })}
         </ul>
 
+        {/* No Request a Proposal button on mobile, per Nirav 2026-09-17. */}
         <div className="mt-8 flex flex-col gap-3 pb-10">
-          <CtaLink
-            href="/request-proposal"
-            onClick={onClose}
-            tabIndex={open ? 0 : -1}
-            className="w-full"
-          >
-            {site.primaryCtaLabel}
-          </CtaLink>
           <CtaLink
             href="/contact"
             variant="secondary"
