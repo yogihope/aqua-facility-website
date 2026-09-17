@@ -76,10 +76,10 @@ export default async function ContactPage() {
             </div>
 
             <VerifyNote>
-              Corporate address and phone shown here are placeholders held in a
+              The corporate street address shown here is a placeholder held in a
               single site-settings record. Management supplies the verified
-              contact details before go-live — updating them once changes them
-              everywhere on the site.
+              address before go-live — updating it once changes it everywhere
+              on the site.
             </VerifyNote>
           </div>
         }

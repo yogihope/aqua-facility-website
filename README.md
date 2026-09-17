@@ -141,8 +141,8 @@ and the content publishes itself.
 Tracked against Section 18 of the spec:
 
 - [ ] Replace the remaining placeholder contact details in
-      `src/content/site.ts` (street address, PIN, phone). City and state are
-      confirmed as Ahmedabad, Gujarat. They live in one record and propagate
+      `src/content/site.ts` (street address, PIN). City, state and phone are
+      confirmed. They live in one record and propagate
       site-wide.
 - [ ] Supply leadership headshots. Drop them into `public/leadership/` and set
       `photoUrl` in `src/content/leadership.ts`.

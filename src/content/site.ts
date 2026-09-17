@@ -24,7 +24,7 @@ export const site = {
   foundingYear: FOUNDING_YEAR,
   domain: "https://aquafacility.com",
 
-  // City and state are management-confirmed. Street line and PIN are still
+  // City, state and phone are management-confirmed. Street line and PIN are still
   // [VERIFY] — an empty postalCode is rendered as absent rather than guessed,
   // so no invented address component reaches the footer or Organization schema.
   addressLine1: "Corporate Office",
@@ -33,7 +33,7 @@ export const site = {
   state: "Gujarat",
   postalCode: "",
   country: "India",
-  phone: "+91 00000 00000",
+  phone: "+91 97277 22036",
   altPhone: null as string | null,
   email: "info@aquafacility.com",
   careersEmail: "careers@aquafacility.com",
