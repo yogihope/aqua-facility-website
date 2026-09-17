@@ -92,7 +92,12 @@ export default async function RootLayout({
       <body className="antialiased">
         <JsonLd data={organizationSchema()} />
         <Header nav={nav} />
-        <main id="main">{children}</main>
+        {/* overflow-x clip here, not only on body: body's overflow propagates to
+            the viewport, where phones still widen the page to fit decorative
+            glows that hang past a section edge. */}
+        <main id="main" className="overflow-x-clip">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

@@ -1,4 +1,5 @@
 import { home } from "@/content/home";
+import { cn } from "@/lib/utils";
 
 /**
  * Section 6.1 (2) — single-line stat rail.
@@ -17,8 +18,13 @@ export function TrustStrip() {
       {/* Mobile: static, no motion */}
       <ul className="flex flex-wrap justify-center gap-x-6 gap-y-3 px-5 py-6 sm:hidden">
         {items.map((item) => (
-          <li key={item.label}>
-            <Item label={item.label} verified={item.verified} note={item.note} />
+          <li key={item.label} className="max-w-full">
+            <Item
+              label={item.label}
+              verified={item.verified}
+              note={item.note}
+              wrap
+            />
           </li>
         ))}
       </ul>
@@ -58,15 +64,21 @@ function Item({
   label,
   verified,
   note,
+  wrap = false,
   ...rest
 }: {
   label: string;
   verified: boolean;
   note?: string;
+  /** Let a long label break onto two lines (static mobile list). */
+  wrap?: boolean;
 } & React.HTMLAttributes<HTMLSpanElement>) {
   return (
     <span
-      className="flex shrink-0 items-center gap-2 whitespace-nowrap text-[0.8125rem] font-semibold uppercase tracking-[0.1em] text-charcoal/75"
+      className={cn(
+        "flex shrink-0 items-center justify-center gap-2 text-[0.8125rem] font-semibold uppercase tracking-[0.1em] text-charcoal/75",
+        wrap ? "flex-wrap text-center" : "whitespace-nowrap"
+      )}
       {...rest}
     >
       {label}

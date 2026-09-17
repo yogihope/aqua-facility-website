@@ -41,7 +41,7 @@ export function Section({
     <section
       id={id}
       className={cn(
-        "relative py-16 sm:py-24 lg:py-32",
+        "relative overflow-x-clip py-16 sm:py-24 lg:py-32",
         tone === "warm" && "bg-warm",
         tone === "sand" && "bg-warm-deep",
         tone === "dark" && "dark-section bg-charcoal",
