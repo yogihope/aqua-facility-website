@@ -294,6 +294,13 @@ body {
   animation-play-state: paused;
 }
 
+/* Reduced motion stops the rail, so let it be scrolled by hand instead. */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-manual {
+    overflow-x: auto;
+  }
+}
+
 /* --------------------------------------------------------------------------
    Prose — 6.35 article template, 700–900px measure
    -------------------------------------------------------------------------- */

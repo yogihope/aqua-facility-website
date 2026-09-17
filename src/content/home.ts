@@ -92,26 +92,29 @@ export const home = {
   },
 
   /**
-   * Clients named on the legacy aquafacility.com site (home and service pages),
-   * carried over on Nirav's direction 2026-09-17. Names only, no logo files.
+   * Clients named on the legacy aquafacility.com site, carried over on Nirav's
+   * direction 2026-09-17. Logos are the legacy site's own uploads, trimmed onto
+   * transparent backgrounds; Tata and SPX Flow were white-only and are recoloured.
    */
   clients: [
-    "Adani Power",
-    "Adani Wilmar",
-    "Tata",
-    "Torrent Power",
-    "Larsen & Toubro",
-    "Hitachi",
-    "Maruti Suzuki",
-    "Honda",
-    "Arvind",
-    "Essar Oil",
-    "Sandvik",
-    "SPX Flow",
-    "SGL",
-    "AIA Engineering",
-    "GFL",
-    "Wagh Bakri",
+    { name: "Adani Power", logo: "/clients/adani-power.png" },
+    { name: "Adani Wilmar", logo: "/clients/adani-wilmar.png" },
+    { name: "Tata", logo: "/clients/tata.png" },
+    { name: "Torrent Power", logo: "/clients/torrent-power.png" },
+    { name: "Torrent Pharma", logo: "/clients/torrent-pharma.png" },
+    { name: "Larsen & Toubro", logo: "/clients/larsen-toubro.png" },
+    { name: "Hitachi", logo: "/clients/hitachi.png" },
+    { name: "Suzuki", logo: "/clients/suzuki.png" },
+    { name: "Honda", logo: "/clients/honda.png" },
+    { name: "Arvind", logo: "/clients/arvind.png" },
+    { name: "Essar Oil", logo: "/clients/essar-oil.png" },
+    { name: "Sandvik", logo: "/clients/sandvik.png" },
+    { name: "SPX Flow", logo: "/clients/spx-flow.png" },
+    { name: "Steelco Gujarat (SGL)", logo: "/clients/steelco-gujarat.png" },
+    { name: "AIA Engineering", logo: "/clients/aia-engineering.png" },
+    { name: "Gujarat Fluorochemicals (GFL)", logo: "/clients/gujarat-fluorochemicals.png" },
+    { name: "CLP India", logo: "/clients/clp-india.png" },
+    { name: "Wagh Bakri", logo: "/clients/wagh-bakri.png" },
   ],
 
   /** Section 11 — Assurance. */
