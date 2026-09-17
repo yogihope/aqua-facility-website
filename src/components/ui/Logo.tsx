@@ -8,16 +8,14 @@ import { cn } from "@/lib/utils";
  * the brand team (`aqua-logo.png`), un-matted off its white background so the
  * edges stay clean on the warm-white and charcoal surfaces alike:
  *
- *   aqua-symbol.png          the A alone — what this component renders
+ *   aqua-symbol.png          the A alone — what LogoMark renders
  *   aqua-symbol-reverse.png  maroon swapped for warm white, for dark sections
  *   aqua-lockup.png          the A with the "Aqua" wordmark and trademark
  *   aqua-lockup-reverse.png  the same lockup for dark sections
  *
- * The lockup files are the brand's own compact logo, kept here for share
- * images and print. On screen the header and footer pair the symbol with live
- * "Aqua" type instead: at 40–44px the wordmark baked into the lockup renders
- * around 9px tall and turns to mush, while live type stays crisp, selectable
- * and recolourable per tone.
+ * `Logo` renders the lockup, the brand's own logo with the wordmark inside
+ * the A, in the header and footer (Nirav's call, 2026-09-17). `LogoMark` is
+ * the bare symbol for decorative spots.
  */
 export function LogoMark({
   className,
@@ -48,28 +46,30 @@ export function Logo({
   showTagline?: boolean;
 }) {
   return (
-    <span className={cn("flex items-center gap-3", className)}>
-      <span className="h-10 w-auto shrink-0 sm:h-11">
-        <LogoMark tone={tone} />
-      </span>
-      <span className="flex flex-col leading-none">
+    <span className={cn("flex items-center gap-4", className)}>
+      <Image
+        src={tone === "reverse" ? "/brand/aqua-lockup-reverse.png" : "/brand/aqua-lockup.png"}
+        alt="Aqua"
+        width={512}
+        height={461}
+        loading="eager"
+        className={cn(
+          "w-auto shrink-0 object-contain",
+          showTagline ? "h-20" : "h-14 sm:h-[3.75rem]"
+        )}
+      />
+      {showTagline ? (
         <span
           className={cn(
-            "font-display text-[1.6rem] leading-none tracking-[-0.01em] sm:text-[1.75rem]",
-            tone === "reverse" ? "text-warm" : "text-brown"
-          )}
-        >
-          Aqua
-        </span>
-        <span
-          className={cn(
-            "mt-1 text-[0.5rem] font-semibold uppercase tracking-[0.2em] sm:text-[0.5625rem]",
+            "text-[0.625rem] font-semibold uppercase leading-relaxed tracking-[0.2em]",
             tone === "reverse" ? "text-warm/55" : "text-muted"
           )}
         >
-          {showTagline ? "Facility Services Pvt. Ltd." : "Since 1996"}
+          Facility Services
+          <br />
+          Pvt. Ltd.
         </span>
-      </span>
+      ) : null}
     </span>
   );
 }
