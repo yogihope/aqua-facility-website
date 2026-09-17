@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
 import { CtaLink } from "@/components/ui/Button";
@@ -67,6 +68,26 @@ export async function Footer() {
             <p className="mt-2 text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-warm/40">
               {site.philosophy}
             </p>
+
+            {/* Brand badges as on the company stationery, on a light plate so
+                their brown artwork keeps its original colour. */}
+            <ul className="mt-8 inline-flex items-center gap-4 rounded-[1.25rem] bg-warm px-5 py-4">
+              {[
+                { src: "/badges/since-1996.png", alt: "Since 1996", w: 190, h: 154 },
+                { src: "/badges/iso-certified.png", alt: "ISO certified company", w: 194, h: 194 },
+                { src: "/badges/pan-india.png", alt: "Pan India operations", w: 186, h: 188 },
+              ].map((badge) => (
+                <li key={badge.src}>
+                  <Image
+                    src={badge.src}
+                    alt={badge.alt}
+                    width={badge.w}
+                    height={badge.h}
+                    className="h-16 w-auto sm:h-[4.5rem]"
+                  />
+                </li>
+              ))}
+            </ul>
           </div>
 
           <FooterColumn
