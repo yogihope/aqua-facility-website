@@ -1,5 +1,6 @@
 import { Hero } from "@/components/sections/Hero";
 import { TrustStrip } from "@/components/sections/TrustStrip";
+import { ClientList } from "@/components/sections/ClientList";
 import { AboutAqua } from "@/components/sections/AboutAqua";
 import { Repositioning } from "@/components/sections/Repositioning";
 import { ServiceBento } from "@/components/sections/ServiceBento";
@@ -49,6 +50,7 @@ export default async function HomePage() {
     <>
       {/* 1 */} <Hero />
       {/* 2 */} <TrustStrip />
+      {/* 2a */} <ClientList />
       {/* 2b */} <AboutAqua />
       {/* 3 + 5 */} <Repositioning />
       {/* 4 */} <ServiceBento services={services} />

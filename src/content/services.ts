@@ -24,6 +24,7 @@ export const services: ServiceContent[] = [
       "Facility maintenance",
       "Waste management",
       "Landscaping",
+      "Pest management",
     ],
     capabilities: [
       "Mechanised housekeeping",
@@ -42,6 +43,12 @@ export const services: ServiceContent[] = [
       "Landscaping",
       "Plumbing and carpentry",
       "Warehouse / store management",
+      "Pest management",
+      "Fumigation",
+      "Laundry services",
+      "Residential and domestic cleaning",
+      "Move-out (departure) cleaning",
+      "Annual deep cleaning",
     ],
     problems: [
       {
@@ -84,9 +91,11 @@ export const services: ServiceContent[] = [
     seoTitle:
       "Integrated Facility Management Services | Aqua Facility Services",
     seoDescription:
-      "Mechanised housekeeping, industrial cleaning, facility maintenance, waste management, landscaping and operational support tailored to complex sites.",
+      "Mechanised housekeeping, industrial cleaning, pest management, fumigation, laundry, facility maintenance, waste management and landscaping tailored to each site.",
     industries: [
       "commercial-corporate",
+      "hospitality-leisure",
+      "residential",
       "healthcare-pharma",
       "automobile",
       "power",
@@ -126,6 +135,8 @@ export const services: ServiceContent[] = [
       "Front-office staffing",
       "Office-support manpower",
       "Administrative manpower",
+      "Mailroom services",
+      "Liaisoning and licensing support",
     ],
     problems: [
       {
@@ -296,6 +307,7 @@ export const services: ServiceContent[] = [
       "Maintenance reporting",
       "Safety systems",
       "Corrective-action management",
+      "24×7 repair and maintenance teams",
     ],
     problems: [
       {

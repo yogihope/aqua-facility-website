@@ -11,7 +11,7 @@ import { buildMetadata, breadcrumbSchema } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Industries | Operational Support for Complex Environments",
   description:
-    "Aqua combines sector understanding with flexible service models, trained manpower, machinery and site-specific processes across thirteen operating sectors.",
+    "Aqua combines sector understanding with flexible service models, trained manpower, machinery and site-specific processes across fifteen operating sectors.",
   path: "/industries",
 });
 

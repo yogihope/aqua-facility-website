@@ -1,7 +1,8 @@
 import type { IndustryContent } from "./types";
 
 /**
- * Thirteen sectors — Sections 6.18 to 6.31.
+ * Thirteen sectors from Sections 6.18 to 6.31, plus Hospitality & Leisure and
+ * Residential carried over from the legacy site.
  * Hero titles, intros and capability tags are taken from the specification.
  * Challenge copy is written to the Section 5.2 voice rules and carries no
  * client, scale or performance claims.
@@ -440,6 +441,74 @@ export const industries: IndustryContent[] = [
     ...seo(
       "Railways & Infrastructure",
       "Station and platform cleaning, manpower, maintenance and project support for railway and infrastructure environments."
+    ),
+  },
+  {
+    slug: "hospitality-leisure",
+    order: 14,
+    title: "Hospitality & Leisure",
+    heroTitle: "Operational Support Built for Hospitality & Leisure.",
+    intro:
+      "Housekeeping, laundry, front-office, guest-house management and facility upkeep.",
+    capabilities: [
+      "Housekeeping",
+      "Laundry",
+      "Front office",
+      "Guest-house management",
+      "Pest management",
+    ],
+    challenges: [
+      {
+        title: "Guest-facing standards",
+        body: "Rooms, public areas and washrooms are judged by guests on every visit, so standards have to hold across every shift.",
+      },
+      {
+        title: "Turnaround pressure",
+        body: "Room and linen turnaround has to keep pace with check-ins and check-outs without disturbing occupied areas.",
+      },
+      {
+        title: "Hygiene and pest control",
+        body: "Kitchens, stores and guest areas need scheduled pest management and hygiene checks, not reactive clean-ups.",
+      },
+    ],
+    ctaLabel: cta,
+    ...seo(
+      "Hospitality & Leisure",
+      "Housekeeping, laundry, front-office staffing and guest-house management for hotels, resorts and leisure properties."
+    ),
+  },
+  {
+    slug: "residential",
+    order: 15,
+    title: "Residential",
+    heroTitle: "Operational Support Built for Residential Properties.",
+    intro:
+      "Property and domestic cleaning, move-out cleaning, annual deep cleaning, landscaping and upkeep.",
+    capabilities: [
+      "Property cleaning",
+      "Move-out cleaning",
+      "Annual deep cleaning",
+      "Landscaping",
+      "Pest management",
+    ],
+    challenges: [
+      {
+        title: "Occupied homes",
+        body: "Work happens around residents, so teams follow the household's instructions on access, timing and what not to touch.",
+      },
+      {
+        title: "Wear and tear",
+        body: "Scheduled deep cleaning of upholstery, curtains, floors and washrooms slows the effect of everyday use.",
+      },
+      {
+        title: "End-of-tenancy handover",
+        body: "Move-out cleaning has to leave a property ready for handover while the occupant is busy with the move.",
+      },
+    ],
+    ctaLabel: cta,
+    ...seo(
+      "Residential",
+      "Property cleaning, move-out cleaning, annual deep cleaning, landscaping and pest management for residential properties."
     ),
   },
 ];

@@ -82,10 +82,11 @@ export function organizationSchema() {
     slogan: site.brandPromise,
     address: {
       "@type": "PostalAddress",
-      streetAddress: site.addressLine1,
+      streetAddress: [site.addressLine1, site.addressLine2]
+        .filter(Boolean)
+        .join(", "),
       addressLocality: site.city,
       addressRegion: site.state,
-      // Omitted rather than guessed while the PIN is unverified.
       ...(site.postalCode ? { postalCode: site.postalCode } : {}),
       addressCountry: "IN",
     },

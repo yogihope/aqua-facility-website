@@ -14,15 +14,16 @@ export const home = {
     secondaryCta: { label: "Partner With Aqua", href: "/request-proposal" },
   },
 
-  /** Section 2 — Trust strip. ISO claim carries a VERIFY flag until documented. */
+  /** Section 2 — Trust strip. ISO and statutory claims as on the legacy site (2026-09-17). */
   trustStrip: [
     { label: "30+ Years of Expertise", verified: true },
     { label: "Gujarat State Best Employer Brand 2026", verified: true },
     { label: "PAN-India Capability", verified: true },
     { label: "Multi-Sector Expertise", verified: true },
-    { label: "ISO-Certified", verified: false, note: "Standard to be confirmed" },
+    { label: "ISO-Certified", verified: true },
+    { label: "100% Statutory Compliance", verified: true },
     { label: "Mechanised & Technology-Enabled Operations", verified: true },
-  ],
+  ] as { label: string; verified: boolean; note?: string }[],
 
   repositioning: {
     h2: "Aqua Does More Than Manage Facilities.",
@@ -89,6 +90,29 @@ export const home = {
     body: "Digital attendance, workforce tracking, geo-tagged verification, audit logs, maintenance schedules, inventory visibility, escalation systems and management MIS create a transparent operating layer across sites.",
     cta: { label: "See How We Monitor Operations", href: "/technology" },
   },
+
+  /**
+   * Clients named on the legacy aquafacility.com site (home and service pages),
+   * carried over on Nirav's direction 2026-09-17. Names only, no logo files.
+   */
+  clients: [
+    "Adani Power",
+    "Adani Wilmar",
+    "Tata",
+    "Torrent Power",
+    "Larsen & Toubro",
+    "Hitachi",
+    "Maruti Suzuki",
+    "Honda",
+    "Arvind",
+    "Essar Oil",
+    "Sandvik",
+    "SPX Flow",
+    "SGL",
+    "AIA Engineering",
+    "GFL",
+    "Wagh Bakri",
+  ],
 
   /** Section 11 — Assurance. */
   assurance: [

@@ -1,7 +1,7 @@
 import { Container, Section } from "@/components/ui/Container";
 import { PageHero } from "@/components/sections/PageHero";
 import { ProposalForm } from "@/components/forms/ProposalForm";
-import { JsonLd, VerifyNote } from "@/components/ui/Bits";
+import { JsonLd } from "@/components/ui/Bits";
 import { Reveal } from "@/components/ui/Reveal";
 import { getServices, getIndustries } from "@/lib/data";
 import { buildMetadata, breadcrumbSchema } from "@/lib/seo";
@@ -63,6 +63,13 @@ export default async function ContactPage() {
                 >
                   {site.email}
                 </a>
+                <a
+                  href={`mailto:${site.operationsEmail}`}
+                  data-analytics="email_click"
+                  className="text-[0.9375rem] text-charcoal/80 transition-colors hover:text-brown"
+                >
+                  {site.operationsEmail} (operations)
+                </a>
                 {site.careersEmail ? (
                   <a
                     href={`mailto:${site.careersEmail}`}
@@ -75,12 +82,30 @@ export default async function ContactPage() {
               </div>
             </div>
 
-            <VerifyNote>
-              The corporate street address shown here is a placeholder held in a
-              single site-settings record. Management supplies the verified
-              address before go-live — updating it once changes it everywhere
-              on the site.
-            </VerifyNote>
+            <div className="rounded-[1.5rem] border border-line bg-white/70 p-7">
+              <p className="kicker text-gold-deep">{site.usOffice.label}</p>
+              <address className="mt-5 flex flex-col gap-1 text-[0.9375rem] not-italic leading-relaxed text-charcoal/85">
+                <span>{site.usOffice.addressLine1}</span>
+                <span>{site.usOffice.cityLine}</span>
+                <span>{site.usOffice.country}</span>
+              </address>
+              <div className="mt-6 flex flex-col gap-2.5 border-t border-line pt-5">
+                <a
+                  href={`tel:${site.usOffice.phone.replace(/[^+0-9]/g, "")}`}
+                  data-analytics="phone_click"
+                  className="text-[0.9375rem] font-semibold text-brown transition-colors hover:text-gold-deep"
+                >
+                  {site.usOffice.phone}
+                </a>
+                <a
+                  href={`mailto:${site.usOffice.email}`}
+                  data-analytics="email_click"
+                  className="text-[0.9375rem] text-charcoal/80 transition-colors hover:text-brown"
+                >
+                  {site.usOffice.email}
+                </a>
+              </div>
+            </div>
           </div>
         }
       />
@@ -149,9 +174,8 @@ export default async function ContactPage() {
                 <div className="rounded-[1.5rem] border border-line bg-white/70 p-7">
                   <p className="kicker text-gold-deep">Operating locations</p>
                   <p className="mt-4 text-[0.875rem] leading-relaxed text-muted">
-                    Aqua operates across multiple states in India. The verified
-                    state and location list publishes once operations confirms it
-                    — the spec does not permit a coverage map built on assumption.
+                    PAN-India presence from the Ahmedabad headquarters, with a
+                    US office in Hilton Head Island, South Carolina.
                   </p>
                 </div>
               </Reveal>

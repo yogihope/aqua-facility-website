@@ -46,6 +46,18 @@ export const redirects: RedirectContent[] = [
     note: "Legacy hub path with URL typo.",
   },
   {
+    source: "/sevices/laundry-services/",
+    destination: "/services/integrated-facility-management/",
+    statusCode: 301,
+    note: "Laundry is a capability under Integrated Facility Management.",
+  },
+  {
+    source: "/us-home/",
+    destination: "/contact/",
+    statusCode: 301,
+    note: "US office details now sit on the contact page.",
+  },
+  {
     source: "/our-work/",
     destination: "/projects/",
     statusCode: 301,
@@ -57,12 +69,6 @@ export const redirects: RedirectContent[] = [
  * Do not activate until traffic, backlink and business-status review is done.
  */
 export const pendingRedirectDecisions: RedirectContent[] = [
-  {
-    source: "/us-home/",
-    destination: "",
-    statusCode: 0,
-    note: "[DECIDE] Audit traffic, backlinks and business status before redirect or removal.",
-  },
   {
     source: "/category/crazy-time/",
     destination: "",

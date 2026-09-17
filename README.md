@@ -140,10 +140,8 @@ and the content publishes itself.
 
 Tracked against Section 18 of the spec:
 
-- [ ] Replace the remaining placeholder contact details in
-      `src/content/site.ts` (street address, PIN). City, state and phone are
-      confirmed. They live in one record and propagate
-      site-wide.
+- [x] Contact details in `src/content/site.ts` (address, PIN, phone, US
+      office), carried over from the legacy site.
 - [ ] Supply leadership headshots. Drop them into `public/leadership/` and set
       `photoUrl` in `src/content/leadership.ts`.
 - [ ] Drop the brand team's SVG masters into `src/components/ui/Logo.tsx`

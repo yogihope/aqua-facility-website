@@ -24,14 +24,13 @@ export const site = {
   foundingYear: FOUNDING_YEAR,
   domain: "https://aquafacility.com",
 
-  // City, state and phone are management-confirmed. Street line and PIN are still
-  // [VERIFY] — an empty postalCode is rendered as absent rather than guessed,
-  // so no invented address component reaches the footer or Organization schema.
-  addressLine1: "Corporate Office",
-  addressLine2: "Street address to be confirmed by management",
+  // Address and phone as published on the existing aquafacility.com contact
+  // page; Nirav directed carrying them over on 2026-09-17.
+  addressLine1: "701-702, Elenza Vertex",
+  addressLine2: "Sindhu Bhavan Road, Bodakdev",
   city: "Ahmedabad",
   state: "Gujarat",
-  postalCode: "",
+  postalCode: "380054",
   country: "India",
   phone: "+91 97277 22036",
   altPhone: null as string | null,
@@ -39,6 +38,16 @@ export const site = {
   careersEmail: "careers@aquafacility.com",
   /** Direct recruiting inbox published on individual vacancies. */
   operationsEmail: "operations@aquafacility.com",
+
+  /** US office, carried over from the legacy site's US Services block. */
+  usOffice: {
+    label: "United States",
+    addressLine1: "35, Capital Drive, Unit D",
+    cityLine: "Hilton Head Island, SC 29926",
+    country: "USA",
+    phone: "+1 (843) 505-7270",
+    email: "aquafacility7@gmail.com",
+  },
 
   linkedin: "https://www.linkedin.com/company/aqua-facility-services",
   facebook: "https://www.facebook.com/aquafacilityservices",
