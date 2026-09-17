@@ -1,5 +1,10 @@
 # Server-side compose for the Aqua website. Lives at /opt/aqua-web on the VPS.
 # Deploy: docker compose pull app && docker compose up -d app
+# Schema: sh migrate.sh (after copying prisma/schema.prisma beside it)
+#
+# .env beside this file holds DB_ROOT_PASSWORD, DATABASE_URL (pointing at
+# host `db`) and ADMIN_CODE. Content is not seeded: empty tables make the site
+# serve the authored content, and the database only stores form submissions.
 services:
   app:
     image: ghcr.io/yogihope/aqua-facility-website:latest
@@ -11,3 +16,24 @@ services:
     env_file:
       - path: .env
         required: false
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8.4
+    container_name: aqua-web-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: aqua_web
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - aqua-web-mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p\"$$MYSQL_ROOT_PASSWORD\" --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+volumes:
+  aqua-web-mysql:

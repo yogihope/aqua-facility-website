@@ -191,3 +191,11 @@ DATABASE_URL="mysql://user:password@localhost:3306/aqua_web"
 NEXT_PUBLIC_SITE_URL="https://aquafacility.com"
 NEXT_PUBLIC_ENV="development"   # "staging" forces noindex
 ```
+
+## Admin
+
+`/admin/` lists contact enquiries, proposal requests and job applications.
+It opens with the code in `ADMIN_CODE`; with that variable empty the admin
+stays locked. Five wrong codes from one IP lock it for 15 minutes. Submissions
+need `DATABASE_URL` — without a database the forms answer 503 and nothing is
+stored.

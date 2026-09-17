@@ -54,8 +54,8 @@ export function Logo({
         height={461}
         loading="eager"
         className={cn(
-          "w-auto shrink-0 object-contain",
-          showTagline ? "h-20" : "h-14 sm:h-[3.75rem]"
+          "shrink-0 object-contain",
+          showTagline ? "h-auto w-[72px]" : "h-auto w-[55px]"
         )}
       />
       {showTagline ? (

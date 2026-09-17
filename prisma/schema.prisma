@@ -320,6 +320,8 @@ model JobApplication {
   reference  String   @unique
   jobId      Int?
   job        Job?     @relation(fields: [jobId], references: [id])
+  /// Role slug as submitted, kept even when the Job table is not seeded
+  jobSlug    String?
   fullName   String
   email      String
   phone      String

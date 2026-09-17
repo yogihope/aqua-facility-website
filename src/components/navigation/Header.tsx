@@ -173,13 +173,18 @@ export function Header({ nav }: { nav: NavData }) {
         </nav>
 
         <div className="flex items-center gap-3">
-          <CtaLink
-            href="/request-proposal"
-            className="hidden h-11 min-h-0 px-5 text-[0.8125rem] lg:inline-flex"
-            arrow={false}
-          >
-            {site.primaryCtaLabel}
-          </CtaLink>
+          {/* Hidden on a wrapper: CtaLink's own inline-flex outranks `hidden`
+              in the stylesheet, which left this button pushing the header
+              wider than the screen on phones. */}
+          <div className="hidden lg:block">
+            <CtaLink
+              href="/request-proposal"
+              className="h-11 min-h-0 px-5 text-[0.8125rem]"
+              arrow={false}
+            >
+              {site.primaryCtaLabel}
+            </CtaLink>
+          </div>
 
           <button
             type="button"

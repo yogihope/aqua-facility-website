@@ -87,6 +87,7 @@ export async function POST(request: Request) {
       data: {
         reference,
         jobId: job?.id ?? null,
+        jobSlug: data.jobSlug || null,
         fullName: data.fullName,
         email: data.email,
         phone: data.phone,
