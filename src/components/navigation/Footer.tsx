@@ -111,6 +111,7 @@ export async function Footer() {
               title="Company"
               links={[
                 { label: "About", href: "/about" },
+                { label: "Leadership", href: "/leadership" },
                 { label: "Projects", href: "/projects" },
                 { label: "Technology", href: "/technology" },
                 { label: "Awards", href: "/awards" },

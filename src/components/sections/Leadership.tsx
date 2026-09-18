@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Container, Section } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/Bits";
+import { TextLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { chairmanMessage } from "@/content/leadership";
 import type { LeaderContent } from "@/content/types";
@@ -94,6 +95,9 @@ export function Leadership({ leaders }: { leaders: LeaderContent[] }) {
           </Reveal>
         </div>
 
+        <div className="mt-12">
+          <TextLink href="/leadership">Read the leadership messages</TextLink>
+        </div>
       </Container>
     </Section>
   );
