@@ -1,6 +1,5 @@
 import { Container, Section } from "@/components/ui/Container";
 import { PageHero } from "@/components/sections/PageHero";
-import { VerifyNote } from "@/components/ui/Bits";
 import { buildMetadata } from "@/lib/seo";
 import { site } from "@/content/site";
 
@@ -25,11 +24,6 @@ export default function TermsPage() {
       <Section tone="warm" className="grain">
         <Container>
           <div className="mx-auto max-w-[46rem]">
-            <VerifyNote className="mb-10">
-              Aqua&rsquo;s legal counsel must review and approve these terms, including
-              the governing-law and jurisdiction clause, before go-live.
-            </VerifyNote>
-
             <div className="prose-aqua">
               <h2>Use of this website</h2>
               <p>
@@ -54,11 +48,6 @@ export default function TermsPage() {
                 commitment. Specific scope, terms and deliverables are agreed in
                 writing in the applicable service agreement.
               </p>
-              <p>
-                Where information on this page is marked as pending verification,
-                it has not yet been confirmed and should not be relied upon.
-              </p>
-
               <h2>Enquiries submitted through this site</h2>
               <p>
                 Submitting an enquiry does not create a contractual relationship.

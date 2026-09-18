@@ -2,7 +2,7 @@ import { Container, Section } from "@/components/ui/Container";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { CaseStudyCard } from "@/components/sections/CaseStudiesSection";
-import { SectionHeading, JsonLd, VerifyNote, IndexBadge } from "@/components/ui/Bits";
+import { SectionHeading, JsonLd, IndexBadge } from "@/components/ui/Bits";
 import { Reveal } from "@/components/ui/Reveal";
 import { getCaseStudies } from "@/lib/data";
 import { buildMetadata, breadcrumbSchema } from "@/lib/seo";
@@ -56,14 +56,6 @@ export default async function ProjectsPage() {
         title="Proof Through Execution."
         intro="Our strongest work is best understood through the operational challenges we solve, the systems we deploy and the outcomes we help clients achieve."
         breadcrumbs={[{ name: "Home", href: "/" }, { name: "Projects" }]}
-        aside={
-          <VerifyNote>
-            Case-study structure is live. Client names, workforce scale and
-            outcome metrics publish only against documentary confirmation and
-            written client permission — no invented numbers, no placeholder
-            metrics.
-          </VerifyNote>
-        }
       />
 
       <Section tone="warm" className="grain">

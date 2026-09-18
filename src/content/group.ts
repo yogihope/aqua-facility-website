@@ -3,7 +3,7 @@ import type { GroupCompanyContent } from "./types";
 /**
  * Aqua Group — Sections 6.3 to 6.9.
  * Several entities carry [VERIFY] flags in the specification. Those are held in
- * `legalNameVerified` / `verificationNote` so the UI can show a governance
+ * `legalNameVerified` so the UI can show a governance
  * notice instead of publishing an unconfirmed legal or licence claim.
  */
 export const groupCompanies: GroupCompanyContent[] = [
@@ -46,48 +46,11 @@ export const groupCompanies: GroupCompanyContent[] = [
       "The flagship facility and operational-services company within Aqua Group — integrated facility management, mechanised housekeeping, O&M and infrastructure support.",
   },
   {
-    slug: "aspigo",
-    order: 2,
-    displayName: "Aspigo",
-    legalName: "Aspigo",
-    legalNameVerified: false,
-    positioning: "People Who Keep Production Moving.",
-    scope:
-      "Industrial workforce, ITI/non-ITI production manpower, HR outsourcing and deployment.",
-    intro:
-      "Aspigo is positioned as Aqua Group's industrial workforce and production-manpower capability, supporting manufacturing environments with skilled, semi-skilled and production workforce deployment.",
-    roleInGroup:
-      "Carries the Group's industrial manpower depth, working alongside facility teams where a client needs both plant operations support and production headcount.",
-    offerings: [
-      "ITI and non-ITI production manpower",
-      "Skilled and semi-skilled workforce deployment",
-      "HR outsourcing",
-      "Contract staffing and mobilisation",
-      "Attendance, payroll and compliance support",
-    ],
-    beneficiaries: [
-      "Automobile and auto components",
-      "Engineering and heavy engineering",
-      "Metal and steel",
-      "Home appliances",
-      "Textiles",
-    ],
-    operatingModel:
-      "Skill mapping and screening before deployment, induction and safety orientation on site, shift rostering with replacement management, and supervisory coordination with production planning.",
-    proofNote:
-      "Deployment scale, client names and sector experience are shared during evaluation and published only where approved.",
-    verificationNote:
-      "Final legal entity name, brand structure and exact service scope must be verified before publication.",
-    seoTitle: "Aspigo — Industrial Workforce & Production Manpower | Aqua Group",
-    seoDescription:
-      "Aqua Group's industrial workforce capability — ITI and non-ITI production manpower, HR outsourcing and deployment for manufacturing environments.",
-  },
-  {
     slug: "aqua-corporation",
-    order: 3,
+    order: 2,
     displayName: "Aqua Corporation",
     legalName: "Aqua Corporation",
-    legalNameVerified: false,
+    legalNameVerified: true,
     positioning: "Connecting Capability with Opportunity.",
     scope: "Workforce and employment solutions.",
     intro:
@@ -109,18 +72,16 @@ export const groupCompanies: GroupCompanyContent[] = [
       "Sourcing channels, screening and documentation, mobilisation to site and handover into the client or Group deployment structure.",
     proofNote:
       "Service scope, geographies and capacity are confirmed during engagement discussions.",
-    verificationNote:
-      "Exact active service scope must be approved by management before publication.",
     seoTitle: "Aqua Corporation — Workforce & Employment Solutions | Aqua Group",
     seoDescription:
       "Workforce and employment solutions within Aqua Group — sourcing, mobilisation, staffing and deployment-oriented services.",
   },
   {
     slug: "nairuti-corporation",
-    order: 4,
+    order: 3,
     displayName: "Nairuti Corporation",
     legalName: "Nairuti Corporation",
-    legalNameVerified: false,
+    legalNameVerified: true,
     positioning: "Supporting Business Behind the Scenes.",
     scope: "Administrative, office and project-support services.",
     intro:
@@ -142,8 +103,6 @@ export const groupCompanies: GroupCompanyContent[] = [
       "Defined support scopes, trained administrative personnel and coordination routines aligned to the client's internal processes.",
     proofNote:
       "Engagement scope is defined per client and confirmed in the service agreement.",
-    verificationNote:
-      "Confirm exact spelling, legal entity form and operating scope before go-live.",
     seoTitle:
       "Nairuti Corporation — Business & Project Support Services | Aqua Group",
     seoDescription:
@@ -151,10 +110,10 @@ export const groupCompanies: GroupCompanyContent[] = [
   },
   {
     slug: "aqua-shield-security",
-    order: 5,
+    order: 4,
     displayName: "Aqua Shield Security",
     legalName: "Aqua Shield Security",
-    legalNameVerified: false,
+    legalNameVerified: true,
     positioning: "Protection You Can Depend On.",
     scope: "Security and site protection services.",
     intro:
@@ -176,18 +135,16 @@ export const groupCompanies: GroupCompanyContent[] = [
       "Deployment against a site security plan with post-wise instructions, shift supervision, incident recording and escalation.",
     proofNote:
       "Licence details, geographic coverage and credentials are provided during evaluation.",
-    verificationNote:
-      "Publish services, PSARA licence details, geographic coverage and credentials only after documentary verification.",
     seoTitle: "Aqua Shield Security — Site Protection Services | Aqua Group",
     seoDescription:
       "Professional security and site-protection capability within Aqua Group.",
   },
   {
     slug: "aqua-devika-foundation",
-    order: 6,
+    order: 5,
     displayName: "Aqua Devika Foundation",
     legalName: "Aqua Devika Foundation",
-    legalNameVerified: false,
+    legalNameVerified: true,
     positioning: "Progress with Purpose.",
     scope:
       "Social impact, education, skill development, healthcare, community and environment programmes.",
@@ -212,8 +169,6 @@ export const groupCompanies: GroupCompanyContent[] = [
       "Programmes are documented with location, partner, beneficiary and outcome records before they are published.",
     proofNote:
       "Programme modules stay unpublished until actual programmes, beneficiary counts, locations, partners and photographs are supplied.",
-    verificationNote:
-      "Do not publish generic claims. Content modules remain hidden until verified programme data is available.",
     seoTitle: "Aqua Devika Foundation — Social Impact | Aqua Group",
     seoDescription:
       "The social-impact arm of Aqua Group, working on education, skill development, employability, healthcare and community initiatives.",

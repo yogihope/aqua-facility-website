@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Container, Section } from "@/components/ui/Container";
-import { SectionHeading, VerifyNote, Chip } from "@/components/ui/Bits";
+import { SectionHeading, Chip } from "@/components/ui/Bits";
 import { Reveal } from "@/components/ui/Reveal";
 import { TextLink, Arrow } from "@/components/ui/Button";
 import { caseStudyClientLabel } from "@/content/projects";
@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 /**
  * Section 6.1 (10) / 6.32 — Challenge → Solution → Scale → Process → Outcome.
  * Placeholder metrics are forbidden, so an unverified metric renders as a
- * labelled pending row rather than a number, and unapproved client names never
+ * omitted rather than shown as a number, and unapproved client names never
  * reach the DOM.
  */
 export function CaseStudiesSection({
@@ -39,14 +39,6 @@ export function CaseStudiesSection({
             </Reveal>
           ))}
         </div>
-
-        <Reveal delay={120}>
-          <VerifyNote className="mt-8">
-            Case-study structure is live; verified client names, workforce scale
-            and outcome metrics publish only after management supplies
-            documentary confirmation and client permission.
-          </VerifyNote>
-        </Reveal>
       </Container>
     </Section>
   );

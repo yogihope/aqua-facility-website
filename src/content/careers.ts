@@ -123,7 +123,7 @@ export const jobs: JobContent[] = [
     slug: "iti-electrician",
     title: "ITI Electrician",
     category: "Workforce",
-    company: "Aspigo",
+    company: "Aqua Facility Services",
     location: "Multiple plant locations",
     employmentType: "Full-time",
     experience: "1–5 years",
@@ -140,7 +140,7 @@ export const jobs: JobContent[] = [
     slug: "machine-operator",
     title: "Machine Operator",
     category: "Workforce",
-    company: "Aspigo",
+    company: "Aqua Facility Services",
     location: "Multiple plant locations",
     employmentType: "Full-time",
     experience: "0–4 years",
@@ -202,7 +202,7 @@ export const employeeDevelopment = [
   {
     stage: "Progression",
     title: "Associate to supervisor to site lead",
-    body: "Supervisory and site-management roles are filled from within wherever the skill and record support it, across all six group companies.",
+    body: "Supervisory and site-management roles are filled from within wherever the skill and record support it, across every group company.",
   },
   {
     stage: "Documentation",

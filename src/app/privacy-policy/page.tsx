@@ -1,6 +1,5 @@
 import { Container, Section } from "@/components/ui/Container";
 import { PageHero } from "@/components/sections/PageHero";
-import { VerifyNote } from "@/components/ui/Bits";
 import { buildMetadata } from "@/lib/seo";
 import { site, cityLine } from "@/content/site";
 
@@ -29,11 +28,6 @@ export default function PrivacyPolicyPage() {
       <Section tone="warm" className="grain">
         <Container>
           <div className="mx-auto max-w-[46rem]">
-            <VerifyNote className="mb-10">
-              This policy describes the website&rsquo;s actual behaviour. Aqua&rsquo;s legal
-              counsel must review and approve the final wording, retention
-              periods and grievance contact before go-live.
-            </VerifyNote>
 
             <div className="prose-aqua">
               <h2>Information we collect</h2>

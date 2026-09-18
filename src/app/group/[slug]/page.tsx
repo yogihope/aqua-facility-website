@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/Container";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { SectionHeading, JsonLd, VerifyNote, IndexBadge } from "@/components/ui/Bits";
+import { SectionHeading, JsonLd, IndexBadge } from "@/components/ui/Bits";
 import { Reveal } from "@/components/ui/Reveal";
 import { TextLink, Arrow } from "@/components/ui/Button";
 import { getGroupCompanies, getGroupCompanyBySlug } from "@/lib/data";
@@ -75,18 +75,9 @@ export default async function GroupCompanyPage(props: PageProps<"/group/[slug]">
                 </dt>
                 <dd className="mt-1.5 text-[0.9375rem] font-medium text-charcoal">
                   {company.legalName}
-                  {!company.legalNameVerified ? (
-                    <span className="ml-2 rounded-full border border-gold/35 bg-gold/10 px-2 py-0.5 text-[0.5625rem] font-semibold text-gold-deep">
-                      Pending verification
-                    </span>
-                  ) : null}
                 </dd>
               </dl>
             </div>
-
-            {company.verificationNote ? (
-              <VerifyNote>{company.verificationNote}</VerifyNote>
-            ) : null}
           </div>
         }
       />

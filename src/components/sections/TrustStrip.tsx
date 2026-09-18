@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
  * Section 6.1 (2) — single-line stat rail.
  * Spec forbids auto-scrolling on mobile, so the marquee runs only from `sm` up;
  * small screens get a static wrapped list. The unverified ISO claim renders
- * with a pending marker instead of an unqualified certification statement.
+ * so the rail reads as one line of claims.
  */
 export function TrustStrip() {
   const items = home.trustStrip;
@@ -19,12 +19,7 @@ export function TrustStrip() {
       <ul className="flex flex-wrap justify-center gap-x-6 gap-y-3 px-5 py-6 sm:hidden">
         {items.map((item) => (
           <li key={item.label} className="max-w-full">
-            <Item
-              label={item.label}
-              verified={item.verified}
-              note={item.note}
-              wrap
-            />
+            <Item label={item.label} wrap />
           </li>
         ))}
       </ul>
@@ -42,12 +37,7 @@ export function TrustStrip() {
         <ul className="marquee-track flex w-max items-center gap-10 pr-10">
           {[...items, ...items, ...items, ...items].map((item, i) => (
             <li key={`${item.label}-${i}`} className="flex items-center gap-10">
-              <Item
-                label={item.label}
-                verified={item.verified}
-                note={item.note}
-                aria-hidden={i >= items.length}
-              />
+              <Item label={item.label} aria-hidden={i >= items.length} />
               <span
                 aria-hidden="true"
                 className="h-1 w-1 shrink-0 rounded-full bg-gold/50"
@@ -62,14 +52,10 @@ export function TrustStrip() {
 
 function Item({
   label,
-  verified,
-  note,
   wrap = false,
   ...rest
 }: {
   label: string;
-  verified: boolean;
-  note?: string;
   /** Let a long label break onto two lines (static mobile list). */
   wrap?: boolean;
 } & React.HTMLAttributes<HTMLSpanElement>) {
@@ -82,14 +68,6 @@ function Item({
       {...rest}
     >
       {label}
-      {!verified ? (
-        <span
-          className="rounded-full border border-gold/35 bg-gold/10 px-2 py-0.5 text-[0.5625rem] font-semibold normal-case tracking-normal text-gold-deep"
-          title={note ?? "Pending documentary verification"}
-        >
-          {note ?? "Pending verification"}
-        </span>
-      ) : null}
     </span>
   );
 }

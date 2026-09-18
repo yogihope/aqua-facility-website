@@ -10,7 +10,7 @@ import type { GroupCompanyContent } from "@/content/types";
 import { cn } from "@/lib/utils";
 
 /**
- * Section 6.1 (9) — interactive ecosystem, six nodes around Aqua Group.
+ * Section 6.1 (9) — interactive ecosystem, one node per group company.
  * 7.1 rule: nothing lives behind hover alone. The orbital diagram is a
  * desktop enhancement; every company is also a full card in the list below,
  * which is what mobile and keyboard users read.
@@ -139,14 +139,6 @@ export function GroupEcosystem({
                       <span className="h3 text-[1.0625rem] text-charcoal transition-colors group-hover:text-brown">
                         {company.displayName}
                       </span>
-                      {!company.legalNameVerified ? (
-                        <span
-                          className="rounded-full border border-gold/35 bg-gold/10 px-2 py-0.5 text-[0.5625rem] font-semibold text-gold-deep"
-                          title="Legal name and scope pending management verification"
-                        >
-                          Pending verification
-                        </span>
-                      ) : null}
                     </span>
                     <span className="mt-1.5 block font-display text-[0.9375rem] italic text-brown/85">
                       {company.positioning}

@@ -2,8 +2,7 @@ import { Container, Section } from "@/components/ui/Container";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { GroupEcosystem } from "@/components/sections/GroupEcosystem";
-import { JsonLd, VerifyNote, SectionHeading } from "@/components/ui/Bits";
-import { Reveal } from "@/components/ui/Reveal";
+import { JsonLd, SectionHeading } from "@/components/ui/Bits";
 import { getGroupCompanies } from "@/lib/data";
 import { buildMetadata, breadcrumbSchema } from "@/lib/seo";
 
@@ -18,7 +17,6 @@ export const revalidate = 3600;
 
 export default async function GroupPage() {
   const companies = await getGroupCompanies();
-  const pending = companies.filter((c) => !c.legalNameVerified);
 
   return (
     <>
@@ -54,20 +52,8 @@ export default async function GroupPage() {
                 <span className="italic text-brown">what waits.</span>
               </>
             }
-            body="Group entity names, licences and service scopes are published only against documentary confirmation. Where confirmation is pending, the page says so rather than filling the space with an assumption."
+            body="Each company holds its own scope, and the group shares one operating philosophy: trained people, standardised process, mechanised execution and technology-backed reporting."
           />
-
-          {pending.length ? (
-            <Reveal delay={100}>
-              <VerifyNote className="mt-10 max-w-3xl">
-                Pending management verification before go-live:{" "}
-                {pending.map((c) => c.displayName).join(", ")}. Final legal entity
-                names, brand structure, licence details (including PSARA where
-                applicable) and exact service scopes must be confirmed — see
-                Section 18 of the development specification.
-              </VerifyNote>
-            </Reveal>
-          ) : null}
         </Container>
       </Section>
 

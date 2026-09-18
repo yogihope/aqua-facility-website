@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Container, Section } from "@/components/ui/Container";
-import { SectionHeading, VerifyNote } from "@/components/ui/Bits";
+import { SectionHeading } from "@/components/ui/Bits";
 import { Reveal } from "@/components/ui/Reveal";
 import { chairmanMessage } from "@/content/leadership";
 import type { LeaderContent } from "@/content/types";
@@ -19,7 +19,6 @@ export function Leadership({ leaders }: { leaders: LeaderContent[] }) {
   const chairman =
     leaders.find((l) => l.slug === chairmanMessage.attributionSlug) ??
     leaders[0];
-  const awaitingPhotos = leaders.filter((l) => !l.photoUrl);
 
   return (
     <Section tone="warm" className="grain">
@@ -95,17 +94,6 @@ export function Leadership({ leaders }: { leaders: LeaderContent[] }) {
           </Reveal>
         </div>
 
-        {awaitingPhotos.length ? (
-          <Reveal delay={200}>
-            <VerifyNote className="mt-8 max-w-3xl">
-              Photography pending for{" "}
-              {awaitingPhotos.map((l) => l.name).join(" and ")}. Drop the
-              headshots into <code>public/leadership/</code> and set{" "}
-              <code>photoUrl</code> in <code>src/content/leadership.ts</code> —
-              the monogram plate is sized to be replaced one-for-one.
-            </VerifyNote>
-          </Reveal>
-        ) : null}
       </Container>
     </Section>
   );

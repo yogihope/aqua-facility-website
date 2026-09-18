@@ -114,46 +114,6 @@ export function Chip({
   );
 }
 
-/**
- * Governance notice — the spec's content-safety rule made visible in the UI
- * rather than left as a comment in a document. Used wherever a claim, legal
- * name, licence or metric is still awaiting management verification.
- */
-export function VerifyNote({
-  children,
-  className,
-  tone = "light",
-}: {
-  children: React.ReactNode;
-  className?: string;
-  tone?: "light" | "dark";
-}) {
-  return (
-    <p
-      className={cn(
-        "flex items-start gap-2.5 rounded-xl border px-4 py-3 text-[0.8125rem] leading-relaxed",
-        tone === "light"
-          ? "border-gold/30 bg-gold/[0.07] text-[#7a6220]"
-          : "border-gold-soft/25 bg-gold-soft/[0.08] text-gold-soft/90",
-        className
-      )}
-    >
-      <svg
-        viewBox="0 0 20 20"
-        aria-hidden="true"
-        className="mt-px h-4 w-4 shrink-0"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      >
-        <circle cx="10" cy="10" r="7.5" />
-        <path d="M10 6.4v4.4M10 13.4h.01" />
-      </svg>
-      <span>{children}</span>
-    </p>
-  );
-}
 
 /** Section 11.1 — breadcrumbs on all inner pages. */
 export function Breadcrumbs({

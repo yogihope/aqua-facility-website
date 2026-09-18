@@ -58,6 +58,12 @@ export const redirects: RedirectContent[] = [
     note: "US office details now sit on the contact page.",
   },
   {
+    source: "/group/aspigo/",
+    destination: "/group/",
+    statusCode: 301,
+    note: "Company removed from the group listing.",
+  },
+  {
     source: "/our-work/",
     destination: "/projects/",
     statusCode: 301,

@@ -5,7 +5,7 @@ import { PptpStory } from "@/components/sections/PptpStory";
 import { AboutAqua } from "@/components/sections/AboutAqua";
 import { Leadership } from "@/components/sections/Leadership";
 import { AwardHighlight } from "@/components/sections/AwardHighlight";
-import { SectionHeading, JsonLd, VerifyNote, IndexBadge } from "@/components/ui/Bits";
+import { SectionHeading, JsonLd, IndexBadge } from "@/components/ui/Bits";
 import { Reveal } from "@/components/ui/Reveal";
 import { about } from "@/content/home";
 import { site, yearsOfExpertise } from "@/content/site";
@@ -41,7 +41,7 @@ export default async function AboutPage() {
         meta={[
           { label: "Founded", value: String(site.foundingYear) },
           { label: "Experience", value: `${yearsOfExpertise()}+ years` },
-          { label: "Group companies", value: "Six" },
+          { label: "Group companies", value: "Five" },
           { label: "Coverage", value: "PAN-India capability" },
         ]}
       />
@@ -202,46 +202,6 @@ export default async function AboutPage() {
       {/* Recognition */}
       <AwardHighlight awards={awards} />
 
-      {/* Remaining credential modules — still gated on verification */}
-      <Section tone="sand">
-        <Container>
-          <SectionHeading
-            kicker="Credentials"
-            title={
-              <>
-                Certifications{" "}
-                <span className="italic text-brown">and coverage.</span>
-              </>
-            }
-            body="These modules are built and ready. They publish when compliance supplies the certificate documents and operations confirms the operating-location list."
-          />
-
-          <div className="mt-12 grid gap-4 lg:grid-cols-2">
-            <Reveal>
-              <PendingModule
-                title="Certifications & compliance"
-                body="Standard, certificate number, issuer and validity, with downloadable documents. Expired certifications hide automatically."
-                owner="Compliance"
-              />
-            </Reveal>
-            <Reveal delay={80}>
-              <PendingModule
-                title="PAN-India capability map"
-                body="Actual operating states and locations only — no aspirational coverage."
-                owner="Operations"
-              />
-            </Reveal>
-          </div>
-
-          <Reveal delay={200}>
-            <VerifyNote className="mt-8 max-w-3xl">
-              Content-safety rule from the specification: if a fact is not
-              verified, the claim is removed rather than filled with an estimate.
-              These sections stay hidden until Section 18 assets arrive.
-            </VerifyNote>
-          </Reveal>
-        </Container>
-      </Section>
 
       <CtaBand
         kicker="Work with Aqua"
@@ -254,25 +214,3 @@ export default async function AboutPage() {
   );
 }
 
-function PendingModule({
-  title,
-  body,
-  owner,
-}: {
-  title: string;
-  body: string;
-  owner: string;
-}) {
-  return (
-    <article className="flex h-full flex-col rounded-2xl border border-dashed border-line-strong bg-white/45 p-7">
-      <div className="flex items-center justify-between gap-3">
-        <h3 className="h3 text-[1.0625rem] text-charcoal">{title}</h3>
-        <span className="shrink-0 rounded-full border border-gold/35 bg-gold/10 px-2.5 py-1 text-[0.5625rem] font-semibold uppercase tracking-[0.1em] text-gold-deep">
-          Awaiting assets
-        </span>
-      </div>
-      <p className="mt-3 text-[0.875rem] leading-relaxed text-muted">{body}</p>
-      <p className="mt-auto pt-6 text-[0.75rem] text-muted/70">Owner: {owner}</p>
-    </article>
-  );
-}

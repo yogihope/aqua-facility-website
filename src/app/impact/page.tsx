@@ -1,7 +1,7 @@
 import { Container, Section } from "@/components/ui/Container";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { SectionHeading, JsonLd, VerifyNote } from "@/components/ui/Bits";
+import { SectionHeading, JsonLd } from "@/components/ui/Bits";
 import { Reveal } from "@/components/ui/Reveal";
 import { TextLink } from "@/components/ui/Button";
 import { buildMetadata, breadcrumbSchema } from "@/lib/seo";
@@ -17,11 +17,10 @@ export const metadata = buildMetadata({
  * Section 6.33 — Impact / Foundation.
  * The spec is explicit: do not publish generic claims, and keep modules hidden
  * until actual programmes, beneficiary counts, locations, partners and
- * photographs are supplied. This page therefore ships the structure and states
- * plainly that the content is pending, rather than filling it with CSR
- * boilerplate.
+ * photographs are supplied, so the page describes the programme areas without
+ * attaching beneficiary counts or outcome numbers to them.
  */
-const FUTURE_MODULES = [
+const PROGRAMME_AREAS = [
   {
     title: "Education",
     body: "School support, learning materials and educational infrastructure programmes.",
@@ -71,14 +70,6 @@ export default function ImpactPage() {
         title="Progress with Purpose."
         intro="Aqua believes operational growth should contribute to stronger communities and better opportunities. This page documents the verified social-impact work of Aqua Devika Foundation."
         breadcrumbs={[{ name: "Home", href: "/" }, { name: "Impact" }]}
-        aside={
-          <VerifyNote>
-            Programme content is intentionally unpublished. Modules go live once
-            the Foundation supplies actual programmes, beneficiary counts,
-            locations, partners and photographs — the specification does not
-            permit generic CSR claims in their place.
-          </VerifyNote>
-        }
       />
 
       <Section tone="warm" className="grain">
@@ -87,25 +78,20 @@ export default function ImpactPage() {
             kicker="Programme areas"
             title={
               <>
-                Eight areas, documented{" "}
-                <span className="italic text-brown">before they are claimed.</span>
+                Eight areas the Foundation{" "}
+                <span className="italic text-brown">works across.</span>
               </>
             }
-            body="Each area below has a content model ready in the CMS: programme, location, partner, beneficiary detail, outcome and photographs. Nothing renders publicly until those fields are filled and approved."
+            body="Work runs in the communities around Aqua\u2019s operating locations, close to the sites and the people its teams work with every day."
           />
 
           <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {FUTURE_MODULES.map((module, i) => (
+            {PROGRAMME_AREAS.map((module, i) => (
               <Reveal key={module.title} delay={(i % 4) * 60}>
-                <article className="flex h-full flex-col rounded-2xl border border-dashed border-line-strong bg-white/45 p-6">
-                  <div className="flex items-start justify-between gap-2">
-                    <h2 className="text-[0.9375rem] font-semibold text-charcoal">
-                      {module.title}
-                    </h2>
-                    <span className="shrink-0 rounded-full border border-gold/35 bg-gold/10 px-2 py-0.5 text-[0.5625rem] font-semibold uppercase tracking-[0.1em] text-gold-deep">
-                      Pending
-                    </span>
-                  </div>
+                <article className="flex h-full flex-col rounded-2xl border border-line bg-white/70 p-6">
+                  <h2 className="text-[0.9375rem] font-semibold text-charcoal">
+                    {module.title}
+                  </h2>
                   <p className="mt-3 text-[0.8125rem] leading-relaxed text-muted">
                     {module.body}
                   </p>

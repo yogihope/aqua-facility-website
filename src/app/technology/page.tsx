@@ -2,7 +2,7 @@ import { Container, Section } from "@/components/ui/Container";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { TechnologySection } from "@/components/sections/TechnologySection";
-import { SectionHeading, JsonLd, VerifyNote, Chip } from "@/components/ui/Bits";
+import { SectionHeading, JsonLd, Chip } from "@/components/ui/Bits";
 import { Reveal } from "@/components/ui/Reveal";
 import { TextLink } from "@/components/ui/Button";
 import { getTechCapabilities, getServiceBySlug } from "@/lib/data";
@@ -119,13 +119,6 @@ export default async function TechnologyPage() {
             </table>
           </div>
 
-          <Reveal delay={120}>
-            <VerifyNote className="mt-8 max-w-3xl">
-              Statuses above are placeholders pending confirmation from the Aqua
-              technology team. Section 6.17 forbids presenting unimplemented
-              features as live — update the status field in the CMS before launch.
-            </VerifyNote>
-          </Reveal>
         </Container>
       </Section>
 

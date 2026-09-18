@@ -4,7 +4,7 @@ import { Container, Section } from "@/components/ui/Container";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { CaseStudyCard } from "@/components/sections/CaseStudiesSection";
-import { SectionHeading, JsonLd, VerifyNote, Chip } from "@/components/ui/Bits";
+import { SectionHeading, JsonLd, Chip } from "@/components/ui/Bits";
 import { Reveal } from "@/components/ui/Reveal";
 import { TextLink } from "@/components/ui/Button";
 import { getCaseStudies, getCaseStudyBySlug, getServices } from "@/lib/data";
@@ -40,6 +40,10 @@ export default async function CaseStudyPage(props: PageProps<"/projects/[slug]">
 
   if (!study) notFound();
 
+  const verifiedMetrics = study.outcomeMetrics.filter(
+    (m) => m.verified && m.value
+  );
+
   const related = allStudies.filter((s) => s.slug !== study.slug).slice(0, 2);
   const relatedService = services.find((s) => s.slug === study.serviceSlug);
 
@@ -72,13 +76,9 @@ export default async function CaseStudyPage(props: PageProps<"/projects/[slug]">
         meta={[
           { label: "Location", value: study.location },
           { label: "Duration", value: study.duration },
-          {
-            label: "Workforce scale",
-            value:
-              study.workforceVerified && study.workforceScale
-                ? study.workforceScale
-                : "Pending verification",
-          },
+          ...(study.workforceVerified && study.workforceScale
+            ? [{ label: "Workforce scale", value: study.workforceScale }]
+            : []),
           {
             label: "Service scope",
             value: study.serviceScope.split(",")[0].trim(),
@@ -126,12 +126,13 @@ export default async function CaseStudyPage(props: PageProps<"/projects/[slug]">
                 </div>
               </Reveal>
 
-              {/* Outcome metrics — unverified values never render as numbers */}
+              {/* Outcome metrics — a metric without a confirmed value is left out */}
+              {verifiedMetrics.length ? (
               <Reveal delay={80}>
                 <div className="rounded-[1.5rem] border border-line bg-white/70 p-7">
                   <p className="kicker text-gold-deep">Outcome metrics</p>
                   <dl className="mt-5 flex flex-col divide-y divide-line">
-                    {study.outcomeMetrics.map((metric) => (
+                    {verifiedMetrics.map((metric) => (
                       <div
                         key={metric.label}
                         className="flex items-baseline justify-between gap-4 py-3.5 first:pt-0 last:pb-0"
@@ -139,30 +140,15 @@ export default async function CaseStudyPage(props: PageProps<"/projects/[slug]">
                         <dt className="text-[0.875rem] text-muted">
                           {metric.label}
                         </dt>
-                        <dd
-                          className={
-                            metric.verified
-                              ? "font-display text-[1.25rem] text-brown"
-                              : "text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-gold-deep/70"
-                          }
-                        >
-                          {metric.verified && metric.value
-                            ? metric.value
-                            : "Pending verification"}
+                        <dd className="font-display text-[1.25rem] text-brown">
+                          {metric.value}
                         </dd>
                       </div>
                     ))}
                   </dl>
                 </div>
               </Reveal>
-
-              <Reveal delay={140}>
-                <VerifyNote>
-                  Figures publish only once Aqua management supplies documentary
-                  confirmation. Until then this page shows the operational
-                  narrative without numbers.
-                </VerifyNote>
-              </Reveal>
+              ) : null}
 
               {study.clientQuote && study.quoteApproved ? (
                 <Reveal delay={180}>
