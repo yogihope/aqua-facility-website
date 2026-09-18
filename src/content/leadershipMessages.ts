@@ -1,27 +1,105 @@
 /**
  * Leadership page copy (6.2a).
  *
- * Only `chairmanMessage.quote` in `leadership.ts` is a person's own words, as
- * management supplied them. Everything here is written in the organisation's
- * voice and attributed to Aqua rather than to an individual, so no quotation is
- * put into anyone's mouth. When the CEO, HR and operations messages arrive,
- * add them to `signedMessages` with the name, role and their own text.
+ * `chairmanMessage.quote` in `leadership.ts` is the chairman's own words as
+ * management supplied them. The messages below are signed by office rather
+ * than by an individual, on Nirav's instruction (2026-09-18): no personal name
+ * is attached, so nothing is attributed to a person who did not say it. Add a
+ * `name` to a message once that person approves the text under their name.
  */
 
-export type SignedMessage = {
+export type RoleMessage = {
   slug: string;
+  /** The office the message is signed by, e.g. "Chief Executive Officer". */
+  role: string;
   kicker: string;
   title: string;
-  /** The person's own words, supplied by them. */
   body: string[];
-  name: string;
-  role: string;
-  initials: string;
+  /** Optional: set once a named individual approves the message as theirs. */
+  name?: string;
   photoUrl?: string;
 };
 
-/** Messages that carry a person's name. Added only once that person supplies the text. */
-export const signedMessages: SignedMessage[] = [];
+/** Messages signed by office. Order is the order they appear on the page. */
+export const roleMessages: RoleMessage[] = [
+  {
+    slug: "ceo",
+    role: "Chief Executive Officer",
+    kicker: "CEO's Message",
+    title: "Thirty years of turning up, every shift.",
+    body: [
+      "Aqua started in 1996 with a simple promise: do the work properly, and do it the same way on the days nobody is watching. That promise is still the whole business. What has changed is the scale it runs at — corporate campuses, manufacturing plants, industrial sites and public infrastructure, across India.",
+      "Growth came from clients asking us to take on more, not from a plan drawn on paper. A housekeeping contract became facility management. Facility management led to workforce and production manpower. That led into plant operations and maintenance, and then into railway and infrastructure work. Each step happened because we had earned the last one.",
+      "The next few years are about depth rather than noise: fewer vendors for our clients, more evidence behind every claim we make, and technology that shows what happened on site the same day it happens. If your operation depends on people and processes running reliably, that is exactly the problem we exist to solve.",
+    ],
+  },
+  {
+    slug: "hr",
+    role: "Head of Human Resources",
+    kicker: "HR's Message",
+    title: "A career here can start on the floor.",
+    body: [
+      "Most of the people who run our sites today did not join as managers. They joined as housekeeping staff, technicians and operators, learned the work, and moved up because the record supported it. That route is open, and it is the one we look at first when a supervisory role opens.",
+      "Nobody reaches a site untrained. Skill mapping, induction and safety orientation happen before deployment, and training continues on site. We hire ITI and non-ITI technicians, production workforce, housekeeping teams, supervisors and corporate staff — and we hire year round, across states.",
+      "What we ask for is straightforward: turn up, follow the method, look after your team and take the work seriously. What we give back is steady employment, statutory compliance handled properly, training that adds to your skill, and a clear path upward for anyone willing to take it.",
+    ],
+  },
+  {
+    slug: "operations",
+    role: "Operations Manager",
+    kicker: "Operations Manager's Message",
+    title: "The plan only counts if it holds at 3am.",
+    body: [
+      "A contract can say sixty people. What matters is whether the right sixty were on the right stations, in the shift that mattered, on the day something went wrong. Our job is to make that true every day, not on review day.",
+      "So each site gets its own manpower plan, its own frequencies and its own escalation matrix, and supervisors who stay on the floor rather than in an office. Mechanised equipment is matched to the surface, the footfall and the access conditions. Replacements are arranged before an absence becomes a gap in your operation.",
+      "Everything is recorded: digital attendance, geo-tagged inspections, photo-verified tasks, tickets with named owners and closure times. When we sit down for a review, we are both looking at the same record — not at two different versions of the month.",
+    ],
+  },
+  {
+    slug: "safety-quality",
+    role: "Head of Safety & Quality",
+    kicker: "Safety & Quality Message",
+    title: "Everyone goes home the way they came in.",
+    body: [
+      "No output number is worth an injury. Every deployment starts with the safety brief, the PPE check and the work method for that specific site — chemical handling, height access, hot work, confined space, whatever the job actually involves.",
+      "Quality runs the same way. Area-classified frequencies, written SOPs, inspection rounds and corrective actions with a named owner and a closing date. An audit finding is not a scolding; it is a task with a deadline.",
+      "Our teams work inside plants, hospitals, railway stations and corporate campuses where the client's own standards are strict. Meeting them is the baseline, not the achievement.",
+    ],
+  },
+  {
+    slug: "technology",
+    role: "Head of Technology",
+    kicker: "Technology Message",
+    title: "If it happened on site, it should be visible today.",
+    body: [
+      "Facility work has always been hard to verify. A register signed at the end of a shift tells you very little. We build the layer that fixes that: digital attendance, geo-tagged inspections, photo-verified tasks, complaint tickets, preventive-maintenance schedules and site-wise MIS.",
+      "The point is not dashboards for their own sake. It is that a plant head can open a screen and see deployment against plan, open issues and closure times without calling anyone.",
+      "We keep building it around what sites actually need — the tools are shaped by supervisors using them in the field, not by a product roadmap written far away from the work.",
+    ],
+  },
+  {
+    slug: "client-relations",
+    role: "Head of Client Relations",
+    kicker: "Client Relations Message",
+    title: "Reviews should be boring.",
+    body: [
+      "The best monthly review is one with no surprises: what was promised was deployed, issues were raised when they happened, and closures are already recorded. That is the standard we hold ourselves to.",
+      "Every requirement is scoped on site before a number is quoted. Manpower plans, frequencies, equipment and supervision are built for that location rather than lifted from a package, because a station, a paint shop and a corporate lobby are not the same problem.",
+      "When something goes wrong — and on live operations it sometimes will — you will hear it from us first, with what we are doing about it.",
+    ],
+  },
+  {
+    slug: "training",
+    role: "Head of Training & Development",
+    kicker: "Training Message",
+    title: "Skill is built before the shift, not during it.",
+    body: [
+      "A worker sent to a site without training is unfair to the worker and to the client. Induction, safety orientation and task training happen first, and skill mapping decides who goes where.",
+      "Training continues after deployment: equipment handling, chemical use, new SOPs, supervisory skills for those moving up. ITI and non-ITI technicians get technical refreshers as plant requirements change.",
+      "The measure that matters to us is how many people move into technical and supervisory roles inside the group. That is what turns a job at Aqua into a career at Aqua.",
+    ],
+  },
+];
 
 export const leadershipPage = {
   heroKicker: "Leadership",

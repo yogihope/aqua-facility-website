@@ -7,7 +7,7 @@ import { CtaLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { getLeaders, getAwards } from "@/lib/data";
 import { chairmanMessage } from "@/content/leadership";
-import { leadershipPage, signedMessages } from "@/content/leadershipMessages";
+import { leadershipPage, roleMessages } from "@/content/leadershipMessages";
 import { site, yearsOfExpertise } from "@/content/site";
 import { buildMetadata, breadcrumbSchema } from "@/lib/seo";
 import { formatAwardDate } from "@/lib/utils";
@@ -24,10 +24,10 @@ export const revalidate = 3600;
 /**
  * Section 6.2a — leadership messages.
  *
- * Only the chairman's line is a person's own words (supplied by management and
- * quoted verbatim). The rest is written in the organisation's voice and signed
- * by Aqua, so no statement is attributed to someone who did not make it. Named
- * messages appear here automatically once they are added to `signedMessages`.
+ * The chairman's line is his own words, supplied by management. The other
+ * messages are signed by office rather than by an individual (Nirav, 2026-09-18),
+ * so nothing is attributed to a named person who did not say it. Set `name` on
+ * a message in `leadershipMessages.ts` once someone approves it as theirs.
  */
 export default async function LeadershipPage() {
   const [leaders, awards] = await Promise.all([getLeaders(), getAwards()]);
@@ -130,65 +130,78 @@ export default async function LeadershipPage() {
         </Container>
       </Section>
 
-      {/* Named messages, once their authors supply them */}
-      {signedMessages.length ? (
-        <Section tone="sand">
-          <Container>
-            <SectionHeading
-              kicker="Messages"
-              title={
-                <>
-                  In their{" "}
-                  <span className="italic text-brown">own words.</span>
-                </>
-              }
-            />
-            <div className="mt-14 flex flex-col gap-4">
-              {signedMessages.map((message, i) => (
-                <Reveal key={message.slug} delay={(i % 2) * 80}>
-                  <article className="grid gap-8 rounded-[1.5rem] border border-line bg-white/75 p-7 sm:p-10 lg:grid-cols-[0.3fr_0.7fr] lg:gap-12">
-                    <div>
-                      <div className="w-full max-w-[14rem] overflow-hidden rounded-2xl">
-                        {message.photoUrl ? (
-                          <div className="relative aspect-[4/5] w-full bg-warm-deep">
-                            <Image
-                              src={message.photoUrl}
-                              alt={`${message.name}, ${message.role}`}
-                              fill
-                              sizes="14rem"
-                              className="object-cover"
-                            />
-                          </div>
-                        ) : (
-                          <Monogram initials={message.initials} tone="light" />
-                        )}
-                      </div>
-                      <p className="mt-5 text-[1rem] font-semibold text-charcoal">
-                        {message.name}
-                      </p>
-                      <p className="mt-1 text-[0.75rem] font-semibold uppercase tracking-[0.12em] text-muted">
-                        {message.role}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="kicker text-gold-deep">{message.kicker}</p>
-                      <h3 className="h3 mt-5 text-charcoal">{message.title}</h3>
-                      {message.body.map((paragraph) => (
-                        <p
-                          key={paragraph.slice(0, 40)}
-                          className="mt-4 text-[1.0625rem] leading-relaxed text-muted"
+      {/* Messages, signed by office */}
+      <Section tone="sand">
+        <Container>
+          <SectionHeading
+            kicker="Messages"
+            title={
+              <>
+                From the people who{" "}
+                <span className="italic text-brown">run each part of it.</span>
+              </>
+            }
+            body="Seven offices, one operating philosophy — what each of them is accountable for, in their own words."
+          />
+
+          <div className="mt-14 flex flex-col gap-4">
+            {roleMessages.map((message, i) => (
+              <Reveal key={message.slug} delay={(i % 2) * 70}>
+                <article className="grid gap-7 rounded-[1.5rem] border border-line bg-white/75 p-7 sm:p-10 lg:grid-cols-[0.34fr_0.66fr] lg:gap-14">
+                  <div className="lg:border-r lg:border-line lg:pr-10">
+                    <p className="kicker text-gold-deep">{message.kicker}</p>
+                    <h3 className="h3 mt-5 text-charcoal">{message.title}</h3>
+                    <div className="mt-6 flex items-center gap-4 border-t border-line pt-5">
+                      {message.photoUrl ? (
+                        <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full bg-warm-deep">
+                          <Image
+                            src={message.photoUrl}
+                            alt={message.name ?? message.role}
+                            fill
+                            sizes="56px"
+                            className="object-cover"
+                          />
+                        </div>
+                      ) : (
+                        <span
+                          aria-hidden="true"
+                          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-gold/30 bg-gold/[0.08] font-display text-[1.125rem] text-brown/70"
                         >
-                          {paragraph}
-                        </p>
-                      ))}
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                      )}
+                      <span>
+                        {message.name ? (
+                          <span className="block text-[0.9375rem] font-semibold text-charcoal">
+                            {message.name}
+                          </span>
+                        ) : null}
+                        <span className="block text-[0.75rem] font-semibold uppercase tracking-[0.12em] text-muted">
+                          {message.role}
+                        </span>
+                        <span className="mt-1 block text-[0.75rem] text-muted/80">
+                          {site.legalName}
+                        </span>
+                      </span>
                     </div>
-                  </article>
-                </Reveal>
-              ))}
-            </div>
-          </Container>
-        </Section>
-      ) : null}
+                  </div>
+
+                  <div>
+                    {message.body.map((paragraph) => (
+                      <p
+                        key={paragraph.slice(0, 40)}
+                        className="text-[1.0625rem] leading-relaxed text-muted [&+p]:mt-5"
+                      >
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </Container>
+      </Section>
 
       {/* Principles */}
       <Section tone="sand">
