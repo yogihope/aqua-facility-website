@@ -35,7 +35,9 @@ export const roleMessages: RoleMessage[] = [
   },
   {
     slug: "hr",
-    role: "Head of Human Resources",
+    role: "Head - HR & IR",
+    name: "Vishwaraj Puwar",
+    photoUrl: "/leadership/vishwaraj-puwar.jpg",
     kicker: "HR's Message",
     title: "A career here can start on the floor.",
     body: [
@@ -46,13 +48,28 @@ export const roleMessages: RoleMessage[] = [
   },
   {
     slug: "operations",
-    role: "Operations Manager",
-    kicker: "Operations Manager's Message",
+    role: "Head - Operations",
+    name: "Nirav Patel",
+    photoUrl: "/leadership/nirav-patel.jpg",
+    kicker: "Operations Message",
     title: "The plan only counts if it holds at 3am.",
     body: [
       "A contract can say sixty people. What matters is whether the right sixty were on the right stations, in the shift that mattered, on the day something went wrong. Our job is to make that true every day, not on review day.",
       "So each site gets its own manpower plan, its own frequencies and its own escalation matrix, and supervisors who stay on the floor rather than in an office. Mechanised equipment is matched to the surface, the footfall and the access conditions. Replacements are arranged before an absence becomes a gap in your operation.",
       "Everything is recorded: digital attendance, geo-tagged inspections, photo-verified tasks, tickets with named owners and closure times. When we sit down for a review, we are both looking at the same record — not at two different versions of the month.",
+    ],
+  },
+  {
+    slug: "finance",
+    role: "Head - Finance & Account",
+    name: "Jignesh Shah",
+    photoUrl: "/leadership/jignesh-shah.jpg",
+    kicker: "Finance & Accounts Message",
+    title: "Wages on time, every month, at every site.",
+    body: [
+      "A facility contract is judged on the floor, but it runs on money moving correctly behind the scenes. Salaries, statutory dues, vendor payments and client billing all have dates, and those dates do not move.",
+      "Our teams are spread across states and sites, so payroll is built off the same attendance record the client sees. What was deployed is what gets paid and what gets billed — one set of numbers, not three.",
+      "Statutory obligations — PF, ESI, professional tax, GST — are treated as part of running the contract rather than as paperwork at year end. Clients who ask for compliance records get them with the invoice, not after a reminder.",
     ],
   },
   {

@@ -141,7 +141,7 @@ export default async function LeadershipPage() {
                 <span className="italic text-brown">run each part of it.</span>
               </>
             }
-            body="Seven offices, one operating philosophy — what each of them is accountable for, in their own words."
+            body="One operating philosophy, and the people accountable for each part of it — finance, operations, HR and IR, safety, technology, client relations and training."
           />
 
           <div className="mt-14 flex flex-col gap-4">
