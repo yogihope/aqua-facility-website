@@ -55,7 +55,7 @@ export const redirects: RedirectContent[] = [
     source: "/us-home/",
     destination: "/contact/",
     statusCode: 301,
-    note: "US office details now sit on the contact page.",
+    note: "Legacy US page; that business is no longer published on the site.",
   },
   {
     source: "/group/aspigo/",
