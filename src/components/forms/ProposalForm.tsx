@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Field, ErrorSummary, CheckboxCard } from "./Field";
 import { proposalSchema, flattenErrors, type FieldErrors } from "@/lib/leadSchema";
+import { site } from "@/content/site";
 
 type Option = { slug: string; title: string };
 
@@ -341,10 +342,10 @@ export function ProposalForm({
           Secure upload is enabled at launch, once the file whitelist, size limit
           and malware scanning are configured. For now, email your document to{" "}
           <a
-            href="mailto:info@aquafacility.com"
+            href={`mailto:${site.email}`}
             className="font-medium text-brown underline underline-offset-2"
           >
-            info@aquafacility.com
+            {site.email}
           </a>{" "}
           quoting the reference you receive here.
         </p>
