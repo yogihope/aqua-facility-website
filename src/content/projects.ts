@@ -123,5 +123,5 @@ export const getCaseStudy = (slug: string) =>
 export function caseStudyClientLabel(c: CaseStudyContent): string {
   return c.clientApproved && c.clientName
     ? c.clientName
-    : c.anonymisedAs ?? "Client name pending approval";
+    : (c.anonymisedAs ?? c.serviceScope);
 }

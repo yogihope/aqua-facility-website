@@ -56,6 +56,15 @@ export default async function ContactPage() {
                 >
                   {site.phone}
                 </a>
+                {site.altPhone ? (
+                  <a
+                    href={`tel:${site.altPhone.replace(/\s/g, "")}`}
+                    data-analytics="phone_click"
+                    className="text-[0.9375rem] font-semibold text-brown transition-colors hover:text-gold-deep"
+                  >
+                    {site.altPhone}
+                  </a>
+                ) : null}
                 <a
                   href={`mailto:${site.email}`}
                   data-analytics="email_click"
@@ -82,30 +91,6 @@ export default async function ContactPage() {
               </div>
             </div>
 
-            <div className="rounded-[1.5rem] border border-line bg-white/70 p-7">
-              <p className="kicker text-gold-deep">{site.usOffice.label}</p>
-              <address className="mt-5 flex flex-col gap-1 text-[0.9375rem] not-italic leading-relaxed text-charcoal/85">
-                <span>{site.usOffice.addressLine1}</span>
-                <span>{site.usOffice.cityLine}</span>
-                <span>{site.usOffice.country}</span>
-              </address>
-              <div className="mt-6 flex flex-col gap-2.5 border-t border-line pt-5">
-                <a
-                  href={`tel:${site.usOffice.phone.replace(/[^+0-9]/g, "")}`}
-                  data-analytics="phone_click"
-                  className="text-[0.9375rem] font-semibold text-brown transition-colors hover:text-gold-deep"
-                >
-                  {site.usOffice.phone}
-                </a>
-                <a
-                  href={`mailto:${site.usOffice.email}`}
-                  data-analytics="email_click"
-                  className="text-[0.9375rem] text-charcoal/80 transition-colors hover:text-brown"
-                >
-                  {site.usOffice.email}
-                </a>
-              </div>
-            </div>
           </div>
         }
       />
@@ -174,8 +159,7 @@ export default async function ContactPage() {
                 <div className="rounded-[1.5rem] border border-line bg-white/70 p-7">
                   <p className="kicker text-gold-deep">Operating locations</p>
                   <p className="mt-4 text-[0.875rem] leading-relaxed text-muted">
-                    PAN-India presence from the Ahmedabad headquarters, with a
-                    US office in Hilton Head Island, South Carolina.
+                    PAN-India presence, run from the Ahmedabad head office.
                   </p>
                 </div>
               </Reveal>

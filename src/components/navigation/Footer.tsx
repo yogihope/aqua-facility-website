@@ -135,6 +135,15 @@ export async function Footer() {
                 >
                   {site.phone}
                 </a>
+                {site.altPhone ? (
+                  <a
+                    href={`tel:${site.altPhone.replace(/\s/g, "")}`}
+                    data-analytics="phone_click"
+                    className="text-warm/80 transition-colors hover:text-gold-soft"
+                  >
+                    {site.altPhone}
+                  </a>
+                ) : null}
                 <a
                   href={`mailto:${site.email}`}
                   data-analytics="email_click"
@@ -165,10 +174,13 @@ export async function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col gap-6 border-t border-warm/10 pt-8 md:flex-row md:items-center md:justify-between">
-          <p className="text-[0.75rem] text-warm/40">
-            © {year} {site.legalName}. {yearsOfExpertise()}+ years of operational
-            services since {site.foundingYear}.
-          </p>
+          <div className="flex flex-col gap-1.5">
+            <p className="text-[0.75rem] text-warm/40">
+              © {year} {site.legalName}. {yearsOfExpertise()}+ years of
+              operational services since {site.foundingYear}.
+            </p>
+            <p className="text-[0.75rem] text-warm/40">Powered by Pexzo</p>
+          </div>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <Link
               href="/privacy-policy"
