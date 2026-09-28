@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container, Section } from "@/components/ui/Container";
 import { SectionHeading, Chip } from "@/components/ui/Bits";
@@ -5,6 +6,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { TextLink, Arrow } from "@/components/ui/Button";
 import { caseStudyClientLabel } from "@/content/projects";
 import type { CaseStudyContent } from "@/content/types";
+import { caseStudyPhoto } from "@/content/workPhotos";
 import { cn } from "@/lib/utils";
 
 /**
@@ -51,6 +53,8 @@ export function CaseStudyCard({
   study: CaseStudyContent;
   className?: string;
 }) {
+  const photo = caseStudyPhoto[study.slug];
+
   return (
     <Link
       href={`/projects/${study.slug}`}
@@ -61,20 +65,20 @@ export function CaseStudyCard({
         className
       )}
     >
-      {/* Visual band — replaced by wide-angle site photography at content freeze */}
+      {/* Visual band — site photography, with the label kept legible over it */}
       <span className="relative block aspect-[16/10] overflow-hidden bg-charcoal">
+        {photo ? (
+          <Image
+            src={photo.src}
+            alt={photo.alt}
+            fill
+            sizes="(min-width: 1024px) 26rem, 92vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+          />
+        ) : null}
         <span
           aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(circle_at_70%_25%,rgba(199,154,35,0.25),transparent_60%)]"
-        />
-        <span
-          aria-hidden="true"
-          className="absolute inset-0 opacity-45"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, rgba(247,244,238,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(247,244,238,0.05) 1px, transparent 1px)",
-            backgroundSize: "24px 24px",
-          }}
+          className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/30 to-transparent"
         />
         <span className="absolute inset-x-5 bottom-5">
           <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-gold-soft">

@@ -2,15 +2,15 @@ import { Container, Section } from "@/components/ui/Container";
 import { Kicker } from "@/components/ui/Bits";
 import { Reveal } from "@/components/ui/Reveal";
 import { TextLink } from "@/components/ui/Button";
+import Image from "next/image";
 import { home } from "@/content/home";
+import { workPhotos, type WorkPhoto } from "@/content/workPhotos";
 
 /**
  * Section 6.1 (3) — the repositioning statement.
  * This is the section that carries the "housekeeping vendor → operational
  * services partner" shift, so it gets the largest editorial type on the page
- * after the hero. The mosaic uses composed panels rather than stock imagery;
- * Section 4.4 requires documentary photography, which is supplied at content
- * freeze — the panels below are sized to be swapped for it one-for-one.
+ * after the hero. The mosaic carries site photography (Section 4.4).
  */
 export function Repositioning() {
   const { repositioning, outcomes } = home;
@@ -60,27 +60,25 @@ export function Repositioning() {
           {/* Asymmetric editorial mosaic (4.3) */}
           <Reveal delay={140} className="lg:pt-10">
             <div className="grid grid-cols-2 gap-4">
-              <MosaicPanel
+              <MosaicPhoto
                 className="col-span-2 aspect-[16/9]"
-                label="Plant operations"
-                caption="Mechanised execution on live industrial floors"
+                photo={workPhotos.housekeeping}
+                label="Facility operations"
+                caption="Mechanised execution on live sites"
               />
-              <MosaicPanel
+              <MosaicPhoto
                 className="aspect-[3/4]"
+                photo={workPhotos.briefing}
                 label="Workforce"
                 caption="Trained, supervised, deployed"
-                tone="dark"
               />
-              <MosaicPanel
+              <MosaicPhoto
                 className="aspect-[3/4]"
-                label="Infrastructure"
-                caption="High-footfall environments"
+                photo={workPhotos.maintenance}
+                label="Maintenance"
+                caption="Technical teams on plant assets"
               />
             </div>
-            <p className="mt-5 text-[0.75rem] leading-relaxed text-muted/80">
-              Documentary photography of actual operations, facilities and
-              machinery replaces these panels at content freeze (Section 4.4).
-            </p>
           </Reveal>
         </div>
       </Container>
@@ -88,57 +86,35 @@ export function Repositioning() {
   );
 }
 
-function MosaicPanel({
+function MosaicPhoto({
   className,
+  photo,
   label,
   caption,
-  tone = "light",
 }: {
   className?: string;
+  photo: WorkPhoto;
   label: string;
   caption: string;
-  tone?: "light" | "dark";
 }) {
   return (
     <figure
-      className={`relative overflow-hidden rounded-2xl border ${
-        tone === "dark"
-          ? "border-charcoal/20 bg-charcoal text-warm"
-          : "border-line bg-gradient-to-br from-white via-warm to-sand/60"
-      } ${className ?? ""}`}
+      className={`relative overflow-hidden rounded-2xl border border-line ${
+        className ?? ""
+      }`}
     >
-      <span
-        aria-hidden="true"
-        className={`absolute inset-0 ${
-          tone === "dark"
-            ? "bg-[radial-gradient(circle_at_70%_20%,rgba(199,154,35,0.22),transparent_60%)]"
-            : "bg-[radial-gradient(circle_at_30%_20%,rgba(199,154,35,0.14),transparent_62%)]"
-        }`}
+      <Image
+        src={photo.src}
+        alt={photo.alt}
+        fill
+        sizes="(min-width: 1024px) 26rem, 92vw"
+        className="object-cover"
       />
-      {/* Faint technical grid — reads as measured, not decorative */}
-      <span
-        aria-hidden="true"
-        className="absolute inset-0 opacity-[0.5]"
-        style={{
-          backgroundImage: `linear-gradient(to right, ${
-            tone === "dark" ? "rgba(247,244,238,0.06)" : "rgba(44,39,35,0.05)"
-          } 1px, transparent 1px), linear-gradient(to bottom, ${
-            tone === "dark" ? "rgba(247,244,238,0.06)" : "rgba(44,39,35,0.05)"
-          } 1px, transparent 1px)`,
-          backgroundSize: "28px 28px",
-        }}
-      />
-      <figcaption className="absolute inset-x-0 bottom-0 p-5">
-        <span
-          className={`kicker ${tone === "dark" ? "text-gold-soft" : "text-gold-deep"}`}
-        >
+      <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-charcoal/85 to-transparent p-5 pt-12">
+        <span className="block text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-gold-soft">
           {label}
         </span>
-        <span
-          className={`mt-2 block text-[0.8125rem] leading-snug ${
-            tone === "dark" ? "text-warm/70" : "text-muted"
-          }`}
-        >
+        <span className="mt-1 block text-[0.8125rem] leading-snug text-warm/90">
           {caption}
         </span>
       </figcaption>

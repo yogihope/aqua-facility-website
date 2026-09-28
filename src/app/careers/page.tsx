@@ -1,4 +1,5 @@
 import { Container, Section } from "@/components/ui/Container";
+import Image from "next/image";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { CareersBoard } from "@/components/sections/CareersBoard";
@@ -9,6 +10,7 @@ import { SectionHeading, JsonLd } from "@/components/ui/Bits";
 import { getJobs, getAwards } from "@/lib/data";
 import { getFeaturedJob } from "@/content/careers";
 import { site } from "@/content/site";
+import { workPhotos } from "@/content/workPhotos";
 import { buildMetadata, breadcrumbSchema, jobPostingSchema } from "@/lib/seo";
 
 export const metadata = buildMetadata({
@@ -52,6 +54,18 @@ export default async function CareersPage() {
         title="Build the Operations That Keep India Moving."
         intro="Aqua creates opportunities across facility management, accounts and administration, technical operations, production support, supervision and corporate functions."
         breadcrumbs={[{ name: "Home", href: "/" }, { name: "Careers" }]}
+        aside={
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.5rem] border border-line">
+            <Image
+              src={workPhotos.briefing.src}
+              alt={workPhotos.briefing.alt}
+              fill
+              priority
+              sizes="(min-width: 1024px) 30rem, 92vw"
+              className="object-cover"
+            />
+          </div>
+        }
         meta={[
           { label: "Open roles", value: String(jobs.length) },
           { label: "Categories", value: "Corporate · Technical · Workforce" },

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/Container";
@@ -9,6 +10,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { TextLink, Arrow } from "@/components/ui/Button";
 import { getServices, getServiceBySlug, getIndustries, getCaseStudies } from "@/lib/data";
 import { buildMetadata, breadcrumbSchema, serviceSchema } from "@/lib/seo";
+import { servicePhoto } from "@/content/workPhotos";
 
 export const revalidate = 3600;
 
@@ -44,6 +46,8 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
   ]);
 
   if (!service) notFound();
+
+  const photo = servicePhoto[service.slug];
 
   const relatedIndustries = allIndustries.filter((industry) =>
     service.industries.includes(industry.slug)
@@ -94,6 +98,23 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
           </div>
         }
       />
+
+      {photo ? (
+        <div className="bg-warm">
+          <Container>
+            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[1.5rem] border border-line sm:aspect-[21/9]">
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                fill
+                priority
+                sizes="(min-width: 1320px) 1240px, 92vw"
+                className="object-cover"
+              />
+            </div>
+          </Container>
+        </div>
+      ) : null}
 
       {/* What We Solve */}
       <Section tone="warm" className="grain">
