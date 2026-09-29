@@ -19,6 +19,7 @@ export const leaders: LeaderContent[] = [
     initials: "RS",
     summary:
       "Founded Aqua in 1996 and has led the organisation through its growth from facility services into an integrated operational-services group.",
+    photoUrl: "/leadership/rajesh-shah.jpg",
     approved: true,
   },
   {
@@ -29,6 +30,7 @@ export const leaders: LeaderContent[] = [
     initials: "AS",
     summary:
       "Directs the group's operations across facilities, workforce, industrial services and infrastructure.",
+    photoUrl: "/leadership/anal-shah.jpg",
     approved: true,
   },
   {
