@@ -1,39 +1,56 @@
 import "server-only";
 
+import nodemailer, { type Transporter } from "nodemailer";
 import { site } from "@/content/site";
 
 /**
- * Enquiry notifications through EmailJS.
+ * Enquiry notifications over SMTP.
  *
  * Every submission is written to the database first — that is the record the
  * admin screen reads. This sends a copy to the operations inbox on top of it,
- * and only when EmailJS is configured. With the keys missing the function does
- * nothing and says so in the log, so mail setup can never stop a form from
- * being accepted.
+ * and only when SMTP is configured. With the settings missing the function
+ * does nothing and says so in the log, so mail setup can never stop a form
+ * from being accepted.
  *
- * The call is made from the server with the private key, so the keys never
- * reach the browser and EmailJS's strict mode stays satisfied.
+ * Required environment: SMTP_HOST, SMTP_USER, SMTP_PASS.
+ * Optional: SMTP_PORT (default 465), SMTP_SECURE ("false" for STARTTLS on 587),
+ * SMTP_FROM (defaults to SMTP_USER), NOTIFY_EMAIL (defaults to the published
+ * operations inbox).
  *
- * Required environment:
- *   EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY,
- *   EMAILJS_PRIVATE_KEY
- * Optional: NOTIFY_EMAIL (defaults to the published operations inbox).
- *
- * The EmailJS template should use these variables:
- *   {{subject}} {{message}} {{reply_to}} {{from_name}} {{to_email}}
+ * Gmail note: SMTP_PASS must be a Google App Password, not the account
+ * password, and the From address Gmail shows is always the authenticated
+ * account.
  */
-
-const ENDPOINT = "https://api.emailjs.com/api/v1.0/email/send";
 
 export type NotificationField = [label: string, value: string | null | undefined];
 
-function config() {
-  const serviceId = process.env.EMAILJS_SERVICE_ID?.trim();
-  const templateId = process.env.EMAILJS_TEMPLATE_ID?.trim();
-  const publicKey = process.env.EMAILJS_PUBLIC_KEY?.trim();
-  const privateKey = process.env.EMAILJS_PRIVATE_KEY?.trim();
-  if (!serviceId || !templateId || !publicKey || !privateKey) return null;
-  return { serviceId, templateId, publicKey, privateKey };
+let cached: Transporter | null | undefined;
+
+function transport() {
+  if (cached !== undefined) return cached;
+
+  const host = process.env.SMTP_HOST?.trim();
+  const user = process.env.SMTP_USER?.trim();
+  // App passwords are often pasted with the spaces Google displays.
+  const pass = process.env.SMTP_PASS?.replace(/\s+/g, "");
+
+  if (!host || !user || !pass) {
+    cached = null;
+    return cached;
+  }
+
+  const port = Number(process.env.SMTP_PORT ?? 465);
+  cached = nodemailer.createTransport({
+    host,
+    port,
+    secure: process.env.SMTP_SECURE ? process.env.SMTP_SECURE === "true" : port === 465,
+    auth: { user, pass },
+  });
+  return cached;
+}
+
+function escapeHtml(value: string) {
+  return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
 export async function notifyTeam({
@@ -41,54 +58,41 @@ export async function notifyTeam({
   intro,
   fields,
   replyTo,
-  fromName,
 }: {
   subject: string;
   intro: string;
   fields: NotificationField[];
   replyTo?: string;
-  fromName?: string;
 }): Promise<void> {
-  const cfg = config();
-  if (!cfg) {
-    console.info("[aqua] EmailJS not configured — notification email skipped.");
+  const mailer = transport();
+  if (!mailer) {
+    console.info("[aqua] SMTP not configured — notification email skipped.");
     return;
   }
 
-  const message = [
-    intro,
-    "",
-    ...fields.filter(([, value]) => value).map(([label, value]) => `${label}: ${value}`),
-  ].join("\n");
+  const rows = fields.filter(([, value]) => value);
+  const text = [intro, "", ...rows.map(([l, v]) => `${l}: ${v}`)].join("\n");
+  const html = `<p>${escapeHtml(intro)}</p><table cellpadding="6" style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:14px">${rows
+    .map(
+      ([label, value]) =>
+        `<tr><td style="border:1px solid #ddd;background:#f7f4ee"><b>${escapeHtml(
+          label
+        )}</b></td><td style="border:1px solid #ddd">${escapeHtml(String(value)).replace(
+          /\n/g,
+          "<br>"
+        )}</td></tr>`
+    )
+    .join("")}</table>`;
 
   try {
-    const response = await fetch(ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        service_id: cfg.serviceId,
-        template_id: cfg.templateId,
-        user_id: cfg.publicKey,
-        accessToken: cfg.privateKey,
-        template_params: {
-          subject,
-          message,
-          reply_to: replyTo ?? "",
-          from_name: fromName ?? site.companyName,
-          to_email: process.env.NOTIFY_EMAIL ?? site.email,
-        },
-      }),
-      // A slow mail provider must not hold the visitor's submission open.
-      signal: AbortSignal.timeout(8000),
+    await mailer.sendMail({
+      from: `"${site.companyName} website" <${process.env.SMTP_FROM ?? process.env.SMTP_USER}>`,
+      to: process.env.NOTIFY_EMAIL ?? site.email,
+      replyTo,
+      subject,
+      text,
+      html,
     });
-
-    if (!response.ok) {
-      console.error(
-        "[aqua] EmailJS rejected the notification",
-        response.status,
-        (await response.text()).slice(0, 300)
-      );
-    }
   } catch (error) {
     // A failed email must not fail the submission: it is already stored.
     console.error("[aqua] Notification email failed", error);
