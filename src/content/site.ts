@@ -56,8 +56,7 @@ export const site = {
     "https://in.linkedin.com/company/aqua-facility-services-private-limited",
   facebook:
     "https://www.facebook.com/p/Aqua-Facility-Services-61593771151223/",
-  instagram:
-    "https://www.instagram.com/aquafacilityservicespvt/" as string | null,
+  instagram: "https://www.instagram.com/aqua.facility/" as string | null,
   youtube: null as string | null,
 
   footerCopy:
