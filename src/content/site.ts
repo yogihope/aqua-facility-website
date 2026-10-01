@@ -53,7 +53,8 @@ export const site = {
     "Aqua Facility Services, 701-702 Elenza Vertex, Opp. Sterling Cancer Hospital, Sindhu Bhavan Road, Bodakdev, Ahmedabad 380054",
 
   linkedin: "https://www.linkedin.com/company/aqua-facility-services",
-  facebook: "https://www.facebook.com/aquafacilityservices",
+  facebook:
+    "https://www.facebook.com/p/Aqua-Facility-Services-61593771151223/",
   instagram: null as string | null,
   youtube: null as string | null,
 
