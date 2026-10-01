@@ -5,7 +5,9 @@ import { JsonLd } from "@/components/ui/Bits";
 import { Reveal } from "@/components/ui/Reveal";
 import { getServices, getIndustries } from "@/lib/data";
 import { buildMetadata, breadcrumbSchema } from "@/lib/seo";
+import Image from "next/image";
 import { site, cityLine } from "@/content/site";
+import { workPhotos } from "@/content/workPhotos";
 
 export const metadata = buildMetadata({
   title: "Contact Aqua | Let's Talk About Your Operation",
@@ -34,6 +36,43 @@ export default async function ContactPage() {
         title="Let's Talk About Your Operation."
         intro="Tell us what you need to manage, improve, staff, maintain or execute. The Aqua team will route your requirement to the relevant capability team."
         breadcrumbs={[{ name: "Home", href: "/" }, { name: "Contact" }]}
+        meta={[
+          { label: "Head office", value: `${site.city}, ${site.state}` },
+          { label: "Coverage", value: "PAN-India capability" },
+          { label: "Office lines", value: "Two direct numbers" },
+          { label: "On WhatsApp", value: "Both numbers" },
+        ]}
+        belowIntro={
+          <div className="mt-10 grid gap-4 sm:grid-cols-[1.1fr_0.9fr]">
+            <ol className="flex flex-col gap-4 rounded-[1.5rem] border border-line bg-white/70 p-6">
+              <p className="kicker text-gold-deep">What happens next</p>
+              {[
+                "Your enquiry reaches the operations inbox and the relevant capability team.",
+                "We ask for the site, scope and shift pattern — whatever is missing to size it.",
+                "You get a scoped proposal, or a site visit if the requirement needs one.",
+              ].map((step, i) => (
+                <li key={step} className="flex gap-3.5">
+                  <span className="font-display text-[0.9375rem] tabular-nums text-gold-deep/80">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-[0.875rem] leading-relaxed text-muted">
+                    {step}
+                  </span>
+                </li>
+              ))}
+            </ol>
+
+            <div className="relative min-h-[12rem] overflow-hidden rounded-[1.5rem] border border-line">
+              <Image
+                src={workPhotos.supervision.src}
+                alt={workPhotos.supervision.alt}
+                fill
+                sizes="(min-width: 640px) 20rem, 92vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        }
         aside={
           <div className="flex flex-col gap-4">
             <div className="rounded-[1.5rem] border border-line bg-white/70 p-7">
@@ -72,15 +111,6 @@ export default async function ContactPage() {
                 >
                   {site.email}
                 </a>
-                {site.careersEmail ? (
-                  <a
-                    href={`mailto:${site.careersEmail}`}
-                    data-analytics="email_click"
-                    className="text-[0.9375rem] text-charcoal/80 transition-colors hover:text-brown"
-                  >
-                    {site.careersEmail} (careers)
-                  </a>
-                ) : null}
               </div>
 
               <div className="mt-6 border-t border-line pt-5">

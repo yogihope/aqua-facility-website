@@ -16,12 +16,15 @@ export function PageHero({
   aside,
   tone = "light",
   meta,
+  belowIntro,
 }: {
   kicker: string;
   title: string;
   intro?: string;
   breadcrumbs: { name: string; href?: string }[];
   aside?: React.ReactNode;
+  /** Extra content under the intro — keeps a tall aside from leaving a gap. */
+  belowIntro?: React.ReactNode;
   tone?: "light" | "dark";
   meta?: { label: string; value: string }[];
 }) {
@@ -70,6 +73,8 @@ export function PageHero({
                   <p className="lede mt-7 max-w-2xl">{intro}</p>
                 </Reveal>
               ) : null}
+
+              {belowIntro ? <Reveal delay={210}>{belowIntro}</Reveal> : null}
 
               {meta?.length ? (
                 <Reveal delay={240}>

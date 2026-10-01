@@ -4,6 +4,7 @@ import { applicationSchema } from "@/lib/applicationSchema";
 import { flattenErrors } from "@/lib/leadSchema";
 import { makeReference } from "@/lib/utils";
 import { notifyTeam } from "@/lib/notify";
+import { site } from "@/content/site";
 
 /**
  * Careers application intake (6.34).
@@ -105,7 +106,7 @@ export async function POST(request: Request) {
       {
         ok: false,
         message:
-          "We could not record your application just now. Please email your details to careers@aquafacility.com.",
+          `We could not record your application just now. Please email your details to ${site.email}.`,
       },
       { status: 503 }
     );

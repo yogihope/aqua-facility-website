@@ -77,9 +77,14 @@ export default async function LeadershipPage() {
             }
           />
 
-          <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Two on the first row, the rest three-up (Nirav, 2026-10-01) */}
+          <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
             {leaders.map((leader, i) => (
-              <Reveal key={leader.slug} delay={(i % 3) * 70}>
+              <Reveal
+                key={leader.slug}
+                delay={(i % 3) * 70}
+                className={i < 2 ? "lg:col-span-3" : "lg:col-span-2"}
+              >
                 <li className="group h-full overflow-hidden rounded-[1.5rem] border border-line bg-white/70 transition-all duration-300 hover:-translate-y-1 hover:border-gold/40">
                   <Portrait leader={leader} />
                   <div className="p-6">

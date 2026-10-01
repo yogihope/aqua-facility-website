@@ -1,23 +1,19 @@
-import dynamic from "next/dynamic";
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { CtaLink } from "@/components/ui/Button";
 import { Kicker } from "@/components/ui/Bits";
 import { Reveal } from "@/components/ui/Reveal";
 import { home } from "@/content/home";
+import { workPhotos } from "@/content/workPhotos";
+import { site, yearsOfExpertise } from "@/content/site";
 
 /**
- * Section 6.1 hero — editorial copy left, operational ecosystem right.
- * 9.2: the visual is dynamically imported so it never blocks the headline and
- * CTA, which are server-rendered as static HTML.
+ * Section 6.1 hero — editorial copy left, site photography right.
+ *
+ * The visual is two real photographs rather than an abstract canvas: the work
+ * itself carries more weight than a diagram, and it costs no JavaScript. The
+ * headline and CTA stay server-rendered, so nothing blocks first paint.
  */
-const EcosystemCanvas = dynamic(
-  () => import("@/components/visual/EcosystemCanvas").then((m) => m.EcosystemCanvas),
-  {
-    loading: () => (
-      <div className="h-full w-full rounded-[2rem] bg-gradient-to-br from-sand-soft/70 to-warm" />
-    ),
-  }
-);
 
 export function Hero() {
   const { hero } = home;
@@ -35,7 +31,7 @@ export function Hero() {
       />
 
       <Container className="relative">
-        <div className="grid items-center gap-12 py-14 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:py-24 xl:py-28">
+        <div className="grid items-center gap-12 py-14 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:py-24 xl:py-28">
           {/* Copy — content first on mobile (Section 15) */}
           <div className="max-w-2xl">
             <Reveal>
@@ -87,25 +83,77 @@ export function Hero() {
             </Reveal>
           </div>
 
-          {/* Ecosystem visual */}
+          {/* Site photography — the work, not a diagram */}
           <div className="relative">
-            <div className="relative aspect-square w-full overflow-hidden rounded-[2rem] border border-line bg-gradient-to-br from-white/70 via-warm to-sand-soft/50 sm:aspect-[4/3] lg:aspect-square">
-              <EcosystemCanvas className="absolute inset-0 h-full w-full" />
+            <div className="relative overflow-hidden rounded-[2rem] border border-line">
+              <Image
+                src={workPhotos.housekeeping.src}
+                alt={workPhotos.housekeeping.alt}
+                width={1536}
+                height={1024}
+                priority
+                sizes="(min-width: 1024px) 40rem, 92vw"
+                className="aspect-[4/3] w-full object-cover lg:aspect-[5/4]"
+              />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal/55 via-transparent to-transparent"
+              />
 
-              {/* Corner registration marks — industrial, not decorative */}
               <CornerMark className="left-5 top-5" />
               <CornerMark className="right-5 top-5 rotate-90" />
-              <CornerMark className="bottom-5 right-5 rotate-180" />
-              <CornerMark className="bottom-5 left-5 -rotate-90" />
 
-              <div className="absolute inset-x-5 bottom-5 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-line bg-white/75 px-4 py-3 backdrop-blur-md sm:inset-x-7 sm:bottom-7">
-                <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-muted">
-                  Operational ecosystem
+              <div className="absolute inset-x-5 bottom-5 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-warm/15 bg-charcoal/75 px-4 py-3 backdrop-blur-md sm:inset-x-7 sm:bottom-7">
+                <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-gold-soft">
+                  On site, every shift
                 </p>
-                <p className="text-[0.6875rem] text-muted/80">
-                  Six capabilities · One operating philosophy
+                <p className="text-[0.6875rem] text-warm/70">
+                  Mechanised execution · Trained teams
                 </p>
               </div>
+            </div>
+
+            {/* Second frame and the stats sit under the main photo */}
+            <div className="mt-4 grid grid-cols-[1.1fr_0.9fr] items-stretch gap-4">
+              <div className="overflow-hidden rounded-[1.25rem] border border-line shadow-[0_24px_50px_-34px_rgba(44,39,35,0.6)]">
+                <Image
+                  src={workPhotos.maintenance.src}
+                  alt={workPhotos.maintenance.alt}
+                  width={1536}
+                  height={1024}
+                  sizes="(min-width: 1024px) 22rem, 45vw"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+
+              <dl className="flex flex-col justify-center gap-4 rounded-[1.25rem] border border-line bg-white/85 p-5 backdrop-blur-md">
+                <div>
+                  <dt className="text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-muted">
+                    Since
+                  </dt>
+                  <dd className="font-display text-[1.375rem] leading-none text-brown">
+                    {site.foundingYear}
+                  </dd>
+                </div>
+                <span aria-hidden="true" className="h-px w-full bg-line" />
+                <div>
+                  <dt className="text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-muted">
+                    Experience
+                  </dt>
+                  <dd className="font-display text-[1.375rem] leading-none text-brown">
+                    {yearsOfExpertise()}+ yrs
+                  </dd>
+                </div>
+                <span aria-hidden="true" className="h-px w-full bg-line" />
+                <div>
+                  <dt className="text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-muted">
+                    Coverage
+                  </dt>
+                  <dd className="font-display text-[1.375rem] leading-none text-brown">
+                    PAN-India
+                  </dd>
+                </div>
+              </dl>
             </div>
           </div>
         </div>

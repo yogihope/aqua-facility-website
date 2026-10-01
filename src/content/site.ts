@@ -35,8 +35,11 @@ export const site = {
   phone: "+91 97277 22001",
   altPhone: "+91 97277 22036" as string | null,
   email: "operations@aquafacility.com",
-  careersEmail: "careers@aquafacility.com",
-  /** Direct recruiting inbox published on individual vacancies. */
+  /**
+   * One published inbox for everything, including careers (Nirav, 2026-10-01):
+   * the careers@ address is no longer shown anywhere on the site.
+   */
+  careersEmail: "operations@aquafacility.com",
   operationsEmail: "operations@aquafacility.com",
 
   /** WhatsApp numbers shown on the contact page, in wa.me form. */
