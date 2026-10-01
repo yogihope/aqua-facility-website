@@ -155,7 +155,17 @@ export async function Footer() {
               © {year} {site.legalName}. {yearsOfExpertise()}+ years of
               operational services since {site.foundingYear}.
             </p>
-            <p className="text-[0.75rem] text-warm/40">Powered by Pexzo</p>
+            <p className="text-[0.75rem] text-warm/40">
+              Powered by{" "}
+              <a
+                href="https://pexzo.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-gold-soft"
+              >
+                Pexzo
+              </a>
+            </p>
           </div>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <Link
@@ -188,6 +198,16 @@ export async function Footer() {
                 className="text-[0.75rem] text-warm/45 transition-colors hover:text-gold-soft"
               >
                 Facebook
+              </a>
+            ) : null}
+            {site.instagram ? (
+              <a
+                href={site.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[0.75rem] text-warm/45 transition-colors hover:text-gold-soft"
+              >
+                Instagram
               </a>
             ) : null}
           </div>

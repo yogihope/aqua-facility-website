@@ -413,7 +413,7 @@ function Portrait({ leader }: { leader: LeaderContent }) {
           src={leader.photoUrl}
           alt={`${leader.name}, ${leader.role} of Aqua`}
           fill
-          sizes="(min-width: 1024px) 22rem, (min-width: 640px) 45vw, 90vw"
+          sizes="(min-width: 1320px) 620px, (min-width: 1024px) 48vw, (min-width: 640px) 45vw, 92vw"
           className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
         />
       </div>
