@@ -199,3 +199,18 @@ It opens with the code in `ADMIN_CODE`; with that variable empty the admin
 stays locked. Five wrong codes from one IP lock it for 15 minutes. Submissions
 need `DATABASE_URL` — without a database the forms answer 503 and nothing is
 stored.
+
+## Enquiry email (EmailJS)
+
+Form submissions are always written to the database and shown at `/admin/`.
+When these variables are set, a copy is also emailed to `NOTIFY_EMAIL`
+(default: the published operations inbox):
+
+```
+EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY, EMAILJS_PRIVATE_KEY
+```
+
+The call runs server-side with the private key, so no key reaches the browser.
+The EmailJS template needs these variables: `{{subject}}`, `{{message}}`,
+`{{reply_to}}`, `{{from_name}}`, `{{to_email}}`. A mail failure is logged and
+never fails the submission.
