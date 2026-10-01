@@ -7,7 +7,7 @@ import { CtaLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { getLeaders, getAwards } from "@/lib/data";
 import { chairmanMessage } from "@/content/leadership";
-import { leadershipPage, roleMessages } from "@/content/leadershipMessages";
+import { leadershipPage, publishedRoleMessages } from "@/content/leadershipMessages";
 import type { RoleMessage } from "@/content/leadershipMessages";
 import type { LeaderContent } from "@/content/types";
 import { site, yearsOfExpertise } from "@/content/site";
@@ -147,11 +147,11 @@ export default async function LeadershipPage() {
                 <span className="italic text-brown">in its own words.</span>
               </>
             }
-            body="Finance, operations, HR and IR, safety, technology, client relations and training — what each of them is accountable for."
+            body="Finance, operations, and HR and IR — what each of them is accountable for."
           />
 
           <div className="mt-16 flex flex-col gap-16 sm:gap-24">
-            {roleMessages.map((message, i) => (
+            {publishedRoleMessages.map((message, i) => (
               <MessageRow
                 key={message.slug}
                 message={message}

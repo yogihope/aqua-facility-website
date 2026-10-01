@@ -18,12 +18,19 @@ export type RoleMessage = {
   /** Optional: set once a named individual approves the message as theirs. */
   name?: string;
   photoUrl?: string;
+  /** false hides the message from the page without deleting the copy. */
+  published?: boolean;
 };
 
-/** Messages signed by office. Order is the order they appear on the page. */
+/**
+ * Messages signed by office. Order is the order they appear on the page.
+ * `published: false` keeps the copy here but off the site — the five unsigned
+ * office messages are hidden until someone owns them (Nirav, 2026-10-01).
+ */
 export const roleMessages: RoleMessage[] = [
   {
     slug: "ceo",
+    published: false,
     role: "Chief Executive Officer",
     kicker: "CEO's Message",
     title: "Thirty years of turning up, every shift.",
@@ -74,6 +81,7 @@ export const roleMessages: RoleMessage[] = [
   },
   {
     slug: "safety-quality",
+    published: false,
     role: "Head of Safety & Quality",
     kicker: "Safety & Quality Message",
     title: "Everyone goes home the way they came in.",
@@ -85,6 +93,7 @@ export const roleMessages: RoleMessage[] = [
   },
   {
     slug: "technology",
+    published: false,
     role: "Head of Technology",
     kicker: "Technology Message",
     title: "If it happened on site, it should be visible today.",
@@ -96,6 +105,7 @@ export const roleMessages: RoleMessage[] = [
   },
   {
     slug: "client-relations",
+    published: false,
     role: "Head of Client Relations",
     kicker: "Client Relations Message",
     title: "Reviews should be boring.",
@@ -107,6 +117,7 @@ export const roleMessages: RoleMessage[] = [
   },
   {
     slug: "training",
+    published: false,
     role: "Head of Training & Development",
     kicker: "Training Message",
     title: "Skill is built before the shift, not during it.",
@@ -234,3 +245,8 @@ export const leadershipPage = {
     body: "Whether you want to discuss a site, a workforce requirement or a career at Aqua, the conversation starts in the same place.",
   },
 };
+
+/** What the leadership page renders. */
+export const publishedRoleMessages = roleMessages.filter(
+  (m) => m.published !== false
+);
