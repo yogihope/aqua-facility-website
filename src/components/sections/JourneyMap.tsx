@@ -21,21 +21,40 @@ const TONES = [
   "from-brown-deep to-charcoal",
 ] as const;
 
-export function JourneyMap() {
+export function JourneyMap({
+  tone = "sand",
+  kicker = "The journey",
+  title,
+  body,
+}: {
+  tone?: "warm" | "sand";
+  kicker?: string;
+  title?: React.ReactNode;
+  body?: string;
+} = {}) {
   const stops = about.timeline;
 
   return (
-    <Section tone="sand" id="journey">
+    <Section
+      tone={tone}
+      id="journey"
+      className={tone === "warm" ? "grain" : undefined}
+    >
       <Container>
         <SectionHeading
-          kicker="The journey"
+          kicker={kicker}
           title={
-            <>
-              {yearsOfExpertise()} years, one{" "}
-              <span className="italic text-brown">direction.</span>
-            </>
+            title ?? (
+              <>
+                {yearsOfExpertise()} years, one{" "}
+                <span className="italic text-brown">direction.</span>
+              </>
+            )
           }
-          body={`From a single facility-services contract in ${FOUNDING_YEAR} to an integrated group running facilities, workforce, plant assets and public infrastructure.`}
+          body={
+            body ??
+            `From a single facility-services contract in ${FOUNDING_YEAR} to an integrated group running facilities, workforce, plant assets and public infrastructure.`
+          }
         />
 
         {/* Desktop: horizontal track */}
@@ -53,7 +72,7 @@ export function JourneyMap() {
                   </span>
                   <span
                     aria-hidden="true"
-                    className={`mt-5 flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br ${TONES[i % TONES.length]} ring-4 ring-warm-deep`}
+                    className={`mt-5 flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br ${TONES[i % TONES.length]} ring-4 ${tone === "warm" ? "ring-warm" : "ring-warm-deep"}`}
                   >
                     <span className="h-2 w-2 rounded-full bg-warm" />
                   </span>
@@ -82,7 +101,7 @@ export function JourneyMap() {
               <li className="relative flex gap-5 pl-0">
                 <span
                   aria-hidden="true"
-                  className={`relative z-10 mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br ${TONES[i % TONES.length]} ring-4 ring-warm-deep`}
+                  className={`relative z-10 mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br ${TONES[i % TONES.length]} ring-4 ${tone === "warm" ? "ring-warm" : "ring-warm-deep"}`}
                 >
                   <span className="h-1.5 w-1.5 rounded-full bg-warm" />
                 </span>

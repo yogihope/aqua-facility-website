@@ -3,6 +3,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { PptpStory } from "@/components/sections/PptpStory";
 import { AboutAqua } from "@/components/sections/AboutAqua";
+import { JourneyMap } from "@/components/sections/JourneyMap";
 import { Leadership } from "@/components/sections/Leadership";
 import { AwardHighlight } from "@/components/sections/AwardHighlight";
 import { SectionHeading, JsonLd, IndexBadge } from "@/components/ui/Bits";
@@ -73,74 +74,17 @@ export default async function AboutPage() {
       <AboutAqua tone="sand" showLink={false} />
 
       {/* Timeline — horizontal on desktop, vertical on mobile (Section 7) */}
-      <Section tone="warm" className="grain">
-        <Container>
-          <SectionHeading
-            kicker="How Aqua evolved"
-            title={
-              <>
-                From facility services to{" "}
-                <span className="italic text-brown">
-                  integrated operations.
-                </span>
-              </>
-            }
-            body="Each stage added capability without replacing the last. The result is one organisation that can take responsibility across facilities, workforce, plant assets and infrastructure."
-          />
-
-          <div className="mt-14">
-            {/* Desktop: horizontal progressive reveal */}
-            <ol className="hidden lg:grid lg:grid-cols-6 lg:gap-4">
-              {about.timeline.map((entry, i) => (
-                <Reveal key={entry.title} delay={i * 90} as="li">
-                  <div className="relative flex h-full flex-col">
-                    <div className="flex items-center gap-2">
-                      <span className="h-2.5 w-2.5 shrink-0 rounded-full border-2 border-gold bg-warm" />
-                      <span className="h-px flex-1 bg-line" />
-                    </div>
-                    <p className="mt-5 font-display text-[1.125rem] text-brown">
-                      {entry.year}
-                    </p>
-                    <p className="mt-2 text-[0.9375rem] font-semibold text-charcoal">
-                      {entry.title}
-                    </p>
-                    <p className="mt-2.5 text-[0.8125rem] leading-relaxed text-muted">
-                      {entry.body}
-                    </p>
-                  </div>
-                </Reveal>
-              ))}
-            </ol>
-
-            {/* Mobile: vertical */}
-            <ol className="flex flex-col lg:hidden">
-              {about.timeline.map((entry, i) => (
-                <Reveal key={entry.title} delay={i * 70} as="li">
-                  <div className="relative flex gap-5 pb-9">
-                    <div className="flex flex-col items-center">
-                      <span className="h-2.5 w-2.5 shrink-0 rounded-full border-2 border-gold bg-warm" />
-                      {i < about.timeline.length - 1 ? (
-                        <span className="mt-1 w-px flex-1 bg-line" />
-                      ) : null}
-                    </div>
-                    <div className="-mt-1 pb-1">
-                      <p className="font-display text-[1.125rem] text-brown">
-                        {entry.year}
-                      </p>
-                      <p className="mt-1 text-[0.9375rem] font-semibold text-charcoal">
-                        {entry.title}
-                      </p>
-                      <p className="mt-2 text-[0.875rem] leading-relaxed text-muted">
-                        {entry.body}
-                      </p>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-            </ol>
-          </div>
-        </Container>
-      </Section>
+      <JourneyMap
+        tone="warm"
+        kicker="How Aqua evolved"
+        title={
+          <>
+            From facility services to{" "}
+            <span className="italic text-brown">integrated operations.</span>
+          </>
+        }
+        body="Each stage added capability without replacing the last. The result is one organisation that can take responsibility across facilities, workforce, plant assets and infrastructure."
+      />
 
       {/* Vision, mission, values */}
       <Section tone="sand">
