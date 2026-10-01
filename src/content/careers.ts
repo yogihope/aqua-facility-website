@@ -74,8 +74,8 @@ export const jobs: JobContent[] = [
     applyEmail: "operations@aquafacility.com",
   },
   {
-    slug: "auditor-ahmedabad",
-    title: "Auditor",
+    slug: "in-house-auditor-ahmedabad",
+    title: "In-house Auditor",
     category: "Corporate",
     company: "Aqua Facility Services Pvt. Ltd.",
     location: "Ahmedabad, Gujarat",
@@ -84,7 +84,7 @@ export const jobs: JobContent[] = [
     skill: "Audit",
     salary: "No bar for the right candidate",
     description:
-      "Audit the group's accounts, controls and site billing, and report findings to management.",
+      "Audit the group's accounts, controls and site billing in-house, and report findings to management.",
     requirements: [
       "Minimum 3 years of experience",
       "Inter CA, CS or CA may apply",

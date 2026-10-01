@@ -1,15 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
-import { CtaLink } from "@/components/ui/Button";
-import { Kicker } from "@/components/ui/Bits";
 import { site, cityLine, yearsOfExpertise } from "@/content/site";
 import { getServices, getIndustries, getGroupCompanies } from "@/lib/data";
 
 /**
- * Section 7 — group summary, service links, group companies, contact, legal,
- * socials and a closing CTA. Company description here replaces the legacy
- * "certified housekeeping and hospitality management firm" line flagged in 2.1.
+ * Section 7 — group summary, service links, group companies, contact, legal
+ * and socials. The closing CTA band was removed on 2026-10-01: every content
+ * page ends with its own tailored CtaBand, so the footer repeated it; pages
+ * without one (contact, proposal, privacy, terms) are themselves the
+ * destination.
  */
 export async function Footer() {
   const [services, industries, group] = await Promise.all([
@@ -30,30 +30,6 @@ export async function Footer() {
         aria-hidden="true"
         className="pointer-events-none absolute -right-32 bottom-0 h-[26rem] w-[26rem] rounded-full bg-gold/10 blur-[120px]"
       />
-
-      {/* Closing CTA band */}
-      <div className="relative border-b border-warm/10">
-        <div className="mx-auto flex max-w-[1320px] flex-col gap-8 px-5 py-16 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-10 lg:py-20">
-          <div className="max-w-xl">
-            <Kicker tone="warm">Start a conversation</Kicker>
-            <h2 className="mt-5 font-display text-[clamp(1.9rem,3.4vw,3rem)] leading-[1.06] tracking-[-0.018em] text-warm">
-              Tell us what your operation needs to run.
-            </h2>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <CtaLink href="/request-proposal" variant="onDark">
-              {site.primaryCtaLabel}
-            </CtaLink>
-            <CtaLink
-              href="/contact"
-              variant="secondary"
-              className="border-warm/25 text-warm hover:border-gold-soft hover:bg-warm/[0.06]"
-            >
-              Discuss Your Requirement
-            </CtaLink>
-          </div>
-        </div>
-      </div>
 
       <div className="relative mx-auto max-w-[1320px] px-5 py-16 sm:px-8 lg:px-10">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
