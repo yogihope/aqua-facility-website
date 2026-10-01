@@ -2,6 +2,7 @@ import { Hero } from "@/components/sections/Hero";
 import { TrustStrip } from "@/components/sections/TrustStrip";
 import { ClientList } from "@/components/sections/ClientList";
 import { AboutAqua } from "@/components/sections/AboutAqua";
+import { JourneyMap } from "@/components/sections/JourneyMap";
 import { Repositioning } from "@/components/sections/Repositioning";
 import { ServiceBento } from "@/components/sections/ServiceBento";
 import { IndustriesRail } from "@/components/sections/IndustriesRail";
@@ -52,6 +53,7 @@ export default async function HomePage() {
       {/* 2 */} <TrustStrip />
       {/* 2a */} <ClientList />
       {/* 2b */} <AboutAqua />
+      {/* 2c */} <JourneyMap />
       {/* 3 + 5 */} <Repositioning />
       {/* 4 */} <ServiceBento services={services} />
       {/* 6 */} <IndustriesRail industries={industries} />

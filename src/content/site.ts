@@ -24,9 +24,9 @@ export const site = {
   foundingYear: FOUNDING_YEAR,
   domain: "https://aquafacility.com",
 
-  // Address, office numbers and inbox as printed on the company's own
-  // stationery (supplied by Nirav, 2026-09-24).
-  addressLine1: "804, Elenza Vertex",
+  // Office 701-702, confirmed by Nirav on 2026-10-01 (the stationery's 804 was
+  // the earlier unit). All website enquiries go to the operations inbox.
+  addressLine1: "701-702, Elenza Vertex",
   addressLine2: "Opp. Sterling Cancer Hospital, Sindhu Bhavan Road, Bodakdev",
   city: "Ahmedabad",
   state: "Gujarat",
@@ -34,10 +34,20 @@ export const site = {
   country: "India",
   phone: "+91 97277 22001",
   altPhone: "+91 97277 22036" as string | null,
-  email: "ops.maint@aquacorporation.in",
+  email: "operations@aquafacility.com",
   careersEmail: "careers@aquafacility.com",
   /** Direct recruiting inbox published on individual vacancies. */
   operationsEmail: "operations@aquafacility.com",
+
+  /** WhatsApp numbers shown on the contact page, in wa.me form. */
+  whatsapp: [
+    { label: "+91 97277 22001", number: "919727722001" },
+    { label: "+91 97277 22036", number: "919727722036" },
+  ],
+
+  /** Google Maps place query for the office embed and directions link. */
+  mapsQuery:
+    "Aqua Facility Services, 701-702 Elenza Vertex, Opp. Sterling Cancer Hospital, Sindhu Bhavan Road, Bodakdev, Ahmedabad 380054",
 
   linkedin: "https://www.linkedin.com/company/aqua-facility-services",
   facebook: "https://www.facebook.com/aquafacilityservices",

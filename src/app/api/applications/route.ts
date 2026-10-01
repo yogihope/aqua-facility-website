@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { applicationSchema } from "@/lib/applicationSchema";
 import { flattenErrors } from "@/lib/leadSchema";
 import { makeReference } from "@/lib/utils";
+import { notifyTeam } from "@/lib/notify";
 
 /**
  * Careers application intake (6.34).
@@ -109,6 +110,23 @@ export async function POST(request: Request) {
       { status: 503 }
     );
   }
+
+  await notifyTeam({
+    subject: `Job application — ${data.fullName} · ${reference}`,
+    intro: "A new job application was submitted on the website.",
+    replyTo: data.email,
+    fields: [
+      ["Reference", reference],
+      ["Name", data.fullName],
+      ["Role applied for", data.jobSlug],
+      ["Email", data.email],
+      ["Phone", data.phone],
+      ["Location", data.location],
+      ["Skill", data.skill],
+      ["Experience", data.experience],
+      ["Message", data.message],
+    ],
+  });
 
   return NextResponse.json({ ok: true, reference });
 }

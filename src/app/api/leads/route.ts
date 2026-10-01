@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { proposalSchema, flattenErrors } from "@/lib/leadSchema";
 import { routeLead } from "@/content/site";
 import { makeReference } from "@/lib/utils";
+import { notifyTeam } from "@/lib/notify";
 
 /**
  * Section 13 — form handling, lead routing and CRM handoff.
@@ -131,7 +132,33 @@ export async function POST(request: Request) {
     );
   }
 
-  // TODO(launch): CRM push + internal notification, after the write succeeds.
+  // The lead is stored; the email is a copy for the team and never blocks the
+  // acknowledgement, so a mail failure cannot lose an enquiry.
+  await notifyTeam({
+    subject: `${data.type === "contact" ? "Website enquiry" : "Proposal request"} — ${data.fullName}${
+      data.company ? ` (${data.company})` : ""
+    } · ${reference}`,
+    intro: `A new ${
+      data.type === "contact" ? "contact enquiry" : "proposal request"
+    } was submitted on the website.`,
+    replyTo: data.email,
+    fields: [
+      ["Reference", reference],
+      ["Name", data.fullName],
+      ["Company", data.company],
+      ["Designation", data.designation],
+      ["Email", data.email],
+      ["Phone", data.phone],
+      ["City / state", data.cityState],
+      ["Services needed", data.servicesNeeded.join(", ")],
+      ["Industry", data.industry],
+      ["Site location", data.siteLocation],
+      ["Workforce need", data.workforceNeed],
+      ["Requirement", data.summary],
+      ["Routed to", routeLead(data.servicesNeeded)],
+      ["Source page", data.sourcePage],
+    ],
+  });
 
   return NextResponse.json({ ok: true, reference });
 }

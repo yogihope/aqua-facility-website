@@ -72,13 +72,6 @@ export default async function ContactPage() {
                 >
                   {site.email}
                 </a>
-                <a
-                  href={`mailto:${site.operationsEmail}`}
-                  data-analytics="email_click"
-                  className="text-[0.9375rem] text-charcoal/80 transition-colors hover:text-brown"
-                >
-                  {site.operationsEmail} (operations)
-                </a>
                 {site.careersEmail ? (
                   <a
                     href={`mailto:${site.careersEmail}`}
@@ -88,6 +81,51 @@ export default async function ContactPage() {
                     {site.careersEmail} (careers)
                   </a>
                 ) : null}
+              </div>
+
+              <div className="mt-6 border-t border-line pt-5">
+                <p className="text-[0.75rem] font-semibold uppercase tracking-[0.12em] text-muted">
+                  WhatsApp
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {site.whatsapp.map((w) => (
+                    <a
+                      key={w.number}
+                      href={`https://wa.me/${w.number}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-analytics="whatsapp_click"
+                      className="inline-flex items-center gap-2 rounded-xl border border-line-strong bg-white/70 px-3.5 py-2.5 text-[0.875rem] font-medium text-charcoal transition-colors hover:border-gold hover:text-brown"
+                    >
+                      <WhatsAppIcon />
+                      {w.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="overflow-hidden rounded-[1.5rem] border border-line bg-white/70">
+              <iframe
+                title={`${site.legalName} on Google Maps`}
+                src={`https://www.google.com/maps?q=${encodeURIComponent(site.mapsQuery)}&output=embed`}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="h-64 w-full border-0"
+              />
+              <div className="flex items-center justify-between gap-4 border-t border-line px-5 py-4">
+                <p className="text-[0.8125rem] text-muted">
+                  {site.addressLine1}, {cityLine()}
+                </p>
+                <a
+                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(site.mapsQuery)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-analytics="directions_click"
+                  className="shrink-0 text-[0.8125rem] font-semibold text-brown transition-colors hover:text-gold-deep"
+                >
+                  Get directions
+                </a>
               </div>
             </div>
 
@@ -168,5 +206,19 @@ export default async function ContactPage() {
         </Container>
       </Section>
     </>
+  );
+}
+
+/** WhatsApp glyph, drawn inline so no icon package is needed. */
+function WhatsAppIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className="h-4 w-4 shrink-0 text-[#25D366]"
+      fill="currentColor"
+    >
+      <path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.33 4.95L2 22l5.3-1.38a9.86 9.86 0 0 0 4.74 1.2h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.13-2.9-7A9.82 9.82 0 0 0 12.04 2Zm0 18.05h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.05-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.23 8.24Zm4.52-6.16c-.25-.13-1.47-.72-1.69-.8-.23-.09-.39-.13-.56.12-.16.25-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.84-.85 2.04s.87 2.37 1 2.53c.12.17 1.72 2.62 4.16 3.67.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.3Z" />
+    </svg>
   );
 }
