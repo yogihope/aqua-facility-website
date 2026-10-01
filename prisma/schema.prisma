@@ -227,6 +227,8 @@ model Job {
   description    String    @db.Text
   /// string[]
   requirements   Json
+  /// Published salary, as HR stated it.
+  salary         String?
   /// Overrides the site-wide careers inbox where a role is recruited directly.
   applyEmail     String?
   /// Pins the role above the board as the current headline vacancy.

@@ -47,6 +47,7 @@ export function FeaturedVacancy({ job }: { job: JobContent }) {
                 ["Location", job.location],
                 ["Experience", job.experience],
                 ["Type", job.employmentType],
+                ...(job.salary ? [["Salary", job.salary]] : []),
               ].map(([label, value]) => (
                 <div key={label}>
                   <dt className="text-[0.625rem] font-semibold uppercase tracking-[0.12em] text-muted/70">

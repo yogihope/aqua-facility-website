@@ -110,6 +110,8 @@ export type JobContent = {
   skill: string;
   description: string;
   requirements: string[];
+  /** Published salary, as HR stated it. Omitted when there is none to state. */
+  salary?: string;
   /** Overrides the site-wide careers inbox where a role is recruited directly. */
   applyEmail?: string;
   /** Surfaces the role above the board as the current headline vacancy. */

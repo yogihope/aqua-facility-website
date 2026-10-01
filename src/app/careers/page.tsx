@@ -68,7 +68,7 @@ export default async function CareersPage() {
         }
         meta={[
           { label: "Open roles", value: String(jobs.length) },
-          { label: "Categories", value: "Corporate · Technical · Workforce" },
+          { label: "Hiring for", value: "Head office, Ahmedabad" },
           { label: "Group companies", value: "Five" },
           { label: "Recognition", value: "Best Employer Brand 2026" },
         ]}

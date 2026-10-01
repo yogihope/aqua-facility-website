@@ -285,6 +285,7 @@ export async function getJobs(): Promise<JobContent[]> {
       skill: r.skill,
       description: r.description,
       requirements: asArray<string>(r.requirements),
+      salary: r.salary ?? undefined,
       applyEmail: r.applyEmail ?? undefined,
       featured: r.featured,
     }));
