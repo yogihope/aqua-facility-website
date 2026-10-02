@@ -4,15 +4,19 @@ import { SectionHeading } from "@/components/ui/Bits";
 import { TextLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { chairmanMessage } from "@/content/leadership";
+import { site, yearsOfExpertise } from "@/content/site";
 import type { LeaderContent } from "@/content/types";
 
 /**
- * Section 6.2 — leadership.
+ * Section 6.2 — leadership on the About page.
  *
- * The module publishes on verified names and roles rather than waiting on the
- * full asset set. A leader without a headshot renders a monogram plate at the
- * same 4:5 ratio, so adding `photoUrl` later swaps the image in without moving
- * any surrounding layout.
+ * Rebuilt on 2026-10-02: the chairman's portrait and quote run as one wide
+ * band, then the rest of the team sits in an even grid under it. The earlier
+ * two-column split left the right-hand side empty once the team grew, because
+ * the quote card could not fill a column six portraits tall.
+ *
+ * A leader without a headshot renders a monogram at the same 4:5 ratio, so
+ * adding `photoUrl` later swaps the image in without moving the layout.
  */
 export function Leadership({ leaders }: { leaders: LeaderContent[] }) {
   if (leaders.length === 0) return null;
@@ -20,6 +24,7 @@ export function Leadership({ leaders }: { leaders: LeaderContent[] }) {
   const chairman =
     leaders.find((l) => l.slug === chairmanMessage.attributionSlug) ??
     leaders[0];
+  const team = leaders.filter((l) => l.slug !== chairman.slug);
 
   return (
     <Section tone="warm" className="grain">
@@ -35,65 +40,86 @@ export function Leadership({ leaders }: { leaders: LeaderContent[] }) {
           body="Aqua has been led by the same family since 1996. Continuity of ownership is why the operating standard has survived three decades of growth."
         />
 
-        <div className="mt-14 grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
-          {/* Leaders */}
-          <ul className="grid gap-4 sm:grid-cols-2">
-            {leaders.map((leader, i) => (
-              <Reveal key={leader.slug} delay={i * 90} as="li">
-                <article className="flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-line bg-white/70">
-                  <Portrait leader={leader} />
-                  <div className="flex flex-1 flex-col p-6">
-                    <h3 className="h3 text-[1.0625rem] text-charcoal">
-                      {leader.name}
-                    </h3>
-                    <p className="mt-1.5 text-[0.75rem] font-semibold uppercase tracking-[0.12em] text-gold-deep">
-                      {leader.role}
-                    </p>
-                    <p className="mt-4 text-[0.875rem] leading-relaxed text-muted">
-                      {leader.summary}
-                    </p>
-                    {leader.linkedin ? (
-                      <a
-                        href={leader.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-auto pt-5 text-[0.8125rem] font-semibold text-brown transition-colors hover:text-gold-deep"
-                      >
-                        LinkedIn
-                      </a>
-                    ) : null}
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-          </ul>
+        {/* Chairman — portrait and message across the full width */}
+        <Reveal>
+          <figure className="mt-14 overflow-hidden rounded-[2rem] border border-line bg-charcoal text-warm lg:grid lg:grid-cols-[0.42fr_0.58fr]">
+            <div className="relative aspect-[4/5] w-full sm:aspect-[16/10] lg:aspect-auto lg:min-h-[26rem]">
+              <Portrait leader={chairman} fill />
+            </div>
 
-          {/* Chairman's message */}
-          <Reveal delay={140}>
-            <figure className="flex h-full flex-col justify-center rounded-[1.5rem] border border-line bg-charcoal p-8 text-warm sm:p-12">
-              <p className="kicker text-gold-soft">{chairmanMessage.heading}</p>
-              <svg
-                viewBox="0 0 32 24"
+            <div className="relative flex flex-col justify-center p-7 sm:p-10 lg:p-12">
+              <div
                 aria-hidden="true"
-                className="mt-8 h-6 w-8 text-gold/50"
-                fill="currentColor"
-              >
-                <path d="M13 24V13.2C13 5.9 17.3.7 24.7 0l.9 3.6C21.2 4.6 19 7.4 19 11.3h4.6V24H13Zm-13 0V13.2C0 5.9 4.3.7 11.7 0l.9 3.6C8.2 4.6 6 7.4 6 11.3h4.6V24H0Z" />
-              </svg>
-              <blockquote className="mt-6 font-display text-[clamp(1.375rem,2.6vw,2rem)] italic leading-[1.22] tracking-[-0.015em]">
-                {chairmanMessage.quote}
+                className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-gold/10 blur-[90px]"
+              />
+              <p className="kicker relative text-gold-soft">
+                {chairmanMessage.heading}
+              </p>
+              <blockquote className="relative mt-7 font-display text-[clamp(1.375rem,2.6vw,2.125rem)] italic leading-[1.22] tracking-[-0.015em]">
+                &ldquo;{chairmanMessage.quote}&rdquo;
               </blockquote>
-              <figcaption className="mt-9 border-t border-warm/15 pt-6">
-                <p className="text-[0.9375rem] font-semibold text-warm">
+              <figcaption className="relative mt-9 border-t border-warm/15 pt-6">
+                <p className="text-[1rem] font-semibold text-warm">
                   {chairman.name}
                 </p>
                 <p className="mt-1 text-[0.75rem] font-semibold uppercase tracking-[0.12em] text-warm/45">
                   {chairman.role}
                 </p>
               </figcaption>
-            </figure>
-          </Reveal>
-        </div>
+
+              <dl className="relative mt-9 grid grid-cols-3 gap-5 border-t border-warm/15 pt-6">
+                {[
+                  ["Since", String(site.foundingYear)],
+                  ["Experience", `${yearsOfExpertise()}+ yrs`],
+                  ["Leadership", `${leaders.length} people`],
+                ].map(([label, value]) => (
+                  <div key={label}>
+                    <dt className="text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-warm/40">
+                      {label}
+                    </dt>
+                    <dd className="mt-1 font-display text-[1.125rem] text-gold-soft">
+                      {value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </figure>
+        </Reveal>
+
+        {/* The rest of the team */}
+        <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {team.map((leader, i) => (
+            <Reveal key={leader.slug} delay={(i % 5) * 70} as="li">
+              <article className="group flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-line bg-white/70 transition-all duration-300 hover:-translate-y-1 hover:border-gold/40">
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-warm-deep">
+                  <Portrait leader={leader} fill />
+                </div>
+                <div className="flex flex-1 flex-col p-5">
+                  <h3 className="h3 text-[0.9375rem] text-charcoal">
+                    {leader.name}
+                  </h3>
+                  <p className="mt-1.5 text-[0.6875rem] font-semibold uppercase tracking-[0.12em] text-gold-deep">
+                    {leader.role}
+                  </p>
+                  <p className="mt-3 text-[0.8125rem] leading-relaxed text-muted">
+                    {leader.summary}
+                  </p>
+                  {leader.linkedin ? (
+                    <a
+                      href={leader.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-auto pt-4 text-[0.8125rem] font-semibold text-brown transition-colors hover:text-gold-deep"
+                    >
+                      LinkedIn
+                    </a>
+                  ) : null}
+                </div>
+              </article>
+            </Reveal>
+          ))}
+        </ul>
 
         <div className="mt-12">
           <TextLink href="/leadership">Read the leadership messages</TextLink>
@@ -107,30 +133,31 @@ export function Leadership({ leaders }: { leaders: LeaderContent[] }) {
  * 4:5 plate. Photograph when supplied, monogram otherwise — same box either
  * way, so the grid does not reflow when photography arrives.
  */
-function Portrait({ leader }: { leader: LeaderContent }) {
+function Portrait({
+  leader,
+  fill = false,
+}: {
+  leader: LeaderContent;
+  fill?: boolean;
+}) {
   if (leader.photoUrl) {
     return (
-      <div className="relative aspect-[4/5] w-full overflow-hidden bg-warm-deep">
-        <Image
-          src={leader.photoUrl}
-          alt={`${leader.name}, ${leader.role} of Aqua`}
-          fill
-          sizes="(min-width: 1320px) 420px, (min-width: 1024px) 32vw, (min-width: 640px) 45vw, 92vw"
-          className="object-cover"
-        />
-      </div>
+      <Image
+        src={leader.photoUrl}
+        alt={`${leader.name}, ${leader.role} of Aqua`}
+        {...(fill
+          ? { fill: true }
+          : { width: 1400, height: 1750, className: "h-full w-full" })}
+        sizes="(min-width: 1320px) 420px, (min-width: 1024px) 32vw, (min-width: 640px) 45vw, 92vw"
+        className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+      />
     );
   }
-
   return (
-    <div
-      aria-hidden="true"
-      className="relative flex aspect-[4/5] w-full items-center justify-center overflow-hidden bg-gradient-to-br from-sand-soft via-warm-deep to-sand"
-    >
-      <span className="font-display text-[clamp(3rem,7vw,4.5rem)] leading-none text-brown/30">
+    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-warm-deep to-sand-soft">
+      <span className="font-display text-[clamp(2rem,6vw,3rem)] text-brown/35">
         {leader.initials}
       </span>
-      <span className="absolute inset-x-0 bottom-0 h-px bg-gold/30" />
     </div>
   );
 }
