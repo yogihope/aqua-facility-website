@@ -298,7 +298,9 @@ export async function getJobs(): Promise<JobContent[]> {
 
 /** Section 6.2 — unapproved profiles never reach the DOM. */
 export async function getLeaders(): Promise<LeaderContent[]> {
-  const approved = staticLeaders.filter((l) => l.approved);
+  const approved = staticLeaders
+    .filter((l) => l.approved)
+    .sort((a, b) => a.order - b.order);
   return withDb(async () => {
     const rows = await prisma.leadership.findMany({
       where: { approved: true },

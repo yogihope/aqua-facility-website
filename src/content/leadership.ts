@@ -46,7 +46,7 @@ export const leaders: LeaderContent[] = [
   },
   {
     slug: "nirav-patel",
-    order: 4,
+    order: 5,
     name: "Nirav Patel",
     role: "Head - Operations",
     initials: "NP",
@@ -57,13 +57,24 @@ export const leaders: LeaderContent[] = [
   },
   {
     slug: "vishwaraj-puwar",
-    order: 5,
+    order: 4,
     name: "Vishwaraj Puwar",
     role: "Head - HR & IR",
     initials: "VP",
     summary:
       "Leads human resources and industrial relations, from sourcing and onboarding to workforce compliance and welfare.",
     photoUrl: "/leadership/vishwaraj-puwar.jpg",
+    approved: true,
+  },
+  {
+    slug: "rajendra-patel",
+    order: 6,
+    name: "Rajendra Patel",
+    role: "Head - Operations Facility",
+    initials: "RP",
+    summary:
+      "Leads facility operations across client sites, from deployment and supervision to day-to-day service delivery.",
+    photoUrl: "/leadership/rajendra-patel.jpg",
     approved: true,
   },
 ];

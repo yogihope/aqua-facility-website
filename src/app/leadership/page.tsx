@@ -77,13 +77,13 @@ export default async function LeadershipPage() {
             }
           />
 
-          {/* Two on the first row, the rest three-up (Nirav, 2026-10-01) */}
-          <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
+          {/* Two on the first row, four on the second (Nirav, 2026-10-02) */}
+          <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {leaders.map((leader, i) => (
               <Reveal
                 key={leader.slug}
-                delay={(i % 3) * 70}
-                className={i < 2 ? "lg:col-span-3" : "lg:col-span-2"}
+                delay={(i % 4) * 70}
+                className={i < 2 ? "lg:col-span-2" : undefined}
               >
                 <li className="group h-full overflow-hidden rounded-[1.5rem] border border-line bg-white/70 transition-all duration-300 hover:-translate-y-1 hover:border-gold/40">
                   <Portrait leader={leader} />
@@ -413,7 +413,7 @@ function Portrait({ leader }: { leader: LeaderContent }) {
           src={leader.photoUrl}
           alt={`${leader.name}, ${leader.role} of Aqua`}
           fill
-          sizes="(min-width: 1320px) 620px, (min-width: 1024px) 48vw, (min-width: 640px) 45vw, 92vw"
+          sizes="(min-width: 1320px) 610px, (min-width: 1024px) 48vw, (min-width: 640px) 45vw, 92vw"
           className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
         />
       </div>
