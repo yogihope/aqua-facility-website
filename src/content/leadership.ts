@@ -40,7 +40,7 @@ export const leaders: LeaderContent[] = [
     role: "Head - Finance & Account",
     initials: "JS",
     summary:
-      "Leads finance and accounts for the group, covering billing, payroll funding and statutory payments across sites.",
+      "Leads finance and accounts for the group, covering billing, payroll and statutory payments across sites.",
     photoUrl: "/leadership/jignesh-shah.jpg",
     approved: true,
   },

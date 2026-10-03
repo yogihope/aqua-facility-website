@@ -178,7 +178,7 @@ export const aboutAqua = {
     },
     {
       label: "Multiple industries",
-      body: "Manufacturing, corporate, healthcare, education, infrastructure and public environments.",
+      body: "Manufacturing, corporate, healthcare, education, infrastructure and public places.",
     },
     {
       label: "Integrated facility solutions",
@@ -186,11 +186,11 @@ export const aboutAqua = {
     },
     {
       label: "Strong compliance systems",
-      body: "Statutory and client-specific compliance maintained through the deployment process.",
+      body: "Statutory and client-specific compliance maintained through the digital process.",
     },
     {
-      label: "Technology-enabled operations",
-      body: "Digital attendance, geo-tagged verification, ticketing and MIS across multi-site work.",
+      label: "Technology-Enabled Operations",
+      body: "Digital attendance, geo-tagged QR-based checklists, ticketing and MIS across multi-site work.",
     },
   ],
 };
@@ -219,27 +219,27 @@ export const about = {
     },
     {
       year: "Growth",
-      title: "Mechanised execution",
+      title: "Mechanised Execution",
       body: "Investment in mechanised housekeeping and industrial cleaning equipment moves execution beyond manual methods.",
     },
     {
       year: "Expansion",
-      title: "Workforce and production manpower",
-      body: "Capability extends into HR, workforce solutions and ITI / non-ITI production manpower for manufacturing environments.",
+      title: "Workforce and Production Manpower",
+      body: "Capability extends into HR, workforce solutions and ITI / non-ITI production manpower for manufacturing industries.",
     },
     {
       year: "Industrial",
-      title: "Operations and maintenance",
+      title: "Operations and Maintenance",
       body: "Technical manpower and structured O&M processes extend the scope from facilities into plant assets.",
     },
     {
       year: "Infrastructure",
-      title: "Railways and infrastructure",
+      title: "Railways and Infrastructure",
       body: "Mechanised systems, manpower and supervision applied to high-footfall public infrastructure environments.",
     },
     {
       year: "Today",
-      title: "Technology-enabled operations",
+      title: "Technology-Enabled Operations",
       body: "A digital operating layer for attendance, verification, ticketing and MIS across multi-site operations.",
     },
   ],
