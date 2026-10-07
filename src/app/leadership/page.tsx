@@ -147,7 +147,7 @@ export default async function LeadershipPage() {
                 <span className="italic text-brown">in its own words.</span>
               </>
             }
-            body="Finance, operations, and HR and IR — what each of them is accountable for."
+            body="Finance and accounts, HR and IR, operations and facility operations — what each of them is accountable for."
           />
 
           <div className="mt-16 flex flex-col gap-16 sm:gap-24">

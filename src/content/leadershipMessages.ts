@@ -24,20 +24,22 @@ export type RoleMessage = {
 
 /**
  * Messages signed by office. Order is the order they appear on the page.
- * `published: false` keeps the copy here but off the site — the five unsigned
- * office messages are hidden until someone owns them (Nirav, 2026-10-01).
+ * Published messages come first, in the order Nirav asked for on 2026-10-07:
+ * Jignesh, Vishwaraj, Nirav, Rajendra. `published: false` keeps the copy of
+ * the five unsigned office messages here but off the site.
  */
 export const roleMessages: RoleMessage[] = [
   {
-    slug: "ceo",
-    published: false,
-    role: "Chief Executive Officer",
-    kicker: "CEO's Message",
-    title: "Thirty years of turning up, every shift.",
+    slug: "finance",
+    role: "Head - Finance & Account",
+    name: "Jignesh Shah",
+    photoUrl: "/leadership/jignesh-shah.jpg",
+    kicker: "Finance & Accounts Message",
+    title: "Wages on time, every month, at every site.",
     body: [
-      "Aqua started in 1996 with a simple promise: do the work properly, and do it the same way on the days nobody is watching. That promise is still the whole business. What has changed is the scale it runs at — corporate campuses, manufacturing plants, industrial sites and public infrastructure, across India.",
-      "Growth came from clients asking us to take on more, not from a plan drawn on paper. A housekeeping contract became facility management. Facility management led to workforce and production manpower. That led into plant operations and maintenance, and then into railway and infrastructure work. Each step happened because we had earned the last one.",
-      "The next few years are about depth rather than noise: fewer vendors for our clients, more evidence behind every claim we make, and technology that shows what happened on site the same day it happens. If your operation depends on people and processes running reliably, that is exactly the problem we exist to solve.",
+      "A facility contract is judged on the floor, but it runs on money moving correctly behind the scenes. Salaries, statutory dues, vendor payments and client billing all have dates, and those dates do not move.",
+      "Our teams are spread across states and sites, so payroll is built off the same attendance record the client sees. What was deployed is what gets paid and what gets billed — one set of numbers, not three.",
+      "Statutory obligations — PF, ESI, professional tax, GST — are treated as part of running the contract rather than as paperwork at year end. Clients who ask for compliance records get them with the invoice, not after a reminder.",
     ],
   },
   {
@@ -67,16 +69,28 @@ export const roleMessages: RoleMessage[] = [
     ],
   },
   {
-    slug: "finance",
-    role: "Head - Finance & Account",
-    name: "Jignesh Shah",
-    photoUrl: "/leadership/jignesh-shah.jpg",
-    kicker: "Finance & Accounts Message",
-    title: "Wages on time, every month, at every site.",
+    slug: "facility-operations",
+    role: "Head - Operations Facility",
+    name: "Rajendra Patel",
+    photoUrl: "/leadership/rajendra-patel.jpg",
+    kicker: "Facility Operations Message",
+    title: "A site is judged on what the client sees every morning.",
     body: [
-      "A facility contract is judged on the floor, but it runs on money moving correctly behind the scenes. Salaries, statutory dues, vendor payments and client billing all have dates, and those dates do not move.",
-      "Our teams are spread across states and sites, so payroll is built off the same attendance record the client sees. What was deployed is what gets paid and what gets billed — one set of numbers, not three.",
-      "Statutory obligations — PF, ESI, professional tax, GST — are treated as part of running the contract rather than as paperwork at year end. Clients who ask for compliance records get them with the invoice, not after a reminder.",
+      "Lobbies, washrooms, shop floors and common areas are the first thing anyone notices, and they are noticed every single day. Our job is to make that first look the same on a Monday morning as it is on a Saturday night shift.",
+      "Each site gets its own schedule, its own frequencies and its own checklist, and a supervisor who walks the floor rather than reading about it later. Machines, chemicals and consumables are matched to the surfaces and the footfall of that building, not ordered from a standard list.",
+      "When a client raises something, it becomes a task with a name and a closing time against it. The record we review together at month end is the same record our teams filled in on site, shift by shift.",
+    ],
+  },
+  {
+    slug: "ceo",
+    published: false,
+    role: "Chief Executive Officer",
+    kicker: "CEO's Message",
+    title: "Thirty years of turning up, every shift.",
+    body: [
+      "Aqua started in 1996 with a simple promise: do the work properly, and do it the same way on the days nobody is watching. That promise is still the whole business. What has changed is the scale it runs at — corporate campuses, manufacturing plants, industrial sites and public infrastructure, across India.",
+      "Growth came from clients asking us to take on more, not from a plan drawn on paper. A housekeeping contract became facility management. Facility management led to workforce and production manpower. That led into plant operations and maintenance, and then into railway and infrastructure work. Each step happened because we had earned the last one.",
+      "The next few years are about depth rather than noise: fewer vendors for our clients, more evidence behind every claim we make, and technology that shows what happened on site the same day it happens. If your operation depends on people and processes running reliably, that is exactly the problem we exist to solve.",
     ],
   },
   {
