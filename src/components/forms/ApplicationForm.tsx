@@ -182,10 +182,10 @@ export function ApplicationForm({
           Secure upload is enabled once the file whitelist, size limit and malware
           scanning are configured. Email your CV to{" "}
           <a
-            href={`mailto:${site.email}`}
+            href={`mailto:${site.careersEmail}`}
             className="font-medium text-brown underline underline-offset-2"
           >
-            {site.email}
+            {site.careersEmail}
           </a>{" "}
           quoting the reference shown after you submit.
         </p>

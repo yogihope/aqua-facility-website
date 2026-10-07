@@ -106,7 +106,7 @@ export async function POST(request: Request) {
       {
         ok: false,
         message:
-          `We could not record your application just now. Please email your details to ${site.email}.`,
+          `We could not record your application just now. Please email your details to ${site.careersEmail}.`,
       },
       { status: 503 }
     );

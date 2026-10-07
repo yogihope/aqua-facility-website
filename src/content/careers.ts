@@ -32,7 +32,7 @@ export const jobs: JobContent[] = [
       "Service industry background only",
       "Able to lead the complete HR team",
     ],
-    applyEmail: "operations@aquafacility.com",
+    applyEmail: "admin@aquafacility.com",
     featured: true,
   },
   {
@@ -53,7 +53,7 @@ export const jobs: JobContent[] = [
       "Compliance and statutory work",
       "Recruitment experience",
     ],
-    applyEmail: "operations@aquafacility.com",
+    applyEmail: "admin@aquafacility.com",
   },
   {
     slug: "accounts-head-ahmedabad",
@@ -71,7 +71,7 @@ export const jobs: JobContent[] = [
       "Minimum 5 years of experience",
       "Able to lead the accounts team",
     ],
-    applyEmail: "operations@aquafacility.com",
+    applyEmail: "admin@aquafacility.com",
   },
   {
     slug: "in-house-auditor-ahmedabad",
@@ -89,7 +89,7 @@ export const jobs: JobContent[] = [
       "Minimum 3 years of experience",
       "Inter CA, CS or CA may apply",
     ],
-    applyEmail: "operations@aquafacility.com",
+    applyEmail: "admin@aquafacility.com",
   },
   {
     slug: "purchase-executive-ahmedabad",
@@ -107,7 +107,7 @@ export const jobs: JobContent[] = [
       "2–3 years of purchase experience",
       "Able to handle uniform, shoes, PPE and machine purchase",
     ],
-    applyEmail: "operations@aquafacility.com",
+    applyEmail: "admin@aquafacility.com",
   },
   {
     slug: "pa-to-md-in-office-ahmedabad",
@@ -126,7 +126,7 @@ export const jobs: JobContent[] = [
       "Street-smart, practical approach",
       "Comfortable working closely with the MD",
     ],
-    applyEmail: "operations@aquafacility.com",
+    applyEmail: "admin@aquafacility.com",
   },
   {
     slug: "pa-to-md-out-office-ahmedabad",
@@ -145,7 +145,7 @@ export const jobs: JobContent[] = [
       "Comfortable with regular travel",
       "Client communication experience",
     ],
-    applyEmail: "operations@aquafacility.com",
+    applyEmail: "admin@aquafacility.com",
   },
 ];
 
