@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 
-type Client = { name: string; logo: string };
+type Client = { name: string; logo: string; dark?: boolean };
 
 /** Pixels per second of automatic movement. */
 const SPEED = 40;
@@ -111,7 +111,13 @@ export function ClientRail({ clients }: { clients: Client[] }) {
               key={`${client.name}-${i}`}
               aria-hidden={i >= clients.length || undefined}
             >
-              <div className="flex h-28 w-48 select-none items-center justify-center rounded-[1.25rem] border border-line bg-white px-7 transition-colors duration-300 hover:border-gold/40 sm:h-32 sm:w-56">
+              <div
+                className={`flex h-28 w-48 select-none items-center justify-center rounded-[1.25rem] border px-7 transition-colors duration-300 sm:h-32 sm:w-56 ${
+                  client.dark
+                    ? "border-charcoal/15 bg-charcoal hover:border-gold/50"
+                    : "border-line bg-white hover:border-gold/40"
+                }`}
+              >
                 <div className="relative h-14 w-full">
                   <Image
                     src={client.logo}

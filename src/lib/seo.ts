@@ -31,6 +31,14 @@ type SeoInput = {
   noIndex?: boolean;
 };
 
+/** Link preview card — what WhatsApp, LinkedIn and Facebook show. */
+const shareImage = {
+  url: absoluteUrl("/share-card.jpg"),
+  width: 1200,
+  height: 630,
+  alt: "Aqua Facility Services — integrated facility, manpower and infrastructure solutions since 1996",
+};
+
 export function buildMetadata({
   title,
   description,
@@ -56,10 +64,12 @@ export function buildMetadata({
       siteName: site.legalName,
       locale: "en_IN",
       type,
+      images: [shareImage],
       ...(publishedTime ? { publishedTime } : {}),
     },
     twitter: {
       card: "summary_large_image",
+      images: [shareImage.url],
       title,
       description,
     },

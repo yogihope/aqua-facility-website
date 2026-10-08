@@ -52,8 +52,19 @@ export const metadata: Metadata = {
     locale: "en_IN",
     siteName: site.legalName,
     url: SITE_URL,
+    images: [
+      {
+        url: `${SITE_URL}/share-card.jpg`,
+        width: 1200,
+        height: 630,
+        alt: "Aqua Facility Services — integrated facility, manpower and infrastructure solutions since 1996",
+      },
+    ],
   },
-  twitter: { card: "summary_large_image" },
+  twitter: {
+    card: "summary_large_image",
+    images: [`${SITE_URL}/share-card.jpg`],
+  },
   // 16.3 — staging must stay out of the index. Flip via env, not code edits.
   robots:
     process.env.NEXT_PUBLIC_ENV === "staging"
