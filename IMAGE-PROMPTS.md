@@ -1,5 +1,9 @@
 # Image prompts — one picture per slot
 
+> **Status: done.** All 23 images were supplied on 8 October 2026 and are live
+> on the site. Keep this file for the style block and the file names when a
+> picture needs regenerating, or when the remaining ten sector pages get one.
+
 Last updated: 7 October 2026.
 
 Today five pictures are shared across eighteen places, so the same warehouse

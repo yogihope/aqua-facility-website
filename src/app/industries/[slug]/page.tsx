@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/Container";
+import Image from "next/image";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { CaseStudyCard } from "@/components/sections/CaseStudiesSection";
@@ -14,6 +15,7 @@ import {
   getCaseStudies,
 } from "@/lib/data";
 import { buildMetadata, breadcrumbSchema } from "@/lib/seo";
+import { industryPhoto } from "@/content/workPhotos";
 
 export const revalidate = 3600;
 
@@ -48,6 +50,8 @@ export default async function IndustryPage(props: PageProps<"/industries/[slug]"
   ]);
 
   if (!industry) notFound();
+
+  const photo = industryPhoto[industry.slug];
 
   const relatedCase = caseStudies.find((c) => c.industrySlug === industry.slug);
   const otherIndustries = allIndustries
@@ -90,6 +94,23 @@ export default async function IndustryPage(props: PageProps<"/industries/[slug]"
           </div>
         }
       />
+
+      {photo ? (
+        <div className="bg-warm">
+          <Container>
+            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[1.5rem] border border-line sm:aspect-[21/9]">
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                fill
+                priority
+                sizes="(min-width: 1320px) 1240px, 92vw"
+                className="object-cover"
+              />
+            </div>
+          </Container>
+        </div>
+      ) : null}
 
       {/* Industry challenges */}
       <Section tone="warm" className="grain">

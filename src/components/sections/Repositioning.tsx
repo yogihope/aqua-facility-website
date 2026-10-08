@@ -62,19 +62,19 @@ export function Repositioning() {
             <div className="grid grid-cols-2 gap-4">
               <MosaicPhoto
                 className="col-span-2 aspect-[16/9]"
-                photo={workPhotos.housekeeping}
+                photo={workPhotos.mosaicFacility}
                 label="Facility operations"
                 caption="Mechanised execution on live sites"
               />
               <MosaicPhoto
                 className="aspect-[3/4]"
-                photo={workPhotos.briefing}
+                photo={workPhotos.mosaicWorkforce}
                 label="Workforce"
                 caption="Trained, supervised, deployed"
               />
               <MosaicPhoto
                 className="aspect-[3/4]"
-                photo={workPhotos.maintenance}
+                photo={workPhotos.mosaicMaintenance}
                 label="Maintenance"
                 caption="Technical teams on plant assets"
               />

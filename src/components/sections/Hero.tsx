@@ -87,8 +87,8 @@ export function Hero() {
           <div className="relative">
             <div className="relative overflow-hidden rounded-[2rem] border border-line">
               <Image
-                src={workPhotos.housekeeping.src}
-                alt={workPhotos.housekeeping.alt}
+                src={workPhotos.heroMain.src}
+                alt={workPhotos.heroMain.alt}
                 width={1536}
                 height={1024}
                 priority
@@ -117,8 +117,8 @@ export function Hero() {
             <div className="mt-4 grid grid-cols-[1.1fr_0.9fr] items-stretch gap-4">
               <div className="overflow-hidden rounded-[1.25rem] border border-line shadow-[0_24px_50px_-34px_rgba(44,39,35,0.6)]">
                 <Image
-                  src={workPhotos.maintenance.src}
-                  alt={workPhotos.maintenance.alt}
+                  src={workPhotos.heroSecondary.src}
+                  alt={workPhotos.heroSecondary.alt}
                   width={1536}
                   height={1024}
                   sizes="(min-width: 1024px) 22rem, 45vw"

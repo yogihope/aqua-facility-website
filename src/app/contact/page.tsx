@@ -64,8 +64,8 @@ export default async function ContactPage() {
 
             <div className="relative min-h-[12rem] overflow-hidden rounded-[1.5rem] border border-line">
               <Image
-                src={workPhotos.supervision.src}
-                alt={workPhotos.supervision.alt}
+                src={workPhotos.contactReception.src}
+                alt={workPhotos.contactReception.alt}
                 fill
                 sizes="(min-width: 640px) 20rem, 92vw"
                 className="object-cover"

@@ -57,8 +57,8 @@ export default async function CareersPage() {
         aside={
           <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.5rem] border border-line">
             <Image
-              src={workPhotos.briefing.src}
-              alt={workPhotos.briefing.alt}
+              src={workPhotos.careersTraining.src}
+              alt={workPhotos.careersTraining.alt}
               fill
               priority
               sizes="(min-width: 1024px) 30rem, 92vw"
