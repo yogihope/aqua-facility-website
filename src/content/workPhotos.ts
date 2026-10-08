@@ -113,11 +113,11 @@ export const caseStudyPhoto: Record<string, WorkPhoto> = {
 export const industryPhoto: Record<string, WorkPhoto> = {
   automobile: {
     src: "/work/industry-automobile.jpg",
-    alt: "Aqua team cleaning the shop floor of an automobile plant beside robot welding cells",
+    alt: "Aqua production technicians fitting components on an automobile assembly line beside robot welding cells",
   },
   engineering: {
     src: "/work/industry-engineering.jpg",
-    alt: "Aqua team cleaning the floor of an engineering workshop hall",
+    alt: "Aqua technician operating a CNC lathe while a colleague measures a finished part",
   },
   power: {
     src: "/work/industry-power.jpg",
@@ -149,7 +149,7 @@ export const industryPhoto: Record<string, WorkPhoto> = {
   },
   "home-appliances": {
     src: "/work/industry-home-appliances.jpg",
-    alt: "Aqua staff cleaning alongside a refrigerator assembly line",
+    alt: "Aqua workers fitting and checking refrigerators on an appliance assembly line",
   },
   agriculture: {
     src: "/work/industry-agriculture.jpg",
