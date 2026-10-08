@@ -1,10 +1,10 @@
 # Photos needed — page by page
 
-> **Mostly done.** The 23 site photographs and the client logo set arrived in
-> October 2026 and are on the site. What is still open: leadership portraits
-> for the five unsigned message offices, photographs for the nine sector pages
-> that have none, insight article headers, impact programme photographs and
-> real photography to replace the AI-generated set.
+> **Mostly done.** The site photography and the client logo set arrived in
+> October 2026 and every page now carries its own picture. What is still open:
+> leadership portraits for the five unsigned message offices, insight article
+> headers, impact programme photographs (which must be real, not generated),
+> and real photography to replace the generated set over time.
 
 Last updated: 28 September 2026.
 

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/Container";
@@ -8,6 +9,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { TextLink, Arrow } from "@/components/ui/Button";
 import { getGroupCompanies, getGroupCompanyBySlug } from "@/lib/data";
 import { buildMetadata, breadcrumbSchema } from "@/lib/seo";
+import { groupPhoto } from "@/content/workPhotos";
 
 export const revalidate = 3600;
 
@@ -40,6 +42,8 @@ export default async function GroupCompanyPage(props: PageProps<"/group/[slug]">
   ]);
 
   if (!company) notFound();
+
+  const photo = groupPhoto[company.slug];
 
   const related = allCompanies.filter((c) => c.slug !== company.slug);
 
@@ -81,6 +85,23 @@ export default async function GroupCompanyPage(props: PageProps<"/group/[slug]">
           </div>
         }
       />
+
+      {photo ? (
+        <div className="bg-warm">
+          <Container>
+            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[1.5rem] border border-line sm:aspect-[21/9]">
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                fill
+                priority
+                sizes="(min-width: 1320px) 1240px, 92vw"
+                className="object-cover"
+              />
+            </div>
+          </Container>
+        </div>
+      ) : null}
 
       {/* Role within Aqua Group */}
       <Section tone="warm" className="grain">

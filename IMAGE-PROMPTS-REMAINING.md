@@ -1,5 +1,9 @@
 # Image prompts — the ten still needed
 
+> **Done.** All ten arrived on 8 October 2026 and are on the site: every sector
+> page now carries its own picture and the Aqua Shield Security page has one
+> too. Keep this file for the wording if any of them is ever regenerated.
+
 Prepared 8 October 2026 for Aqua Facility Services Pvt. Ltd.
 
 Everything else on the website now has its own picture. These ten are the only

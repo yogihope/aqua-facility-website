@@ -106,9 +106,9 @@ export const caseStudyPhoto: Record<string, WorkPhoto> = {
 };
 
 /**
- * Sector photography. Only the sectors that have a real picture appear here —
- * an industry page without one simply stays text-led rather than borrowing a
- * picture of different work.
+ * Sector photography — all fifteen sectors now have their own picture. A sector
+ * added later without one simply stays text-led rather than borrowing a picture
+ * of different work.
  */
 export const industryPhoto: Record<string, WorkPhoto> = {
   automobile: {
@@ -134,5 +134,49 @@ export const industryPhoto: Record<string, WorkPhoto> = {
   textiles: {
     src: "/work/industry-textiles.jpg",
     alt: "Aqua team clearing lint around spinning machines in a textile mill",
+  },
+  "heavy-engineering": {
+    src: "/work/industry-heavy-engineering.jpg",
+    alt: "Aqua crew cleaning a heavy engineering fabrication bay under an overhead crane",
+  },
+  "renewable-energy": {
+    src: "/work/industry-renewable-energy.jpg",
+    alt: "Aqua team washing rows of panels at a utility-scale solar plant",
+  },
+  "oil-gas": {
+    src: "/work/industry-oil-gas.jpg",
+    alt: "Aqua crew carrying out housekeeping along a pipe rack at an oil and gas terminal",
+  },
+  "home-appliances": {
+    src: "/work/industry-home-appliances.jpg",
+    alt: "Aqua staff cleaning alongside a refrigerator assembly line",
+  },
+  agriculture: {
+    src: "/work/industry-agriculture.jpg",
+    alt: "Aqua team cleaning the floor of a grain and seed processing plant beside storage silos",
+  },
+  "commercial-corporate": {
+    src: "/work/industry-commercial-corporate.jpg",
+    alt: "Aqua housekeeping team cleaning an open-plan corporate office early in the morning",
+  },
+  "railways-infrastructure": {
+    src: "/work/industry-railways-infrastructure.jpg",
+    alt: "Aqua crew cleaning the concourse of a modern railway station building",
+  },
+  "hospitality-leisure": {
+    src: "/work/industry-hospitality-leisure.jpg",
+    alt: "Aqua housekeeping staff making up a hotel room with a linen trolley in the corridor",
+  },
+  residential: {
+    src: "/work/industry-residential.jpg",
+    alt: "Aqua team cleaning the lobby and common staircase of a residential tower",
+  },
+};
+
+/** Photography for a group company page, where one exists. */
+export const groupPhoto: Record<string, WorkPhoto> = {
+  "aqua-shield-security": {
+    src: "/work/group-security.jpg",
+    alt: "Aqua Shield security guards checking a visitor register and directing a truck at a plant gate",
   },
 };
