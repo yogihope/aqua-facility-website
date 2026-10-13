@@ -375,6 +375,7 @@ export async function getInsights(): Promise<InsightContent[]> {
       seoTitle: r.seoTitle,
       seoDescription: r.seoDescription,
       serviceSlug: r.service?.slug,
+      heroImage: r.heroImage ?? undefined,
     }));
   }, staticInsights);
 }

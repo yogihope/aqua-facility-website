@@ -318,6 +318,7 @@ async function main() {
       publishedAt: new Date(insight.publishedAt),
       seoTitle: insight.seoTitle,
       seoDescription: insight.seoDescription,
+      heroImage: insight.heroImage ?? null,
       published: true,
       serviceId: service?.id ?? null,
     };

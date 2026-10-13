@@ -130,6 +130,8 @@ export type InsightContent = {
   seoTitle: string;
   seoDescription: string;
   serviceSlug?: string;
+  /** Featured image under /public — also used as the article's share card. */
+  heroImage?: string;
 };
 
 export type RedirectContent = {

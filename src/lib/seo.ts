@@ -29,6 +29,8 @@ type SeoInput = {
   type?: "website" | "article";
   publishedTime?: string;
   noIndex?: boolean;
+  /** Overrides the default share card, e.g. an article's featured image. */
+  image?: { path: string; alt: string };
 };
 
 /** Link preview card — what WhatsApp, LinkedIn and Facebook show. */
@@ -46,8 +48,12 @@ export function buildMetadata({
   type = "website",
   publishedTime,
   noIndex,
+  image,
 }: SeoInput): Metadata {
   const url = absoluteUrl(path);
+  const ogImage = image
+    ? { url: absoluteUrl(image.path), alt: image.alt }
+    : shareImage;
   return {
     title,
     description,
@@ -64,12 +70,12 @@ export function buildMetadata({
       siteName: site.legalName,
       locale: "en_IN",
       type,
-      images: [shareImage],
+      images: [ogImage],
       ...(publishedTime ? { publishedTime } : {}),
     },
     twitter: {
       card: "summary_large_image",
-      images: [shareImage.url],
+      images: [ogImage.url],
       title,
       description,
     },
@@ -165,12 +171,14 @@ export function articleSchema(input: {
   path: string;
   publishedAt: string;
   author: string;
+  image?: string;
 }) {
   return {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: input.title,
     description: input.description,
+    ...(input.image ? { image: absoluteUrl(input.image) } : {}),
     datePublished: input.publishedAt,
     author: { "@type": "Organization", name: input.author },
     publisher: {

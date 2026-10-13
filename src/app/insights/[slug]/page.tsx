@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/Container";
@@ -26,6 +27,9 @@ export async function generateMetadata(props: PageProps<"/insights/[slug]">) {
     path: `/insights/${insight.slug}`,
     type: "article",
     publishedTime: insight.publishedAt,
+    ...(insight.heroImage
+      ? { image: { path: insight.heroImage, alt: insight.title } }
+      : {}),
   });
 }
 
@@ -51,6 +55,7 @@ export default async function InsightPage(props: PageProps<"/insights/[slug]">) 
             path: `/insights/${insight.slug}`,
             publishedAt: insight.publishedAt,
             author: insight.author,
+            image: insight.heroImage,
           }),
           breadcrumbSchema([
             { name: "Home", path: "/" },
@@ -98,6 +103,19 @@ export default async function InsightPage(props: PageProps<"/insights/[slug]">) 
 
         <Section tone="warm" className="!pt-0">
           <Container>
+            {insight.heroImage ? (
+              <figure className="relative mx-auto mb-14 aspect-[1735/906] max-w-[60rem] overflow-hidden rounded-[1.5rem] border border-line bg-charcoal">
+                <Image
+                  src={insight.heroImage}
+                  alt={insight.title}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 60rem, 92vw"
+                  className="object-cover"
+                />
+              </figure>
+            ) : null}
+
             <div className="prose-aqua mx-auto">
               {renderBody(insight.body)}
             </div>

@@ -13,6 +13,60 @@ export const INSIGHT_CATEGORIES = [
 
 export const insights: InsightContent[] = [
   {
+    slug: "aqua-facility-services-30-years-integrated-facility-management",
+    title:
+      "Aqua Facility Services: 30+ Years of Integrated Facility Management Excellence",
+    category: "Aqua Updates",
+    excerpt:
+      "From a professional housekeeping organisation in 1996 to an integrated operational-services company — people, process and technology working together on the ground.",
+    body: `For more than three decades, Aqua Facility Services has worked behind the scenes of businesses, industries and infrastructure to keep operations cleaner, safer and more efficient.
+
+Established in 1996, Aqua has grown from a professional housekeeping organisation into an integrated operational-services company delivering integrated facility management services, workforce solutions, industrial housekeeping, operations and maintenance, railway support and technology-enabled monitoring.
+
+Today, organisations searching for an experienced facility management company in Gujarat need more than cleaning manpower. They need accountability, trained teams, mechanisation, compliance and measurable service delivery. This is where Aqua Facility Services brings together experience, people, process and technology.
+
+## Integrated Facility Management Services for Modern Businesses
+
+Aqua's integrated facility management services cover mechanised housekeeping, commercial cleaning, industrial cleaning, facility maintenance, waste management, landscaping, warehouse support and specialised site services.
+
+As an experienced provider of housekeeping services in Gujarat and industrial housekeeping services, Aqua supports demanding environments including manufacturing plants, power facilities, commercial establishments, healthcare facilities and infrastructure projects.
+
+Our approach goes beyond simply deploying people. Every operation is designed around site requirements, defined processes, trained supervision, suitable equipment and performance monitoring.
+
+## Manpower and Industrial Operations Support
+
+Aqua also provides manpower services in Gujarat for industrial and production environments, including ITI, non-ITI, technical, semi-skilled and production manpower.
+
+Our operations and maintenance services support industries that require reliable technical manpower, preventive maintenance, utilities support and structured operational management.
+
+For infrastructure environments, Aqua's capabilities also extend to railway cleaning services, station and platform housekeeping, infrastructure manpower and project-support operations.
+
+## Technology-Enabled Facility Management
+
+What differentiates the next generation of Aqua Facility Services is the integration of technology with ground-level execution.
+
+Digital attendance, QR-based inspections, geo-tagged reporting, digital checklists, complaint management, performance dashboards and management MIS can provide greater operational visibility and accountability.
+
+From its base as a facility management company in Ahmedabad, Aqua has developed capabilities for organisations requiring a dependable PAN India facility management company.
+
+## Why Aqua Facility Services?
+
+With 30+ years of operational experience, multi-sector exposure, trained manpower, mechanised systems and technology-enabled processes, Aqua Facility Services is positioned to support organisations seeking a long-term operational partner.
+
+**People. Process. Technology. Performance.**
+
+**Built on Trust. Driven by Excellence.**`,
+    author: "Aqua Editorial Team",
+    readMinutes: 3,
+    publishedAt: "2026-10-13",
+    seoTitle:
+      "Aqua Facility Services: 30+ Years of Integrated Facility Management | Aqua Insights",
+    seoDescription:
+      "Since 1996, Aqua Facility Services has delivered integrated facility management, housekeeping, manpower, O&M and railway support across Gujarat and PAN India.",
+    serviceSlug: "integrated-facility-management",
+    heroImage: "/insights/aqua-30-years-integrated-facility-management.jpg",
+  },
+  {
     slug: "what-integrated-facility-management-actually-consolidates",
     title: "What Integrated Facility Management Actually Consolidates",
     category: "Facility Management",

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container, Section } from "@/components/ui/Container";
 import { PageHero } from "@/components/sections/PageHero";
@@ -66,21 +67,34 @@ export default async function InsightsPage() {
                   </span>
                 </div>
 
-                <div className="relative hidden aspect-[4/3] overflow-hidden rounded-2xl bg-charcoal lg:block">
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-0 bg-[radial-gradient(circle_at_70%_25%,rgba(199,154,35,0.25),transparent_60%)]"
-                  />
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-0 opacity-45"
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(to right, rgba(247,244,238,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(247,244,238,0.05) 1px, transparent 1px)",
-                      backgroundSize: "26px 26px",
-                    }}
-                  />
-                </div>
+                {featured.heroImage ? (
+                  <div className="relative aspect-[1735/906] overflow-hidden rounded-2xl bg-charcoal">
+                    <Image
+                      src={featured.heroImage}
+                      alt={featured.title}
+                      fill
+                      priority
+                      sizes="(min-width: 1024px) 34rem, 92vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                    />
+                  </div>
+                ) : (
+                  <div className="relative hidden aspect-[4/3] overflow-hidden rounded-2xl bg-charcoal lg:block">
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-0 bg-[radial-gradient(circle_at_70%_25%,rgba(199,154,35,0.25),transparent_60%)]"
+                    />
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-0 opacity-45"
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(to right, rgba(247,244,238,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(247,244,238,0.05) 1px, transparent 1px)",
+                        backgroundSize: "26px 26px",
+                      }}
+                    />
+                  </div>
+                )}
               </Link>
             </Reveal>
           ) : null}
