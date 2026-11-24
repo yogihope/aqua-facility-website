@@ -72,7 +72,7 @@ As a growing PAN India facility management company, Aqua follows a simple philos
     seoDescription:
       "Mechanized, industrial, factory and commercial housekeeping services that combine trained manpower, cleaning machinery and site SOPs. How Aqua supports facilities across Gujarat and India.",
     serviceSlug: "integrated-facility-management",
-    heroImage: "/insights/mechanized-housekeeping-industrial-facility-management.jpg",
+    heroImage: "/insights/mechanized-housekeeping-future-industrial-facility-management.jpg",
   },
   {
     slug: "why-industrial-operations-maintenance-is-critical-for-reliable-plant-performance",
