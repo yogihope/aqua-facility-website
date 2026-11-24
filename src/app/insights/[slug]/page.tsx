@@ -178,18 +178,23 @@ export default async function InsightPage(props: PageProps<"/insights/[slug]">) 
 
               <aside className="flex flex-col gap-5">
                   {suggested.length ? (
-                    <div className="rounded-[1.25rem] border border-line bg-white/70 p-6">
-                      <p className="kicker text-gold-deep">Suggested reading</p>
-                      <ul className="mt-4 divide-y divide-line">
-                        {suggested.map((s) => (
-                          <li key={s.slug}>
-                            <SidebarCard insight={s} />
+                    <div className="overflow-hidden rounded-[1.25rem] border border-line bg-white/70">
+                      <div className="flex items-center justify-between border-b border-line bg-sand-soft/60 px-6 py-4">
+                        <p className="kicker text-gold-deep">Suggested reading</p>
+                        <span className="text-[0.75rem] text-muted">{suggested.length} articles</span>
+                      </div>
+                      <ol>
+                        {suggested.map((s, i) => (
+                          <li key={s.slug} className="border-b border-line last:border-b-0">
+                            <SidebarCard insight={s} index={i} />
                           </li>
                         ))}
-                      </ul>
-                      <TextLink href="/insights" className="mt-4 text-[0.875rem]">
-                        View all insights
-                      </TextLink>
+                      </ol>
+                      <div className="border-t border-line px-6 py-4">
+                        <TextLink href="/insights" className="text-[0.875rem]">
+                          View all insights
+                        </TextLink>
+                      </div>
                     </div>
                   ) : null}
 
@@ -294,26 +299,29 @@ export default async function InsightPage(props: PageProps<"/insights/[slug]">) 
   );
 }
 
-function SidebarCard({ insight }: { insight: InsightContent }) {
+function SidebarCard({ insight, index }: { insight: InsightContent; index: number }) {
   return (
     <Link
       href={`/insights/${insight.slug}`}
-      className="group flex items-start gap-4 py-4 first:pt-0"
+      className="group relative flex gap-4 px-6 py-5 transition-colors duration-200 hover:bg-white"
     >
-      <Thumb
-        insight={insight}
-        className="aspect-[1735/906] w-32 shrink-0 rounded-lg border border-line"
-        sizes="320px"
+      <span
+        aria-hidden="true"
+        className="absolute inset-y-0 left-0 w-[3px] origin-top scale-y-0 bg-gold transition-transform duration-300 group-hover:scale-y-100"
       />
-      <span className="min-w-0">
+      <span className="w-8 shrink-0 font-display text-[1.5rem] leading-none text-gold/70 tabular-nums transition-colors group-hover:text-gold-deep">
+        {String(index + 1).padStart(2, "0")}
+      </span>
+      <span className="min-w-0 flex-1">
         <span className="block text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-gold-deep">
           {insight.category}
         </span>
-        <span className="mt-1 line-clamp-3 block text-[0.875rem] font-semibold leading-snug text-charcoal transition-colors group-hover:text-brown">
+        <span className="mt-1.5 block font-display text-[1.0625rem] leading-snug text-charcoal transition-colors group-hover:text-brown">
           {insight.title}
         </span>
-        <span className="mt-1.5 block text-[0.75rem] text-muted">
-          {formatDate(insight.publishedAt)}
+        <span className="mt-2 flex items-center justify-between gap-3 text-[0.75rem] text-muted">
+          {formatDate(insight.publishedAt)} · {insight.readMinutes} min read
+          <Arrow className="h-3.5 w-3.5 text-brown opacity-0 transition-opacity group-hover:opacity-100" />
         </span>
       </span>
     </Link>
