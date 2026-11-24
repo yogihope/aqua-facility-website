@@ -298,12 +298,12 @@ function SidebarCard({ insight }: { insight: InsightContent }) {
   return (
     <Link
       href={`/insights/${insight.slug}`}
-      className="group flex gap-4 py-4 first:pt-0"
+      className="group flex items-start gap-4 py-4 first:pt-0"
     >
       <Thumb
         insight={insight}
-        className="aspect-[4/3] w-24 shrink-0 rounded-lg"
-        sizes="96px"
+        className="aspect-[1735/906] w-32 shrink-0 rounded-lg border border-line"
+        sizes="320px"
       />
       <span className="min-w-0">
         <span className="block text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-gold-deep">
